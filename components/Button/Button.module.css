@@ -5,7 +5,7 @@
 	cursor: pointer;
 	text-align: center;
 	border: none;
-	border-radius: 5px;
+	border-radius: 3px;
 	font-size: 14px;
 	transition: all 0.2s;
 }
@@ -13,6 +13,7 @@
 .primary {
 	color: var(--white);
 	background-color: var(--primary);
+	box-shadow: 0 4px 20px rgba(232, 170, 49, 0.43);
 }
 
 .primary:hover {
