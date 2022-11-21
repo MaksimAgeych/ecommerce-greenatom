@@ -24,3 +24,12 @@ a {
     background: black;
   }
 }
+
+
+:root {
+  --black: #141414;
+  --white: #FFFFF;
+  --primary: #E8AA31;
+  --primary-hover: #f8bd54;
+  --gray: #ECF1F2;
+}
