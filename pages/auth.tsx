@@ -7,5 +7,7 @@ function Auth(): JSX.Element {
         <div>
             <Authentication />
         </div>
+    )
+}
 
 export default Auth;

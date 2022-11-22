@@ -2,10 +2,12 @@ import styles from '../styles/Home.module.css'
 import {Htag, P, Button} from "../components";
 import {withLayout} from "../layouts/Layout";
 import Link from "next/link";
+import { Provider } from 'react-redux';
+import { store } from '../store/rootReducer';
 
 function Home() {
   return (
-    <div className={styles.container}>
+          <div className={styles.container}>
         <Htag tag={'h1'}>Заголовок</Htag>
         <P size={'l'}>Привет мир</P>
         <Button appearance={'primary'}>Кнопка</Button>
@@ -14,6 +16,7 @@ function Home() {
         <Link href={'/catalog'}>Каталог</Link>
         <Link href={'/favorites'}>Избранное</Link>
     </div>
+
   )
 }
 
