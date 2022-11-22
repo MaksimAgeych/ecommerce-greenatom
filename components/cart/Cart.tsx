@@ -1,11 +1,10 @@
 import React from "react";
-import ReactComponent from "*.svg"
-import Star from "./element/Star.svg";
+import IconStar from "./element/Star.svg";
 
 
 function createStar(countStar:number){
     for(let i=0;i<countStar;i++){
-        return <Star/>
+        return <IconStar className="star"/>
     }
 }
 
@@ -14,7 +13,9 @@ const Cart =({product}:any)=>{//на продукт пока заглушка an
 
     return(
         <div>
-            <img src={img}/>
+            <div className="imsec">
+            <img src={img} className="image"/>
+            </div>
             <span>{title}</span>
             {createStar(rank)}
               
