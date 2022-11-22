@@ -1,4 +1,9 @@
+import React from 'react';
+import {ButtonProps} from './Button.props';
 import styles from './Button.module.css';
+import cn from 'classnames';
+import ArrowIcon from './arrow.svg';
+import {motion} from 'framer-motion';
 
 export const Button = ({children, arrow = 'none', appearance, className, ...props}: ButtonProps): JSX.Element => {
     return (
@@ -11,7 +16,7 @@ export const Button = ({children, arrow = 'none', appearance, className, ...prop
             {...props}
         >
             {children}
-            {arrow != 'none' && <span className={styles.arrow, {
+            {arrow != 'none' && <span className={cn(styles.arrow, {
                 [styles.down]: arrow == 'down',
                 [styles.right]: arrow == 'right'
             })}> {<ArrowIcon/>} </span>}
