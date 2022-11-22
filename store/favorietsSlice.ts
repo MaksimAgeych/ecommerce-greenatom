@@ -19,7 +19,6 @@ export const favorietsSlice = createSlice({
 
       if (!isUnique) state.favoriets = [...state.favoriets, action.payload]
 
-
     },
     deleteFav: (state, action: PayloadAction<any>) => {
       state.favoriets = state.favoriets.filter(
