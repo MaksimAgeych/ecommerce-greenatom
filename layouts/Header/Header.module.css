@@ -1,19 +1,55 @@
 .header {
 	display: grid;
+	grid-template: 70px 90px 70px / auto;
+	grid-template-areas:
+		"topHeader"
+		"midHeader"
+		"botHeader";
 
+}
+
+.header div {
+	display: grid;
+	grid-template: auto /  minmax(320px, 1200px) ;
+	justify-content: space-around;
+	align-items: center;
 }
 
 .topHeader {
+	grid-area: topHeader;
 	background: var(--black);
-	color: var(--white)
+	color: var(--white);
+}
+
+.topHeader > div {
+	display: grid;
+	grid-template: auto / auto 1fr;
+}
+
+.leftTopHeader {
+	padding: 0;
+	margin: 0;
+}
+
+.leftTopHeader li {
+	list-style-type: none;
+	display: inline-block;
+	margin-right: 60px;
+}
+
+.rightTopHeader {
+	display: grid;
+	justify-items: end;
 }
 
 .midHeader {
+	grid-area: midHeader;
 	background: var(--gray);
 	color: var(--black);
 }
 
 .botHeader {
+	grid-area: botHeader;
 	background: var(--black);
 	color: var(--white)
 }
