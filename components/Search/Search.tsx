@@ -20,6 +20,7 @@ export const Search = ({className, ...props}: SearchProps):JSX.Element => {
         });
     };
 
+// export default Search;
     const handleKeyDown = (e: KeyboardEvent<HTMLImageElement>) => {
         if(e.key == 'Enter') {
             goToSearch();
