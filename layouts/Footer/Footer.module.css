@@ -1,7 +1,7 @@
 .footer {
-	background: var(--primary);
+	min-height: 1071px;
+	background: var(--black);
 	color: var(--white);
-	min-height: 72px;
 	display: grid;
 	grid-template: auto / 1fr auto auto;
 	gap: 40px;
