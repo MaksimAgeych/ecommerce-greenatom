@@ -1,0 +1,19 @@
+.header {
+	display: grid;
+
+}
+
+.topHeader {
+	background: var(--black);
+	color: var(--white)
+}
+
+.midHeader {
+	background: var(--gray);
+	color: var(--black);
+}
+
+.botHeader {
+	background: var(--black);
+	color: var(--white)
+}

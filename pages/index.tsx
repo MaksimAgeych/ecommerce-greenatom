@@ -1,7 +1,8 @@
 import styles from '../styles/Home.module.css'
 import {Htag, P, Button} from "../components";
+import {withLayout} from "../layouts/Layout";
 
-export default function Home() {
+function Home() {
   return (
     <div className={styles.container}>
         <Htag tag={'h1'}>Заголовок</Htag>
@@ -10,3 +11,5 @@ export default function Home() {
     </div>
   )
 }
+
+export default withLayout(Home);

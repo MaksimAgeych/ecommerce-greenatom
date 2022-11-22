@@ -1,4 +1,3 @@
-
 import { Action, configureStore, ThunkAction } from "@reduxjs/toolkit";
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
 import favorietsSlice from "./favorietsSlice";
