@@ -3,9 +3,9 @@
 	grid-template: auto 1fr auto / auto minmax(320px, 1200px) auto;
 	gap: 40px 30px;
 	grid-template-areas:
-		"header header header header"
-		". body body ."
-		"footer footer footer footer";
+		"header header header"
+		". body ."
+		"footer footer footer";
 	min-height: 100vh;
 }
 
