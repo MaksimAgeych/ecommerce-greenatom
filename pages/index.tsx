@@ -1,3 +1,4 @@
+
 import styles from '../styles/Home.module.css'
 import {Htag, P, Button} from "../components";
 import {withLayout} from "../layouts/Layout";
@@ -15,6 +16,8 @@ function Home() {
         <Link href={'/catalog'}>Каталог</Link>
         <Link href={'/favorites'}>Избранное</Link>
     </div>
+
+
 
   )
 }
