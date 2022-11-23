@@ -15,8 +15,7 @@ import {useAppSelector} from "../../hooks/redux-hooks";
 
 export const Header = ({className, ...props}: HeaderProps): JSX.Element => {
 
-    const [user, setUser] = useState(null)
-
+    const [user, setUser] = useState(null);
 
     useEffect(() => {
         onAuthStateChangedListner((user: React.SetStateAction<null>) => setUser(user))
@@ -46,7 +45,7 @@ export const Header = ({className, ...props}: HeaderProps): JSX.Element => {
                             {user ? <div><span>Привет, {userAuth.name}</span> | <Link href={'/'}
                                                                                       onClick={() => signOutUser()}>Выйти</Link>
                                 </div>
-                                : <div><Link href={'/auth'}><span>Личный Кабинет</span></Link></div>
+                                : <div><Link href={'/auth'}><span>Войти</span></Link></div>
                             }
                         </div>
                     </div>
