@@ -1,3 +1,4 @@
+
 import React, {useState, KeyboardEvent} from 'react';
 import {SearchProps} from "./Search.props";
 import styles from './Search.module.css';
@@ -45,3 +46,4 @@ export const Search = ({className, ...props}: SearchProps):JSX.Element => {
         </form>
     );
 };
+

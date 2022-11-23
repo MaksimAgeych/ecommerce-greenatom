@@ -1,4 +1,5 @@
-import React from 'react';
+
+
 import {ButtonProps} from './Button.props';
 import styles from './Button.module.css';
 import cn from 'classnames';
@@ -23,3 +24,4 @@ export const Button = ({children, arrow = 'none', appearance, className, ...prop
         </motion.button>
     );
 };
+

@@ -4,6 +4,7 @@ const initialState = {
     email: null,
     token: null,
     id: null,
+    name: null,
 }
 
 export const authSlice = createSlice(
@@ -14,7 +15,8 @@ export const authSlice = createSlice(
             setUser: (state, action) => {
                 state.email = action.payload.email;
                 state.id = action.payload.id;
-                state.token = action.payload.token
+                state.token = action.payload.token;
+                state.name = action.payload.name;
             },
             removeUser: (state) => {
                 state.email = null;
