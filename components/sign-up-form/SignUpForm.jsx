@@ -18,8 +18,6 @@ const SignUpForm = () => {
 
     const [formFields, setFormFields] = useState(defaultFormFields);
     const { displayName, email, password, confirmPassword } = formFields;
-    const [isSignUp, setIsSignUp] = useState(false)
-    const [user, setUser] = useState(null)
     const dispatch = useAppDispatch()
 
 
@@ -37,14 +35,17 @@ const SignUpForm = () => {
 
         try {
 
-            const { user } = await createAuthUserWithEmailAndPassword(email, password);
-            const { uid, accessToken, email } = await user
-            await dispatch(setUser({ email: email, id: uid, token: accessToken }))
-            const userDocRef = await createUserFromAuthWithPassword(user, { displayName })
-            setFormFields(defaultFormFields); //очистка полей при успешной авторизцации
-            const res = await complitedUserAuth(user)
-            setIsSignUp(res)
-            setUser(user)
+            createAuthUserWithEmailAndPassword(email, password)
+                .then(({user}) => {
+                    console.log(user)
+                    const { uid, accessToken, email } = user;
+                    dispatch(setUser({ email: email, id: uid, token: accessToken }))
+                    createUserFromAuthWithPassword(user, { displayName })
+                    complitedUserAuth(user)
+                  
+                }
+                )
+
         } catch (error) {
 
             if (error.code === 'auth/email-already-in-use') return alert('User alredy exists')
@@ -52,13 +53,6 @@ const SignUpForm = () => {
         }
     }
 
-    // useEffect(() => {
-    //     if (user) {
-    //       const { uid, accessToken, email } = user
-    //     dispatch(setUser({ email: email, id: uid, token: accessToken }))
-    //     }
-        
-    // }, [user])
     return (
         <div className='sign-up-container'>
             <h2>Do not have an account?</h2>

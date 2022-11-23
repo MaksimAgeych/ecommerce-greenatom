@@ -1,22 +1,22 @@
-// import { useAppDispatch } from '../../store/rootReducer.js';
+import { useAppDispatch } from '../../store/rootReducer.js';
 import { signInWithGooglePopup, createUserDocFromAuth, signOutUser, } from '../../utils/firebase/firebase.utils.js';
 import {setUser} from '../../store/authSlice'
 import SignInForm from '../sign-in-form/SignInForm'
 import SignUpForm from '../sign-up-form/SignUpForm'
 
 
-
-
 const Authentication = () => {
 
-    // const dispatch = useAppDispatch();
+    const dispatch = useAppDispatch();
 
     const handleGoogleSignIn = async () => {
-        const { user } = await signInWithGooglePopup();
-        const userDocRef = await createUserDocFromAuth(user);
-        // dispatch(setUser(user))
-        
-
+        signInWithGooglePopup()
+        .then(({user}) => {
+            createUserDocFromAuth(user);
+            const { uid, accessToken, email } = user;
+            dispatch(setUser({ email: email, id: uid, token: accessToken }))
+        })
+       
     }
 
     return (<div className="auth-container">
@@ -30,6 +30,7 @@ const Authentication = () => {
         <button onClick={() => signOutUser()}>
         Sign Out
         </button>
+
     </div>
     )
 };
