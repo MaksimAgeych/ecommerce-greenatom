@@ -2,6 +2,7 @@
 import { signInWithGooglePopup, createUserDocFromAuth, signOutUser, } from '../../utils/firebase/firebase.utils.js';
 import {setUser} from '../../store/authSlice'
 import SignInForm from '../sign-in-form/SignInForm'
+import SignUpForm from '../sign-up-form/SignUpForm'
 
 
 
@@ -22,7 +23,7 @@ const Authentication = () => {
 
         <SignInForm />
 
-        {/* <SignUpForm /> */}
+        <SignUpForm />
     <button onClick={() => handleGoogleSignIn()}>
             Sign In With Google
         </button>

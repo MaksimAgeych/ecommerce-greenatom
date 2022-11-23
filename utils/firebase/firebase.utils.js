@@ -95,7 +95,8 @@ export const complitedUserAuth = async (user) => {
     const userSnapShot = await getDoc(userDocRef);
     // получение данных по конкретному юзеру
     if (userSnapShot.exists()) {
-        return alert('User has created~~')
+        alert('User has created~~')
+        return userSnapShot
     }
 
 }
