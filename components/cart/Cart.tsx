@@ -15,27 +15,29 @@ function createStar(countStar:number){
     
     return(
         
-        <div className="first">
-            <div className="imsec">
-                <img src="https://www.zlatmax.ru/images/zik-0321/01s.webp" className="image"/>
+        <div className={styles.first}>
+            <div className={styles.imsec}>
+                <img src="https://www.zlatmax.ru/images/zik-0321/01s.webp" className={styles.image}/>
             </div>
-            <span  className="textName">asd</span>
+            <span  className={styles.textName}>asd</span>
             <div>
             <div>
-                <div className="textSize">sizeXsize</div>
-                <div className="textMaterial">Material</div>
+                <div className={styles.textSize}>sizeXsize</div>
+                <div className={styles.textMaterial}>Material</div>
             </div>
-            <IconStar className="star"/>
-            <IconStar className="star"/>
-            <div className="textFeedback">1 Отзыв</div>
+            <IconStar className={styles.star}/>
+            <IconStar className={styles.star}/>
+            <div className={styles.textFeedback}>1 Отзыв</div>
             </div>
-            <div className="divLine">
-                <hr className="line"/>
+            <div className={styles.divLine}>
+                <hr className={styles.line}/>
             </div>
             <div>
-            <div className="price">500 р.</div>
-            <div className="imageTwo"><IconCompare className="scale" /><IconLike className="like" /></div>
+            <div className={styles.price}>500 р.</div>
+            <div className={styles.imageTwo}><IconCompare className={styles.scale} /><IconLike className={styles.like} /></div>
+            <div>
             <Button appearance={'primary'}>В корзину</Button>
+            </div>
             </div>
         </div>
     );
