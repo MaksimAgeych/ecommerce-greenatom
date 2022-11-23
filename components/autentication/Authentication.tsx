@@ -1,7 +1,7 @@
 import {signInWithGooglePopup, createUserDocFromAuth, signOutUser,} from '../../utils/firebase/firebase.utils.js';
 import {setUser} from '../../store/authSlice'
-import SignInForm from '../sign-in-form/SignInForm'
-import SignUpForm from '../sign-up-form/SignUpForm'
+import SignInForm from '../SignInForm/SignInForm'
+import SignUpForm from '../SignUpForm/SignUpForm'
 
 import {useAuth} from "../../hooks/userAuth";
 import {Button} from "../Button/Button";
