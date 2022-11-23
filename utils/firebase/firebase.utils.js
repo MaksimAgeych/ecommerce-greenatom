@@ -101,7 +101,6 @@ export const complitedUserAuth = async (user) => {
 
 }
 
-
 export const signIn = async (email, password) => {
 
     if (!(email && password)) return;

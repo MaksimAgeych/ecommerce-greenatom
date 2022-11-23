@@ -48,11 +48,11 @@
 	align-items: center;
 }
 
-.lk:hover {
+.lk a:hover, .lkNoAuth:hover {
 	color: var(--primary);
 }
 
-.lk:hover svg {
+.lkNoAuth:hover svg {
 	fill: var(--primary);
 }
 

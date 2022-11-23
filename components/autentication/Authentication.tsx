@@ -2,10 +2,18 @@ import {signInWithGooglePopup, createUserDocFromAuth, signOutUser,} from '../../
 import {setUser} from '../../store/authSlice'
 import SignInForm from '../sign-in-form/SignInForm'
 import SignUpForm from '../sign-up-form/SignUpForm'
-import {useAppDispatch} from "../../hooks/redux-hooks";
+
+import {useAuth} from "../../hooks/userAuth";
+import {Button} from "../Button/Button";
+import {useRouter} from "next/router";
+import {withLayout} from "../../layouts/Layout";
 
 
 const Authentication = () => {
+
+    let {isAuth} = useAuth();
+    let router = useRouter();
+    isAuth ? router.push('/') : '';
 
     // const dispatch = useAppDispatch();
     //
@@ -20,20 +28,22 @@ const Authentication = () => {
     //
     // }
 
+    console.log(useAuth().name)
     return (<div className="auth-container">
 
-            <SignInForm/>
-
-            {/*<SignUpForm/>*/}
+            <div>
+                <SignInForm/>
+            </div>
+            <div>
+                <SignUpForm/>
+            </div>
             {/*<button onClick={() => handleGoogleSignIn()}>*/}
             {/*    Sign In With Google*/}
             {/*</button>*/}
-            <button onClick={() => signOutUser()}>
-                Sign Out
-            </button>
+            <Button appearance={'primary'} onClick={() => signOutUser()}>Выйти</Button>
 
         </div>
     )
 };
 
-export default Authentication;
+export default withLayout(Authentication);

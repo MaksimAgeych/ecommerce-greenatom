@@ -8,6 +8,7 @@ import {
 import FormInput from '../form-input/FormInput';
 import {setUser} from '../../store/authSlice';
 import {useAppDispatch} from "../../hooks/redux-hooks";
+import {getAuth, updateProfile} from "firebase/auth";
 // import Button from '../button/Button';
 
 const defaultFormFields = {
@@ -32,15 +33,25 @@ const SignUpForm = () => {
         event.preventDefault();
 
         const {email, password, confirmPassword, displayName} = formFields;
-        if (password !== confirmPassword) return alert("Password dosn't match");
+        if (password !== confirmPassword) return alert("Пароли не совпадают");
 
-        createAuthUserWithEmailAndPassword(email, password, {displayName})
+        createAuthUserWithEmailAndPassword(email, password)
             .then(({user}) => {
-                    console.log(user)
                     const {uid, accessToken, email} = user;
+
+                    const auth = getAuth();
+                    //Добавление имени
+                    updateProfile(auth.currentUser, {
+                        displayName: displayName
+                    }).then(() => {
+                        console.log('Имя обновлено')
+                    }).catch((error) => {
+                        console.error('Имя не обновлено: ' + error)
+                    });
+
                     dispatch(setUser({email: email, id: uid, token: accessToken, name: displayName}))
-                    //createUserFromAuthWithPassword(user, {displayName})
-                    complitedUserAuth(user)
+                    complitedUserAuth(user);
+
                 }
             ).catch(console.error)
 
