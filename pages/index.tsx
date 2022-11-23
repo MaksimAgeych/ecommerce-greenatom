@@ -2,8 +2,7 @@ import styles from '../styles/Home.module.css'
 import {Htag, P, Button} from "../components";
 import {withLayout} from "../layouts/Layout";
 import Link from "next/link";
-import { Provider } from 'react-redux';
-import { store } from '../store/rootReducer';
+
 
 function Home() {
   return (
