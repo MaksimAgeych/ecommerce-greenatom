@@ -1,7 +1,8 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { createUserDocFromAuth, signInWithGooglePopup, signIn } from '../../utils/firebase/firebase.utils';
 import FormInput from '../form-input/FormInput';
 import { useAppDispatch } from '../../store/rootReducer';
+import {setUser} from '../../store/authSlice'
 // import './sign-in-form.styles.scss';
 // import Button from '../button/Button';
 
@@ -13,6 +14,7 @@ const defaultFormFields = {
 const SignInForm = () => {
 
     const [formFields, setFormFields] = useState(defaultFormFields);
+    const [currentUser, setCurrentUser] = useState(null);
     const { email, password, } = formFields;
     const dispatch = useAppDispatch();
 
@@ -23,7 +25,7 @@ const SignInForm = () => {
 
     const signInWithGoogle = async () => {
         const { user } = await signInWithGooglePopup()
-        // setCurrentUser(user)
+        setCurrentUser(user)
         await createUserDocFromAuth(user);
 
     }
@@ -35,9 +37,10 @@ const SignInForm = () => {
 
         try {
             const { user } = await signIn(email, password);
-            dispatch(setUser(user))
             console.log(user)
-            setFormFields(defaultFormFields); //очистка полей при успешной авторизцации
+            setCurrentUser(user)
+           
+             setFormFields(defaultFormFields); //очистка полей при успешной авторизцации
         } catch (error) {
 
             switch (error.code) {
@@ -50,6 +53,13 @@ const SignInForm = () => {
             }
         }
     }
+
+    useEffect(()=>{
+        if (currentUser) 
+        {const {uid, accessToken, email} = currentUser
+    dispatch(setUser({ email: email, id: uid, token: accessToken }))}
+    },[currentUser])
+
     return (
         <div className='sign-up-container'>
             <h2>Already have an account?</h2>
@@ -59,15 +69,15 @@ const SignInForm = () => {
 
                 <FormInput label={'Email'} type='email' required onChange={handleOnChange} name='email' value={email} />
 
-               
+
                 <FormInput label={'Password'} type='password' required onChange={handleOnChange} name='password' value={password} />
 
                 <button onClick={(event) => handleOnSubmit(event)}>
-            Sign In
-        </button>
+                    Sign In
+                </button>
 
 
-{/* 
+                {/* 
                 <div className='button-wrapper'>
                     <Button type='submit' buttonType='default' onSubmit={handleOnSubmit} >SIGN IN</Button>
                     <Button type='submit' buttonType='google' onSubmit={signInWithGoogle} >SIGN IN WITH GOOGLE</Button>
