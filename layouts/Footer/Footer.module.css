@@ -11,6 +11,15 @@
 	line-height: 20px;
 }
 
+.footerFirstFloor {
+	grid-template-columns: 3fr 3fr 3fr 3fr;
+	display: grid;
+}
+
+.section {
+	width: 234px;
+}
+
 .footer a:hover {
 	color: var(--gray-light);
 }
