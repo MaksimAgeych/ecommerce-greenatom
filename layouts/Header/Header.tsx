@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {use, useEffect, useState} from 'react';
 import styles from './Header.module.css';
 import {HeaderProps} from "./Header.props";
 import cn from 'classnames';
@@ -9,9 +9,24 @@ import IconLocate from './locate.svg';
 import IconFav from './fav.svg';
 import IconCart from './cart.svg';
 import IconAuth from './auth.svg';
+import {useAuth} from '../../hooks/userAuth'
+import { onAuthStateChangedListner } from '../../utils/firebase/firebase.utils';
+import { useAppSelector } from '../../store/rootReducer';
 
 
 export const Header = ({className, ...props}: HeaderProps): JSX.Element => {
+    
+   const [user, setUser] = useState(null)
+   
+
+
+
+    useEffect(() => {
+        onAuthStateChangedListner(user => setUser(user))
+        
+        console.log(user)}, [])
+
+   const userAuth = useAppSelector(state => state.user)
 
     return (
         <header className={cn(className, styles.header)} {...props}>
@@ -28,7 +43,13 @@ export const Header = ({className, ...props}: HeaderProps): JSX.Element => {
                     <div className={styles.rightTopHeader}>
                         <Link className={styles.lk} href={'/auth'}>
                             <IconAuth className={styles.iconAuth}/>
-                            <span>Личный Кабинет</span>
+                          {user? 
+                        <span>
+                       {userAuth.email}
+                          </span>
+                           : <span>
+                            Личный Кабинет
+                            </span>}
                         </Link>
                     </div>
                 </div>
