@@ -1,17 +1,25 @@
-import Head from 'next/head'
-import Image from 'next/image'
-import { Provider } from 'react-redux'
-import MainLayOut from '../layout/MainLayOut/MainLayOut'
-import { store } from '../store/rootReducer'
-import styles from '../styles/Home.module.css'
-import App from './_app'
 
-export default function Home() {
+import styles from '../styles/Home.module.css'
+import {Htag, P, Button} from "../components";
+import {withLayout} from "../layouts/Layout";
+import Link from "next/link";
+
+
+function Home() {
   return (
-    <Provider store={store}>
-      <MainLayOut>
-        <App />
-      </MainLayOut>
-    </Provider>
+          <div className={styles.container}>
+        <Htag tag={'h1'}>Заголовок</Htag>
+        <P size={'l'}>Привет мир</P>
+        <Button appearance={'primary'}>Кнопка</Button>
+        <Link href={'/auth'}>Авторизация</Link>
+        <Link href={'/cart'}>Корзина</Link>
+        <Link href={'/catalog'}>Каталог</Link>
+        <Link href={'/favorites'}>Избранное</Link>
+    </div>
+
+
+
   )
 }
+
+export default withLayout(Home);

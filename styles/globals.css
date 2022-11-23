@@ -2,8 +2,7 @@ html,
 body {
   padding: 0;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  font-family: 'Montserrat', sans-serif;
 }
 
 a {
@@ -13,7 +12,10 @@ a {
 
 * {
   box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
+
 
 @media (prefers-color-scheme: dark) {
   html {
@@ -23,4 +25,13 @@ a {
     color: white;
     background: black;
   }
+}
+
+
+:root {
+  --black: #141414;
+  --white: #FFF;
+  --primary: #E8AA31;
+  --primary-hover: #f8bd54;
+  --gray: #ECF1F2;
 }
