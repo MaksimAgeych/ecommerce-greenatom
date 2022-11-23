@@ -1,0 +1,132 @@
+.first{
+    width: 375px;
+    height: 600px;
+    margin: 15px;
+    float: left;
+    box-shadow: 0px 4px 20px 0px #0000001A;
+    
+}
+.imsec{
+    width: 374px;
+    height: 295px;
+    
+}
+.image{
+    
+    padding-top: 21px;
+    padding-left: 50px;
+    padding-right: 50px;
+    width: 100%;
+    height: 100%;
+    left: 216.59px;
+    top: 1980.63px;
+}
+.textName{
+    font-family: Arial; /*шрифта Montserrat в стандартных нет поэтому пока в times new roman */
+    padding-left: 20px;
+    padding-top: 20px;
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 34px;
+    text-align: left;
+    
+}
+.textSize{
+    display: inline-block;
+    font-family: Arial;
+    padding-left: 20px;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 34px;
+    text-align: left;
+    color: #ABABAB;
+}
+.textMaterial{
+    font-family: Arial;
+    text-align: right;
+    display: inline-block;
+    float: right;
+    padding-right: 20px;
+    padding-left: 20px;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 34px;
+    letter-spacing: 0em;
+    color: #ABABAB;
+}
+.star{
+    display: inline-block;
+    float: left;
+    left: 50px;
+    margin-top: 11px;
+    margin-left: 10px;    
+}
+.textFeedback{
+
+    font-family: Arial;
+    padding-top: 13px;
+    padding-right: 20px;
+    float: right;
+
+    letter-spacing: 0em;
+    color: #ABABAB;
+}
+.line{
+    float: left;
+    margin-top: 26px ;
+    margin-left: 20px;
+	width: 335px;
+	border: none;
+    border: 1px solid rgba(20, 20, 20, 0.5);
+}
+.divLine{
+  
+	padding-top: 20px;
+	
+}
+.price{
+    display: inline-block;
+    font-family: Arial;
+    padding-top: 20px;
+    padding-left: 20px;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 34px;
+    text-align: left;
+}
+.scale{
+padding-right: 15px;
+}
+.imageTwo{
+    font-family: Arial;
+    text-align: right;
+    display: inline-block;
+    float: right;
+    padding-right: 20px;
+    padding-top: 25px;
+    padding-left: 20px;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 34px;
+    letter-spacing: 0em;
+}
+.but{
+    background: #E8AA31;
+    align: center;
+    box-shadow: 0px 4px 20px rgba(232, 170, 49, 0.43);
+    border-radius: 3px;
+    border: none;
+    width: 335px;
+    height: 50px;
+    position: relative;
+    left: 50%;
+    transform: translate(-50%, 0);
+    
+}
+.textBuy{
+    font-family: Arial;
+color: #FFFFFF;
+display: inline-block;
+
+    font-weight: 600;
+}
