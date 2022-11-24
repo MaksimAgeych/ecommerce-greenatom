@@ -1,4 +1,5 @@
 import React from 'react';
+import {withLayout_leftSidebar} from "../layouts/Layout_LeftSidebar";
 
 function Catalog() : JSX.Element {
     return (
@@ -6,4 +7,4 @@ function Catalog() : JSX.Element {
     );
 }
 
-export default Catalog;
+export default withLayout_leftSidebar(Catalog);

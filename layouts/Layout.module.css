@@ -9,6 +9,17 @@
 	min-height: 100vh;
 }
 
+.wrapperLeftSidebar {
+	display: grid;
+	grid-template: auto 1fr auto / auto 375px minmax(320px, 1200px) auto;
+	gap: 40px 30px;
+	grid-template-areas:
+		"header header header header"
+		". sidebar body ."
+		"footer footer footer footer";
+	min-height: 100vh;
+}
+
 .header {
 	grid-area: header;
 }
