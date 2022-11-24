@@ -1,5 +1,6 @@
 .sidebar {
 	display: grid;
 	align-content: start;
-	gap: 20px;
+	background: var(--white);
+	box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
 }
