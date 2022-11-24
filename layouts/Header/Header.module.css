@@ -18,6 +18,7 @@
 	grid-template: auto /  minmax(320px, 1200px);
 	justify-content: space-around;
 	align-items: center;
+	padding: 0 30px;
 }
 
 /* верхняя часть меню */
