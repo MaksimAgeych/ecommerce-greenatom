@@ -19,7 +19,15 @@ export const Header = ({className, ...props}: HeaderProps): JSX.Element => {
 
 
     useEffect(() => {
-        onAuthStateChangedListner((user: React.SetStateAction<null>) => setUser(user))
+        //TODO displayName 
+        //
+        onAuthStateChangedListner((user: React.SetStateAction<any>) => {
+            // console.log(user.displayName)
+            // console.log(user)
+            setUser(user)})
+        // onAuthStateChangedListner((user: React.SetStateAction<null>) => setUser(user))
+        // .then((use}) => console.log(user.displayName))
+        console.log(name)
         console.log(user)
     }, [])
 

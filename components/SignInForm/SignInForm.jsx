@@ -1,5 +1,5 @@
 import {useState, useEffect} from 'react';
-import {createUserDocFromAuth, signInWithGooglePopup, signIn} from '../../utils/firebase/firebase.utils';
+import {createUserDocFromAuth, signInWithGooglePopup, signIn, createCookie} from '../../utils/firebase/firebase.utils';
 import FormInput from '../form-input/FormInput';
 import {setUser} from '../../store/authSlice'
 import {useAppDispatch} from "../../hooks/redux-hooks";
@@ -42,8 +42,11 @@ const SignInForm = () => {
                         token: user.refreshToken,
                         name: user.displayName
                     }))
-                    console.log(user);
-                    console.log(user.displayName);
+                    // console.log(user);
+                    // console.log(user.displayName);
+                    console.log(createCookie)
+                 createCookie()
+
                 }).catch(console.error)
 
 
