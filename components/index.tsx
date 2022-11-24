@@ -7,3 +7,4 @@ export * from './SignUpForm/SignUpForm';
 export * from './SignInForm/SignInForm';
 export * from './Authentication/Authentication';
 export * from './FormInput/FormInput';
+export * from './SidebarWidget/SidebarWidget';
