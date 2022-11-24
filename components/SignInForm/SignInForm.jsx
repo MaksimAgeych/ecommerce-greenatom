@@ -1,6 +1,6 @@
 import {useState, useEffect} from 'react';
 import {createUserDocFromAuth, signInWithGooglePopup, signIn} from '../../utils/firebase/firebase.utils';
-import FormInput from '../form-input/FormInput';
+import FormInput from '../FormInput/FormInput';
 import {setUser} from '../../store/authSlice'
 import {useAppDispatch} from "../../hooks/redux-hooks";
 import {getAuth, signInWithEmailAndPassword} from "firebase/auth";
