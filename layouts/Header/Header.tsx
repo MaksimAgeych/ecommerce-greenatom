@@ -79,7 +79,7 @@ export const Header = ({className, ...props}: HeaderProps): JSX.Element => {
                 <div className={styles.botHeader}>
                     <nav className={styles.menu}>
                         <ul>
-                            <li><Link href={'/'}>Каталог ножей</Link></li>
+                            <li><Link href={'/catalog'}>Каталог</Link></li>
                             <li><Link href={'/'}>Клинковое оружие</Link></li>
                             <li><Link href={'/'}>Сувенирные изделия</Link></li>
                             <li><Link href={'/'}>Фонари ARMYTEK</Link></li>
