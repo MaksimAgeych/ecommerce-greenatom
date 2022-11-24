@@ -13,7 +13,7 @@ export const Layout = ({children}: LayoutProps): JSX.Element => {
     return (
         <div className={styles.wrapperLeftSidebar}>
             <Header className={styles.header}/>
-            <Sidebar/>
+            <Sidebar className={styles.sidebar}/>
             <main className={styles.body} tabIndex={0} role={"main"}>
                 {children}
             </main>
