@@ -24,6 +24,9 @@
 	grid-area: header;
 }
 
+.sidebar {
+	grid-area: sidebar;
+}
 .body {
 	grid-area: body;
 	outline: none;
