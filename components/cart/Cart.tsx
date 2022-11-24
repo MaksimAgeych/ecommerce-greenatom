@@ -1,43 +1,39 @@
 import React from "react";
 import styles from "./Cart.module.css";
-import IconStar from "./element/Star.svg";
-import IconCompare from "./element/scales.svg";
-import IconLike from "./element/like.svg";
-import { Button } from "../Button/Button";
+import IconStar from "./icons/Star.svg";
+import IconCompare from "./icons/scales.svg";
+import IconLike from "./icons/like.svg";
 
-function createStar(countStar:number){
-    for(let i=0;i<countStar;i++){
-        return <IconStar className="star"/>
-    }
-}
-
- export const Cart =() :JSX.Element=>{//на продукт пока заглушка any 
-    
-    return(
-        
-        <div className={styles.first}>
-            <div className={styles.imsec}>
+export const Cart = (): JSX.Element => {//на продукт пока заглушка any
+    return (
+        <div className={styles.cart}>
+            <div className={styles.images}>
                 <img src="https://www.zlatmax.ru/images/zik-0321/01s.webp" className={styles.image}/>
             </div>
-            <span  className={styles.textName}>asd</span>
-            <div>
-            <div>
-                <div className={styles.textSize}>sizeXsize</div>
-                <div className={styles.textMaterial}>Material</div>
+            <span className={styles.name}>Нож Лиса</span>
+            <div className={styles.spec}>
+                <p className={styles.left}>95x18</p>
+                <p className={styles.right}>Орех, алюминий</p>
             </div>
-            <IconStar className={styles.star}/>
-            <IconStar className={styles.star}/>
-            <div className={styles.textFeedback}>1 Отзыв</div>
+            <div className={styles.feedback}>
+                <div className={styles.rating}>
+                    <IconStar className={styles.star}/>
+                    <IconStar className={styles.star}/>
+                    <IconStar className={styles.star}/>
+                    <IconStar className={styles.star}/>
+                    <IconStar className={styles.star}/>
+                </div>
+                <div className={styles.reviews}>1 Отзыв</div>
             </div>
-            <div className={styles.divLine}>
+            <div className={styles.hr}>
                 <hr className={styles.line}/>
             </div>
-            <div>
-            <div className={styles.price}>500 р.</div>
-            <div className={styles.imageTwo}><IconCompare className={styles.scale} /><IconLike className={styles.like} /></div>
-            <div>
-            <Button appearance={'primary'}>В корзину</Button>
-            </div>
+            <div className={styles.footer}>
+                <div className={styles.price}>500 р.</div>
+                <div className={styles.activity}>
+                    <IconCompare/>
+                    <IconLike/>
+                </div>
             </div>
         </div>
     );
