@@ -42,7 +42,7 @@ export const Header = ({className, ...props}: HeaderProps): JSX.Element => {
                         })
                         }>
                             <IconAuth className={styles.iconAuth}/>
-                            {user ? <div><span>Привет, {userAuth.name}</span> | <Link href={'/'}
+                            {user ? <div><span>Личный кабинет {userAuth.name}</span> | <Link href={'/'}
                                                                                       onClick={() => signOutUser()}>Выйти</Link>
                                 </div>
                                 : <div><Link href={'/auth'}><span>Войти</span></Link></div>
