@@ -1,12 +1,10 @@
 import {signInWithGooglePopup, createUserDocFromAuth, signOutUser,} from '../../utils/firebase/firebase.utils.js';
-import {setUser} from '../../store/authSlice'
 import SignInForm from '../SignInForm/SignInForm'
 import SignUpForm from '../SignUpForm/SignUpForm'
 
 import {useAuth} from "../../hooks/userAuth";
 import {Button} from "../Button/Button";
 import {useRouter} from "next/router";
-import {withLayout} from "../../layouts/Layout";
 
 
 const Authentication = () => {
@@ -46,4 +44,4 @@ const Authentication = () => {
     )
 };
 
-export default withLayout(Authentication);
+export default Authentication;

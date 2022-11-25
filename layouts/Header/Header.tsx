@@ -15,8 +15,7 @@ import {useAppSelector} from "../../hooks/redux-hooks";
 
 export const Header = ({className, ...props}: HeaderProps): JSX.Element => {
 
-    const [user, setUser] = useState(null)
-
+    const [user, setUser] = useState(null);
 
     useEffect(() => {
         //TODO displayName 
@@ -51,10 +50,10 @@ export const Header = ({className, ...props}: HeaderProps): JSX.Element => {
                         })
                         }>
                             <IconAuth className={styles.iconAuth}/>
-                            {user ? <div><span>Привет, {userAuth.name}</span> | <Link href={'/'}
+                            {user ? <div><span>Личный кабинет {userAuth.email}</span> | <Link href={'/'}
                                                                                       onClick={() => signOutUser()}>Выйти</Link>
                                 </div>
-                                : <div><Link href={'/auth'}><span>Личный Кабинет</span></Link></div>
+                                : <div><Link href={'/auth'}><span>Войти</span></Link></div>
                             }
                         </div>
                     </div>
@@ -88,7 +87,7 @@ export const Header = ({className, ...props}: HeaderProps): JSX.Element => {
                 <div className={styles.botHeader}>
                     <nav className={styles.menu}>
                         <ul>
-                            <li><Link href={'/'}>Каталог ножей</Link></li>
+                            <li><Link href={'/catalog'}>Каталог</Link></li>
                             <li><Link href={'/'}>Клинковое оружие</Link></li>
                             <li><Link href={'/'}>Сувенирные изделия</Link></li>
                             <li><Link href={'/'}>Фонари ARMYTEK</Link></li>

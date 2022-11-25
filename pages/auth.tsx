@@ -1,6 +1,7 @@
 import React from 'react';
 
 import Authentication from '../components/Authentication/Authentication';
+import {withLayout} from "../layouts/Layout";
 
 function Auth(): JSX.Element {
     return (
@@ -10,4 +11,4 @@ function Auth(): JSX.Element {
     )
 }
 
-export default Auth;
+export default withLayout(Auth);

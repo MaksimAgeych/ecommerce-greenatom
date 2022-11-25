@@ -1,6 +1,6 @@
 import React from 'react';
 
-function Cart(): JSX.Element {
+ function Cart(): JSX.Element {
     return (
         <div>
 
