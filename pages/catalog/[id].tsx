@@ -2,7 +2,7 @@ import React from 'react';
 import {IProduct} from "../../interface/entities/interface";
 import {Htag, P} from "../../components";
 import {withLayout} from "../../layouts/Layout";
-
+import { ProductDescription } from '../../components';
 //SSG
 export const getStaticPaths = async () => {
     const response = await fetch('http://localhost:4000/products');
@@ -52,7 +52,7 @@ function ProductPage({product}: { product: IProduct }): JSX.Element {
     return (
         <>
             <Htag tag={'h1'}>{name}</Htag>
-            <P>{description}</P>
+            <ProductDescription {...product}/>
         </>
     );
 }
