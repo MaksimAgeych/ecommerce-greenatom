@@ -42,8 +42,11 @@ const SignInForm = () => {
                         token: user.refreshToken,
                         name: user.displayName
                     }))
-                    console.log(user);
-                    console.log(user.displayName);
+                    // console.log(user);
+                    // console.log(user.displayName);
+                //     console.log(createCookie)
+                //  createCookie()
+
                 }).catch(console.error)
 
 

@@ -11,6 +11,7 @@ export const store = configureStore(
             favoriets: favorietsSlice,
             user: authSlice,
             products: productsSlice
+    
         }
     }
 );

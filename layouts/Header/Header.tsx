@@ -18,7 +18,15 @@ export const Header = ({className, ...props}: HeaderProps): JSX.Element => {
     const [user, setUser] = useState(null);
 
     useEffect(() => {
-        onAuthStateChangedListner((user: React.SetStateAction<null>) => setUser(user))
+        //TODO displayName 
+        //
+        onAuthStateChangedListner((user: React.SetStateAction<any>) => {
+            // console.log(user.displayName)
+            // console.log(user)
+            setUser(user)})
+        // onAuthStateChangedListner((user: React.SetStateAction<null>) => setUser(user))
+        // .then((use}) => console.log(user.displayName))
+        console.log(name)
         console.log(user)
     }, [])
 
@@ -42,7 +50,7 @@ export const Header = ({className, ...props}: HeaderProps): JSX.Element => {
                         })
                         }>
                             <IconAuth className={styles.iconAuth}/>
-                            {user ? <div><span>Личный кабинет {userAuth.name}</span> | <Link href={'/'}
+                            {user ? <div><span>Личный кабинет {userAuth.email}</span> | <Link href={'/'}
                                                                                       onClick={() => signOutUser()}>Выйти</Link>
                                 </div>
                                 : <div><Link href={'/auth'}><span>Войти</span></Link></div>

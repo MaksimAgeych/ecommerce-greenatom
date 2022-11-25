@@ -1,8 +1,20 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useAppDispatch, useAppSelector } from '../hooks/redux-hooks';
 import {withLayout_leftSidebar} from "../layouts/Layout_LeftSidebar";
-import {Cart} from "../components";
+import { fetchAllProducts } from '../store/productsAsyncActions';
+import productsSlice from '../store/productsSlice';
+import Cart from "./cart";
 
 function Catalog() : JSX.Element {
+    const dispatch = useAppDispatch();
+    const getState = useAppSelector(state => state.products)
+
+    useEffect(() => {
+    
+     fetchAllProducts('/products')
+     
+  
+    },[])
     return (
         <div>
             <Cart/>
