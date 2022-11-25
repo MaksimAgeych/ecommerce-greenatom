@@ -1,0 +1,44 @@
+.imageDiv{
+    width: 537px;
+    height: 537px;
+    box-shadow: 0px 4px 20px 0px #0000001A;
+    background-color: white;
+    float: left;
+
+}
+.image{
+    width: 537px;
+    height: 537px;
+}
+.destiptionDiv{
+    width: 606px;
+    height: 537px;
+    background-color: white;
+    box-shadow: 0px 4px 20px 0px #0000001A;
+    margin-left: 560px;
+}
+.descripTitle{
+    display:block;
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 29px;
+    padding: 20px;
+
+
+}
+.line{
+    background: #E8AA31;
+    border: 0.5px solid #E8AA31;
+    margin-left: 20px;
+    margin-right: 20px;
+
+}
+.text{
+
+font-size: 17px;
+font-weight: 500;
+line-height: 27px;
+letter-spacing: 0em;
+text-align: left;
+padding: 20px;
+}
