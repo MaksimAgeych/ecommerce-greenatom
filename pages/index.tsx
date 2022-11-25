@@ -1,20 +1,13 @@
 import {withLayout} from "../layouts/Layout";
-import { ProductsCatalog } from '../components/ProductsCatalog/ProductsCatalog';
+import {ProductsCatalog} from '../components/ProductsCatalog/ProductsCatalog';
 
 
 function Home() {
-  return (
-    <div>
-      {/* <Link href={'/auth'}>Авторизация</Link>
-      <Link href={'/cart'}>Корзина</Link>
-      <Link href={'/catalog'}>Каталог</Link>
-      <Link href={'/favorites'}>Избранное</Link> */}
-      <ProductsCatalog />
-    </div>
-
-
-
-  )
+    return (
+        <div>
+            <ProductsCatalog/>
+        </div>
+    )
 }
 
 export default withLayout(Home);
