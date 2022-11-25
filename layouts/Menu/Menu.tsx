@@ -7,8 +7,7 @@ import { ProductCart } from './../../components/ProductCard/ProductCart';
 import { fetchAllProducts } from '../../store/productsAsyncActions';
 
 export const Menu = (): JSX.Element => {
-    const {products} = useAppSelector((state) => state.products);
-    console.log(products);
+    const {products, status} = useAppSelector((state) => state.products);
     const dispatch = useAppDispatch();
 
     useEffect(() => {
@@ -17,6 +16,8 @@ export const Menu = (): JSX.Element => {
 
     return (
         <nav className={styles.menu} role={"navigation"}>
+            {status === "loading" && <div>Загрузка</div>}
+            {status === "error" && <div>Ошибка</div>}
             {
                 products.map((product) => (
                     <ProductCart key={product.id} {...product}/>
