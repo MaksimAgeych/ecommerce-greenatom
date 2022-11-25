@@ -11,7 +11,7 @@
 
 .wrapperLeftSidebar {
 	display: grid;
-	grid-template: auto 1fr auto / auto 375px minmax(320px, 795px) auto;
+	grid-template: auto 1fr auto / auto 250px minmax(320px, 920px) auto;
 	gap: 40px 30px;
 	grid-template-areas:
 		"header header header header"
