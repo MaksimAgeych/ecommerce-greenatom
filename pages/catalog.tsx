@@ -11,7 +11,7 @@ function Catalog() : JSX.Element {
 
     useEffect(() => {
     
-     fetchAllProducts('/products')
+    dispatch( fetchAllProducts('/products'))
      
   
     },[])
