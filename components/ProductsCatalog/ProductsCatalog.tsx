@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 import { useAppSelector } from '../../hooks/redux-hooks';
-import { RootState } from '../../store/rootReducer';
 import styles from './ProductsCatalog.module.css';
 import { useAppDispatch } from '../../hooks/redux-hooks';
 import { ProductCart } from '../ProductCard/ProductCart';
@@ -11,7 +10,7 @@ export const ProductsCatalog = (): JSX.Element => {
     const dispatch = useAppDispatch();
 
     useEffect(() => {
-        dispatch(fetchAllProducts());
+        dispatch(fetchAllProducts(''));
     }, []);
 
     return (
