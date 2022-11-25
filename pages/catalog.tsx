@@ -7,14 +7,7 @@ import Cart from "./cart";
 
 function Catalog() : JSX.Element {
     const dispatch = useAppDispatch();
-    const getState = useAppSelector(state => state.products)
 
-    useEffect(() => {
-    
-     fetchAllProducts('/products')
-     
-  
-    },[])
     return (
         <div>
             <Cart/>
