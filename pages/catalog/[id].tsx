@@ -51,7 +51,7 @@ function ProductPage({product}: { product: IProduct }): JSX.Element {
     console.log(product.name)
     return (
         <>
-            <Htag tag={'h1'}>{name}</Htag>
+            {/* <Htag tag={'h1'}>{name}</Htag> */}
             <ProductDescription {...product}/>
         </>
     );

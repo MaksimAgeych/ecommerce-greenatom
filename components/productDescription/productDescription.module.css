@@ -1,30 +1,34 @@
 .imageDiv{
-    width: 537px;
-    height: 537px;
+    width: 487px;
+    height: 487px;
     box-shadow: 0px 4px 20px 0px #0000001A;
     background-color: white;
     float: left;
 
 }
 .image{
-    width: 537px;
-    height: 537px;
+    width: 487px;
+    height: 487px;
 }
 .destiptionDiv{
-    width: 606px;
-    height: 537px;
+    width: 756px;
+    height: 687px;
     background-color: white;
     box-shadow: 0px 4px 20px 0px #0000001A;
     margin-left: 560px;
 }
 .descripTitle{
-    display:block;
     font-size: 24px;
     font-weight: 700;
     line-height: 29px;
     padding: 20px;
-
-
+}
+.descripName{
+    display: inline-block;
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 29px;
+    padding: 20px;
 }
 .line{
     background: #E8AA31;
@@ -34,11 +38,30 @@
 
 }
 .text{
-
-font-size: 17px;
-font-weight: 500;
-line-height: 27px;
+font-weight: 400;
+line-height: 24px;
 letter-spacing: 0em;
 text-align: left;
 padding: 20px;
+}
+
+.stars{
+    float: right;
+    margin-right: 20px;
+}
+.activity svg {
+	margin-left: 20px;
+    float: right;
+}
+.right{
+    margin: 20px;
+}
+.mater{
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 22px;
+    letter-spacing: 0em;
+    text-align: left;
+    color: #ABABAB;
+    padding-left: 100px;
 }
