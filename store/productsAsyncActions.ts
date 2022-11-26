@@ -9,19 +9,17 @@ export const fetchAllProducts = createAsyncThunk
 <
     IProduct[],
     string,
-    { state: { asyncProducts: ProductsSlice } }
+    { state: { products: ProductsSlice } }
   >
   (
     'products/fetchProducts',
-    async (substr: string) => {
-      // const response = await fetch('http://localhost:4000/products');
-      const response = await getData(substr)
-      // return await response.json();
-      return await response.data
+    async () => {
+      const response = await getData('/products');
+      return await response.data;
     },
     {
       condition: (_, { getState }) => {
-        const { status } = getState().asyncProducts;
+        const { status } = getState().products;
        
         status
 

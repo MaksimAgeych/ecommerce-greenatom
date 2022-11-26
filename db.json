@@ -73,7 +73,7 @@
       "img": "https://www.zlatmax.ru/images/zlatko-0083/02s.webp"
     },
     {
-      "id": 7,
+      "id": 8,
       "name": "Нож Батыр",
       "about": "Берёзовый кап, Металлический, Литье Пума",
       "size": "100Х13М",
@@ -83,7 +83,7 @@
       "img": "https://www.zlatmax.ru/images/zlatko-0155/02s.webp"
     },
     {
-      "id": 8,
+      "id": 9,
       "name": "Нож Кержак-2",
       "about": "Стабилизированный кап, Алюминий",
       "size": "Х12МФ",
@@ -93,7 +93,7 @@
       "img": "https://www.zlatmax.ru/images/zlatonozh-0063/02s.webp"
     },
     {
-      "id": 9,
+      "id": 10,
       "name": "Нож Амундсен",
       "about": "Накладки стабилизированный кап клёна",
       "size": "Х12МФ",
@@ -103,7 +103,7 @@
       "img": "https://www.zlatmax.ru/images/zlatonozh-0081/02s.webp"
     },
     {
-      "id": 10,
+      "id": 11,
       "name": "Нож Финка Юсси",
       "about": "Стабилизированный кап клёна Синий, Алюминий",
       "size": "Х12МФ",
@@ -113,7 +113,7 @@
       "img": "https://www.zlatmax.ru/images/zlatonozh-0085/02s.webp"
     },
     {
-      "id": 11,
+      "id": 12,
       "name": "Меч «Архангел Михаил» V2",
       "about": "Золото, латунь, никель",
       "size": "620,0±10,0 мм",
@@ -123,7 +123,7 @@
       "img": "https://www.zlatmax.ru/images/zlat-1176/mech-arhangel-mihail-v2-foto-01.webp"
     },
     {
-      "id": 12,
+      "id": 13,
       "name": "Сабля легкокавалерийская образца 1789 года",
       "about": "Золото, никель",
       "size": "738,0±5,0 мм",
@@ -133,7 +133,7 @@
       "img": "https://www.zlatmax.ru/images/zlat-1118/sablya-legkokavaleriyskaya-obrazca-1789-goda-foto-01.webp"
     },
     {
-      "id": 13,
+      "id": 14,
       "name": "Сабля «Восточная» украшенная",
       "about": "Золото, латунь, никель,фианит зеленый – 212 шт, фианит бесцветный – 249 шт., корунд красный – 193 шт",
       "size": "945±15 мм",
@@ -143,7 +143,7 @@
       "img": "https://www.zlatmax.ru/images/zlat-1146/sablya-vostochnaya-ukrashennaya-foto-01.webp"
     },
     {
-      "id": 14,
+      "id": 15,
       "name": "Палаш морской Флотилия",
       "about": "Золото, латунь",
       "size": "710,0±15,0 мм",
@@ -153,7 +153,7 @@
       "img": "https://www.zlatmax.ru/images/zlat-1195/palash-morskoy-flotiliya-foto-10.webp"
     },
     {
-      "id": 15,
+      "id": 16,
       "name": "Шпага украшенная",
       "about": "Золото, латунь, никель,серебро",
       "size": "805,0±10,0 мм",
@@ -163,7 +163,7 @@
       "img": "https://www.zlatmax.ru/images/zlat-1133/shpaga-ukrashennaya-foto-01.webp"
     },
     {
-      "id": 16,
+      "id": 17,
       "name": "Сабля восточная украшенная «Сарацин»",
       "about": "Сталь, латунь",
       "size": "938,0±10,0 мм",
@@ -173,7 +173,7 @@
       "img": "https://www.zlatmax.ru/images/zlat-1123/sablya-vostochnaya-ukrashennaya-saracin-foto-01.webp"
     },
     {
-      "id": 17,
+      "id": 18,
       "name": "Сабля «Наследие Востока»",
       "about": "Золото, латунь, никель",
       "size": "945,0±10,0 мм",
@@ -183,7 +183,7 @@
       "img": "https://www.zlatmax.ru/images/zlat-1138/sablya-nasledie-vostoka-foto-01.webp"
     },
     {
-      "id": 18,
+      "id": 19,
       "name": "Сабля «Династия Романовых»",
       "about": "Золото, латунь, никель, драгоценные камни",
       "size": "800±15,0 мм",
@@ -193,7 +193,7 @@
       "img": "https://www.zlatmax.ru/images/zlat-1135/sablya-dinastiya-romanovyh-foto-01.webp"
     },
     {
-      "id": 19,
+      "id": 20,
       "name": "Сабля Офицерская украшенная в ц-м ножне",
       "about": "Золото, латунь, никель, серебро",
       "size": "800±15,0 мм",
@@ -203,7 +203,7 @@
       "img": "https://www.zlatmax.ru/images/zlat-1132/sablya-oficerskaya-ukrashennaya-v-c-m-nozhne-foto-01.webp"
     },
     {
-      "id": 20,
+      "id": 21,
       "name": "Сабля «Пожарного» МЧС",
       "about": " Золото, никель",
       "size": "805,0±10,0 мм",

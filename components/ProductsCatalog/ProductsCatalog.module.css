@@ -1,0 +1,5 @@
+.menu {
+    display: grid;
+    grid-template-columns: 3fr 3fr 3fr;
+    gap: 10px
+}

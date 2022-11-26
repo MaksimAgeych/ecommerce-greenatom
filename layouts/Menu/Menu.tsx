@@ -1,10 +1,9 @@
-import React from 'react';
 import styles from './Menu.module.css';
 
-export const Menu = (): JSX.Element => {
+export const Menu = () => {
     return (
-        <nav className={styles.menu} role={"navigation"}>
+        <div>
             Меню
-        </nav>
-    );
-};
+        </div>
+    )
+}
