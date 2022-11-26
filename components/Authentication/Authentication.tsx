@@ -1,4 +1,4 @@
-import {signOutUser,} from '../../utils/firebase/firebase.utils.js';
+import {createUserDocFromAuth, signInWithGooglePopup, signOutUser,} from '../../utils/firebase/firebase.utils.js';
 import SignInForm from '../SignInForm/SignInForm';
 import SignUpForm from '../SignUpForm/SignUpForm'
 
@@ -15,16 +15,16 @@ const Authentication = () => {
     isAuth ? router.push('/') : '';
 
     // const dispatch = useAppDispatch();
-    //
+    
     // const handleGoogleSignIn = async () => {
     //     signInWithGooglePopup()
     //         .then(({user}) => {
     //             console.log(user);
     //             createUserDocFromAuth(user);
-    //             const {uid, refreshToken, email} = user;
-    //             dispatch(setUser({email: email, id: uid, token: refreshToken}))
+    //             const {uid, refreshToken, email, displayName} = user;
+    //             dispatch(setUser({email: email, id: uid, token: refreshToken, name: displayName}))
     //         })
-    //
+    
     // }
 
     console.log(useAuth().name)
