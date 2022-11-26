@@ -1,6 +1,15 @@
+import { FC } from "react";
 
+interface IProps {
+    label: string;
+    value: string;
+    type: string;
+    required: any;
+   onChange: (event: any) => void;
+    name: string
 
-const FormInput = ({ label, ...otherProps }) => {
+}
+const FormInput: FC<IProps> = ({ label, ...otherProps }) => {
     // const dispatch = useAppDispatch();
 // const handlerSignin = () => {
 //    dispatch(setUser())

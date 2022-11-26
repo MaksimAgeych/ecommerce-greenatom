@@ -26,7 +26,7 @@ export const ProductsCatalog = (): JSX.Element => {
             {status === "error" && <div>Ошибка</div>}
             {
                 productsList.map((product) => (
-                    <ProductCart key={product.id} {...product}/>
+                    <ProductCart key={product.id} item={product}/>
                 ))
             }
         </nav>

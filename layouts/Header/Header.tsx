@@ -10,14 +10,16 @@ import IconFav from './fav.svg';
 import IconCart from './cart.svg';
 import IconAuth from './auth.svg';
 import {onAuthStateChangedListner, signOutUser} from '../../utils/firebase/firebase.utils';
-import {useAppSelector} from "../../hooks/redux-hooks";
+import {useAppDispatch, useAppSelector} from "../../hooks/redux-hooks";
 import { IProduct } from '../../interface/entities/interface';
+import { removeUser } from '../../store/authSlice';
 
 
 export const Header = ({className, ...props}: HeaderProps): JSX.Element => {
 
     const [user, setUser] = useState(null);
     const [serchResult, setSearchResult] = useState<IProduct[] | []>([]);
+    const dispatch = useAppDispatch()
 
     useEffect(() => {
         //TODO displayName 
@@ -53,7 +55,10 @@ export const Header = ({className, ...props}: HeaderProps): JSX.Element => {
                         }>
                             <IconAuth className={styles.iconAuth}/>
                             {user ? <div><span>Личный кабинет {userAuth.email}</span> | <Link href={'/'}
-                                                                                      onClick={() => signOutUser()}>Выйти</Link>
+                                                                                      onClick={() => {
+                                                                                        signOutUser()
+                                                                                        dispatch(removeUser())
+                                                                                        }}>Выйти</Link>
                                 </div>
                                 : <div><Link href={'/auth'}><span>Войти</span></Link></div>
                             }

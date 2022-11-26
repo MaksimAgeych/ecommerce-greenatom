@@ -66,6 +66,12 @@
 	margin-left: 20px;
 }
 
+.btn {
+	background: transparent;
+	border: none;
+}
+
+
 /*.cart {*/
 /*	margin: 15px;*/
 /*	box-shadow: 0 4px 20px 0 #0000001A;*/
