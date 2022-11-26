@@ -11,11 +11,13 @@ import IconCart from './cart.svg';
 import IconAuth from './auth.svg';
 import {onAuthStateChangedListner, signOutUser} from '../../utils/firebase/firebase.utils';
 import {useAppSelector} from "../../hooks/redux-hooks";
+import { IProduct } from '../../interface/entities/interface';
 
 
 export const Header = ({className, ...props}: HeaderProps): JSX.Element => {
 
     const [user, setUser] = useState(null);
+    const [serchResult, setSearchResult] = useState<IProduct[] | []>([]);
 
     useEffect(() => {
         //TODO displayName 
@@ -62,7 +64,7 @@ export const Header = ({className, ...props}: HeaderProps): JSX.Element => {
             <div className={cn(styles.container, styles.gray)}>
                 <div className={styles.midHeader}>
                     <Link href={'http://localhost:3000/'}><Logo/></Link>
-                    <Search/>
+                    <Search setSearchResult={setSearchResult} />
                     <div className={styles.locate}>
                         <IconLocate/>
                         <span> Москва</span>
