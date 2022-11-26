@@ -17,7 +17,7 @@ const SignInForm = () => {
     const { email, password, } = formFields;
     const dispatch = useAppDispatch();
 
-    const handleOnChange = (event) => {
+    const handleOnChange = (event: any) => {
         const { name, value } = event.target;
         setFormFields({ ...formFields, [name]: value })
     }
@@ -37,7 +37,7 @@ const SignInForm = () => {
 
     }
 
-    const handleOnSubmit = async (event) => {
+    const handleOnSubmit = async (event: any) => {
         event.preventDefault();
         const auth = getAuth();
         const { email, password } = formFields;
@@ -53,7 +53,7 @@ const SignInForm = () => {
 
             }).catch(console.error)
 
-
+        }
         return (
             <div className='sign-up-container'>
                 <h2>Авторизация</h2>
@@ -77,7 +77,7 @@ const SignInForm = () => {
                 </form>
             </div>
         );
-    }
+    
 };
 
 export default SignInForm;

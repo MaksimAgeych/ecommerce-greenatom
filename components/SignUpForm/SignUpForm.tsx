@@ -24,30 +24,31 @@ const SignUpForm = () => {
     const {displayName, email, password, confirmPassword} = formFields;
     const dispatch = useAppDispatch();
 
-    const handleOnChange = (event) => {
+    const handleOnChange = (event: any) => {
         const {name, value} = event.target;
         setFormFields({...formFields, [name]: value})
     }
 
-    const handleOnSubmit = async (event) => {
+    const handleOnSubmit = async (event: any) => {
         event.preventDefault();
 
         const {email, password, confirmPassword, displayName} = formFields;
         if (password !== confirmPassword) return alert("Пароли не совпадают");
 
         createAuthUserWithEmailAndPassword(email, password)
-            .then(({user}) => {
+            .then(({user}: any) => {
                     const {uid, accessToken, email} = user;
 
-                    const auth = getAuth();
-                    //Добавление имени
-                    updateProfile(auth.currentUser, {
-                        displayName: displayName
-                    }).then(() => {
-                        console.log('Имя обновлено')
-                    }).catch((error) => {
-                        console.error('Имя не обновлено: ' + error)
-                    });
+                    // const auth = getAuth();
+            //         //Добавление имени
+                    
+            //         updateProfile(auth.currentUser, {
+            //             displayName: displayName
+            //         }).then(() => {
+            //             console.log('Имя обновлено')
+            //         }).catch((error) => {
+            //             console.error('Имя не обновлено: ' + error)
+            //         });
 
                     dispatch(setUser({email: email, id: uid, token: accessToken, name: displayName}))
                     complitedUserAuth(user);
