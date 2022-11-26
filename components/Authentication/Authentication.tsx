@@ -1,10 +1,11 @@
-import {signInWithGooglePopup, createUserDocFromAuth, signOutUser,} from '../../utils/firebase/firebase.utils.js';
-import SignInForm from '../SignInForm/SignInForm'
+import {signOutUser,} from '../../utils/firebase/firebase.utils.js';
+import SignInForm from '../SignInForm/SignInForm';
 import SignUpForm from '../SignUpForm/SignUpForm'
 
 import {useAuth} from "../../hooks/userAuth";
 import {Button} from "../Button/Button";
 import {useRouter} from "next/router";
+
 
 
 const Authentication = () => {
@@ -35,9 +36,8 @@ const Authentication = () => {
             <div>
                 <SignUpForm/>
             </div>
-            {/*<button onClick={() => handleGoogleSignIn()}>*/}
-            {/*    Sign In With Google*/}
-            {/*</button>*/}
+          
+            
             <Button appearance={'primary'} onClick={() => signOutUser()}>Выйти</Button>
 
         </div>
