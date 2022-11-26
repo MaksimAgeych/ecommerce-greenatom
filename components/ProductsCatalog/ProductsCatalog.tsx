@@ -5,8 +5,7 @@ import { useAppDispatch } from '../../hooks/redux-hooks';
 import { ProductCart } from '../ProductCard/ProductCart';
 import { fetchAllProducts } from '../../store/productsAsyncActions';
 import { IProduct } from '../../interface/entities/interface';
-import { doc, setDoc } from 'firebase/firestore';
-import { db } from '../../utils/firebase/firebase.utils';
+import { createUsersProuctDataFromAuth } from '../../utils/firebase/firebase.utils';
 
 export const ProductsCatalog = (): JSX.Element => {
    
@@ -15,36 +14,6 @@ export const ProductsCatalog = (): JSX.Element => {
     const [productsList, setProductsList] = useState<IProduct[]>(products)
     useEffect(() => {
         dispatch(fetchAllProducts(''));
-        fetch('http://localhost:4000/products')
-        .then((res) =>  res.json()
-        ).then((data: any) => {
-            data.forEach((item: any) => {
-                const {
-                    id,
-                    name,
-                    about,
-                    size,
-                    price,
-                    rating,
-                    description,
-                    img,
-                } = item
-                
-            setDoc(doc(db, 'products', id), {
-                id,
-                name,
-                about,
-                size,
-                price,
-                rating,
-                description,
-                img,
-            })
-            });
-           
-        })
-        
-
         setProductsList(products)
     }, []);
 
@@ -56,11 +25,14 @@ export const ProductsCatalog = (): JSX.Element => {
         <nav className={styles.menu} role={"navigation"}>
             {status === "loading" && <div>Загрузка</div>}
             {status === "error" && <div>Ошибка</div>}
-            {/* {
-                productsList.map((product) => (
-                    <ProductCart key={product.id} item={product}/>
-                ))
-            } */}
+            {
+                productsList.map((product) => {
+                    const {id} = product
+                     createUsersProuctDataFromAuth(id, product);
+
+                  return  <ProductCart key={product.id} item={product}/> }
+                )
+            }
         </nav>
     );
 };

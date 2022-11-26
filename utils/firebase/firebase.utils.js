@@ -64,35 +64,22 @@ export const createUserDocFromAuth = async (userAuth) => {
     return userDocRef
 }
 //------------------------Создаем колекцию с товарами
-// export const createUsersProuctDataFromAuth = async (id,
-//     name,
-//     about,
-//     size,
-//     price,
-//     rating,
-//     description,
-//     img,) => {
-//     const productDocRef = doc(db, 'products', id) //id достаем из редакса
-//     const productData = await getDoc(productDocRef);
+export const createUsersProuctDataFromAuth = async (id, favSelector) => {
+    const productDocRef = doc(db, 'products', id) //id достаем из редакса
+    const productData = await getDoc(productDocRef);
 
-//     if (!productData.exists()) {
-//         try {
-//             await setDoc(productDocRef, {
-//                 id,
-//                 name,
-//                 about,
-//                 size,
-//                 price,
-//                 rating,
-//                 description,
-//                 img,
-//             })
-//         }catch (error) {
-//         console.log(error.message)
-//     }
-//     } 
-//     return productDocRef
-// }
+    if (!productData.exists()) {
+        try {
+            await setDoc(productDocRef, {
+                // cart: cartSelector,
+                product: favSelector,
+            })
+        }catch (error) {
+        console.log(error.message)
+    }
+    } 
+    return productDocRef
+}
 
 //---------------------------------------------------
 
