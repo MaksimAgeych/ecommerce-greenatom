@@ -1,6 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { getData } from "../axios/axios";
 import { IProduct } from "../interface/entities/interface";
+// import { createUsersProuctDataFromAuth } from "../utils/firebase/firebase.utils";
 import { ProductsSlice } from "./productsSlice";
 
 
@@ -8,8 +9,9 @@ export const fetchAllProducts = createAsyncThunk<IProduct[], string, { state: { 
     (
         'products/fetchProducts',
         async () => {
-            const response = await fetch('http://localhost:4000/products')
-            return await response.json();
+        const response = await fetch('http://localhost:4000/products')
+              return  await response.json();
+             
         },
         {
             condition: (_, { getState }) => {

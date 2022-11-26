@@ -13,11 +13,11 @@ function Favorites(): JSX.Element {
 
     const getFavID = favProducts.map((item) => item.id)
 
-    useEffect(() => {
-     createUsersProuctDataFromAuth(userID, getFavID)
-     .then((respncse) => console.log(respncse))
+    // useEffect(() => {
+    //  createUsersProuctDataFromAuth(id, getFavID)
+    //  .then((respncse) => console.log(respncse))
     
-    }, [userID])
+    // }, [])
     
    
 
