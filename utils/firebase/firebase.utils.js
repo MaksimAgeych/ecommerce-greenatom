@@ -8,6 +8,7 @@ import {
 } from 'firebase/auth';
 
 import {
+    collection,
     getFirestore,
     doc, //document
     getDoc, //get data from doc
@@ -23,11 +24,7 @@ const firebaseConfig = {
     appId: "1:436520126514:web:e05cd6b7856e1249e2542b",
     measurementId: "G-JY869MF3H7",
 };
-// const express = require('express');
-// const cors = require('cors');
 
-
-// Initialize Firebase
 
 const app = initializeApp(firebaseConfig);
 
@@ -63,24 +60,29 @@ export const createUserDocFromAuth = async (userAuth) => {
 
     return userDocRef
 }
-//------------------------Создаем колекцию с товарами
+//------------------------Создаем колекцию с избранным
 export const createUsersProuctDataFromAuth = async (id, favSelector) => {
-    const productDocRef = doc(db, 'products', id) //id достаем из редакса
-    const productData = await getDoc(productDocRef);
+    return setDoc(doc(db, 'products', id.toString()), {
+        // cart: cartSelector,
+        product: favSelector,
+    })
+        .then((Response) => console.log(Response)
+        ).catch((error) => console.log(error))
 
-    if (!productData.exists()) {
-        try {
-            await setDoc(productDocRef, {
-                // cart: cartSelector,
-                product: favSelector,
-            })
-        }catch (error) {
-        console.log(error.message)
-    }
-    } 
-    return productDocRef
+
+}
+//-------------------Функции геттеры
+export const getProductById = async (id) => {
+    const response = await getDoc(doc(db, 'products', id.toString()))
+    const data = await response
+    return data
 }
 
+export const getCollectionByName = async (collectionName) => {
+    const response = await collection(db, collectionName)
+      const data = await  response.withConverter()
+    return response
+}
 //---------------------------------------------------
 
 
@@ -118,7 +120,7 @@ export const complitedUserAuth = async (user) => {
     const userSnapShot = await getDoc(userDocRef);
     // получение данных по конкретному юзеру
     if (userSnapShot.exists()) {
-        
+
         return alert('User has created~~')
     }
 
@@ -132,6 +134,6 @@ export const signIn = async (email, password) => {
 
 export const signOutUser = async () => await signOut(auth);
 //следит за изменениями авторизации юзера
-export const onAuthStateChangedListner = (callback) => onAuthStateChanged(auth, callback); 
+export const onAuthStateChangedListner = (callback) => onAuthStateChanged(auth, callback);
 
 

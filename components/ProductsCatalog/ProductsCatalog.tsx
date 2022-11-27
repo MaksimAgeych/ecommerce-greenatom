@@ -3,22 +3,39 @@ import { useAppSelector } from '../../hooks/redux-hooks';
 import styles from './ProductsCatalog.module.css';
 import { useAppDispatch } from '../../hooks/redux-hooks';
 import { ProductCart } from '../ProductCard/ProductCart';
-import { fetchAllProducts } from '../../store/productsAsyncActions';
 import { IProduct } from '../../interface/entities/interface';
-import { createUsersProuctDataFromAuth } from '../../utils/firebase/firebase.utils';
+import { useFetchCollection } from '../../hooks/firestore-hooks';
+import { addProducts, clearProducts } from '../../store/productsSlice';
 
 export const ProductsCatalog = (): JSX.Element => {
    
     const {products, status, search} = useAppSelector((state) => state.products);
     const dispatch = useAppDispatch();
-    const [productsList, setProductsList] = useState<IProduct[]>(products)
+    const [productsList, setProductsList] = useState<IProduct[] | null>(null)
+    const fetchProd = useFetchCollection('products')
+
     useEffect(() => {
-        dispatch(fetchAllProducts(''));
+      dispatch(clearProducts())} ,[])
+   
+    useEffect(() => {
+ 
+      if (fetchProd) {
+       const  arr = fetchProd.map((item) => {
+        const {product} = item;
+        return product
+        
+      }) 
+      console.log(arr)
+      dispatch(addProducts(arr))
+        // dispatch(fetchAllProducts(''));
         setProductsList(products)
-    }, []);
+      }
+   
+    }, [fetchProd]);
 
     useEffect(() => {
       search.length > 0? setProductsList(search) : setProductsList(products) 
+       
     }, [search, products])
 
     return (
@@ -26,13 +43,11 @@ export const ProductsCatalog = (): JSX.Element => {
             {status === "loading" && <div>Загрузка</div>}
             {status === "error" && <div>Ошибка</div>}
             {
-                productsList.map((product) => {
-                    const {id} = product
-                     createUsersProuctDataFromAuth(id, product);
-
-                  return  <ProductCart key={product.id} item={product}/> }
-                )
+              productsList ?  
+              productsList.map((product) => <ProductCart key={product.id} item={product}/>)
+               : <span>Loading</span>
             }
+            
         </nav>
     );
 };
