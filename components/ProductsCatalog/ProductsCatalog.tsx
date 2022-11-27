@@ -24,7 +24,6 @@ export const ProductsCatalog = (): JSX.Element => {
        const  arr = fetchProd.map((item) => {
         return item
       }) 
-      console.log(arr)
       dispatch(addProducts(arr))
 
       setProductsList(products)

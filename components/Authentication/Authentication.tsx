@@ -15,19 +15,6 @@ const Authentication = () => {
     let router = useRouter();
     isAuth ? router.push('/') : '';
 
-    // const dispatch = useAppDispatch();
-
-    // const handleGoogleSignIn = async () => {
-    //     signInWithGooglePopup()
-    //         .then(({user}) => {
-    //             console.log(user);
-    //             createUserDocFromAuth(user);
-    //             const {uid, refreshToken, email, displayName} = user;
-    //             dispatch(setUser({email: email, id: uid, token: refreshToken, name: displayName}))
-    //         })
-
-    // }
-
     console.log(useAuth().name)
     return (
         <>
@@ -39,7 +26,7 @@ const Authentication = () => {
                 <div className={styles.block}>
                     <SignUpForm/>
                 </div>
-                {/*<Button appearance={'primary'} onClick={() => signOutUser()}>Выйти</Button>*/}
+      
             </div>
         </>
     )

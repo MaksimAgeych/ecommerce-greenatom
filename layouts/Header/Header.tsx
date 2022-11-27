@@ -9,10 +9,11 @@ import IconLocate from './locate.svg';
 import IconFav from './fav.svg';
 import IconCart from './cart.svg';
 import IconAuth from './auth.svg';
-import {onAuthStateChangedListner, signOutUser} from '../../utils/firebase/firebase.utils';
+import {getProductById, onAuthStateChangedListner, signOutUser} from '../../utils/firebase/firebase.utils';
 import {useAppDispatch, useAppSelector} from "../../hooks/redux-hooks";
 import { IProduct } from '../../interface/entities/interface';
-import { removeUser } from '../../store/authSlice';
+import { removeUser, setUser, setUserName } from '../../store/authSlice';
+import { useFetchCollection } from '../../hooks/firestore-hooks';
 
 
 export const Header = ({className, ...props}: HeaderProps): JSX.Element => {
@@ -20,21 +21,26 @@ export const Header = ({className, ...props}: HeaderProps): JSX.Element => {
     const [user, setUser] = useState(null);
     const [serchResult, setSearchResult] = useState<IProduct[] | []>([]);
     const dispatch = useAppDispatch()
+    const fetchUser = useFetchCollection('users')
 
     useEffect(() => {
         //TODO displayName 
-        //
-        onAuthStateChangedListner((user: React.SetStateAction<any>) => {
-            // console.log(user.displayName)
-            // console.log(user)
-            setUser(user)})
-        // onAuthStateChangedListner((user: React.SetStateAction<null>) => setUser(user))
-        // .then((use}) => console.log(user.displayName))
-        console.log(name)
-        console.log(user)
+        onAuthStateChangedListner((user: React.SetStateAction<any>) => { 
+            setUser(user)
+            //  console.log(user)
+        })
     }, [])
 
+
+
     const userAuth = useAppSelector(state => state.user)
+
+    useEffect(() => {
+   const isExists = fetchUser?.find(user => user.email === userAuth.email)
+   console.log(isExists)
+   if (isExists) dispatch(setUserName(isExists.displayName))
+}
+,[user])
 
     return (
         <header className={cn(className, styles.header)} {...props}>
@@ -54,7 +60,7 @@ export const Header = ({className, ...props}: HeaderProps): JSX.Element => {
                         })
                         }>
                             <IconAuth className={styles.iconAuth}/>
-                            {user ? <div><span>Личный кабинет {userAuth.email}</span> | <Link href={'/'}
+                            {user ? <div><span>Личный кабинет {userAuth.name}</span> | <Link href={'/'}
                                                                                       onClick={() => {
                                                                                         signOutUser()
                                                                                         dispatch(removeUser())
