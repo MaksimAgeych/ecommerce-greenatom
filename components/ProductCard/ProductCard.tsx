@@ -1,5 +1,5 @@
 import React, { FC } from "react";
-import styles from "./Cart.module.css";
+import styles from "./ProductCard.module.css";
 import IconStar from "./icons/Star.svg";
 import IconCompare from "./icons/scales.svg";
 import IconLike from "./icons/like.svg";
@@ -11,7 +11,7 @@ import { addFav } from "../../store/favorietsSlice";
 interface IProps {
     item: IProduct
 }
-export const ProductCart:FC<IProps> = ({item}): JSX.Element => {//на продукт пока заглушка any
+export const ProductCard:FC<IProps> = ({item}): JSX.Element => {//на продукт пока заглушка any
    const {id, name, size, about, price, rating, description, img} = item
     const dispatch = useAppDispatch()
 

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useAppSelector } from '../../hooks/redux-hooks';
 import styles from './ProductsCatalog.module.css';
 import { useAppDispatch } from '../../hooks/redux-hooks';
-import { ProductCart } from '../ProductCard/ProductCart';
+import { ProductCard } from '../ProductCard/ProductCard';
 import { IProduct } from '../../interface/entities/interface';
 import { useFetchCollection } from '../../hooks/firestore-hooks';
 import { addProducts, clearProducts } from '../../store/productsSlice';
@@ -42,7 +42,7 @@ export const ProductsCatalog = (): JSX.Element => {
             {status === "error" && <div>Ошибка</div>}
             {
               productsList ?  
-              productsList.map((product) => <ProductCart key={product.id} item={product}/>)
+              productsList.map((product) => <ProductCard key={product.id} item={product}/>)
                : <span>Loading</span>
             }
             
