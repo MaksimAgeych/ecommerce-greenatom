@@ -1,0 +1,52 @@
+.cart {
+	box-shadow: 0 4px 20px 0 #0000001A;
+	padding: 20px;
+	display: grid;
+	background: var(--white);
+	grid-template-areas: "image name price feedback activity";
+	align-items: center;
+	margin-bottom: 20px;
+	gap: 20px;
+}
+
+.image {
+	grid-area: image;
+	width: 100px;
+}
+
+.name {
+	grid-area: name;
+	font-size: 20px;
+	line-height: 34px;
+	font-weight: 600;
+}
+
+
+.feedback {
+	grid-area: feedback;
+	display: grid;
+	grid-template-columns: auto auto;
+	justify-content: space-between
+}
+
+.activity {
+	display: grid;
+	grid-area: activity;
+	grid-template-columns: 1fr 1fr 1fr;
+	align-items: center;
+	gap: 10px;
+}
+
+.activity svg {
+	width: 25px;
+}
+
+.btn {
+	background: transparent;
+	border: none;
+}
+
+.price {
+	grid-area: price;
+	white-space: nowrap;
+}
