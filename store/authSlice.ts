@@ -23,11 +23,14 @@ export const authSlice = createSlice(
                 state.id = null;
                 state.token = null;
             },
+            setUserName: (state, action) => {
+                state.name = action.payload
+            }
         }
     }
 
 )  
- export const {setUser, removeUser} = authSlice.actions
+ export const {setUser, removeUser, setUserName} = authSlice.actions
  export default authSlice.reducer
 //  export const getUser = useAppSelector(state => state.user)
  

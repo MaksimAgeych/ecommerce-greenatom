@@ -67,8 +67,8 @@ export const createUserDocFromAuth = async (userAuth) => {
 
 //-------------------Функции CRUD
 
-export const getProductById = async (id) => {
-    const response = await getDoc(doc(db, 'products', id.toString()))
+export const getProductById = async (id, str) => {
+    const response = await getDoc(doc(db, str, id.toString()))
     const data = await response
     return data
 } //функция для получения нужного документа (товар, пользователь), в нее передаем id или uid
