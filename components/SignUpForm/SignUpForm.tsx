@@ -9,7 +9,9 @@ import FormInput from '../FormInput/FormInput';
 import {setUser} from '../../store/authSlice';
 import {useAppDispatch} from "../../hooks/redux-hooks";
 import {getAuth, updateProfile} from "firebase/auth";
-// import Button from '../button/Button';
+import styles from './SignUpForm.module.css';
+import {Htag} from "../Htag/Htag";
+import {Button} from "../Button/Button";
 
 const defaultFormFields = {
     displayName: '',
@@ -61,23 +63,23 @@ const SignUpForm = () => {
 
     return (
         <div className='sign-up-container'>
-            <h2>Do not have an account?</h2>
-            <span>SIGN UP with email and password</span>
+            <Htag tag={'h3'}>Нет аккаунта?</Htag>
+            <span>Создайте аккаунт</span>
 
             <form onSubmit={handleOnSubmit}>
 
-                <FormInput label={'Display name'} type='text' required onChange={handleOnChange} name='displayName'
+                <FormInput label={'Имя'} type='text' required onChange={handleOnChange} name='displayName'
                            value={displayName}/>
 
                 <FormInput label={'Email'} type='email' required onChange={handleOnChange} name='email' value={email}/>
 
-                <FormInput label={'Password'} type='password' required onChange={handleOnChange} name='password'
+                <FormInput label={'Пароль'} type='password' required onChange={handleOnChange} name='password'
                            value={password}/>
 
-                <FormInput label={'Confirm Password'} type='password' required onChange={handleOnChange}
+                <FormInput label={'Пароль ещё раз'} type='password' required onChange={handleOnChange}
                            name='confirmPassword' value={confirmPassword}/>
 
-                <button onClick={(e) => handleOnSubmit(e)}>Sign Up</button>
+                <Button appearance={'primary'} onClick={(event) => handleOnSubmit(event)}>Зарегистрироваться</Button>
             </form>
         </div>
     );

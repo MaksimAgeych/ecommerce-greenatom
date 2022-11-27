@@ -1,4 +1,7 @@
 import { FC } from "react";
+import {Input} from "../index";
+import styles from './FormInput.module.css'
+import cn from "classnames";
 
 interface IProps {
     label: string;
@@ -18,13 +21,12 @@ const FormInput: FC<IProps> = ({ label, ...otherProps }) => {
 
 
     return (
-        < div className="group">
-            <input className='form-input' {...otherProps} />
-
-            {label && <label className={`${otherProps.value.length ? 'shrink' : ''} 
-            form-input-label`}>{label}</label>
+        <div className={styles.formInput}>
+            {label && <label className={cn(styles.formInputLabel, {
+                [styles.shrink] : otherProps.value.length,
+            })}>{label}</label>
             }
-      
+            <Input className='form-input' {...otherProps} />
         </div>
     )
 
