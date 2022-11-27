@@ -9,4 +9,4 @@ export * from './Authentication/Authentication';
 export * from './FormInput/FormInput';
 export * from './SidebarWidget/SidebarWidget';
 export * from './ProductCard/ProductCart';
-export * from './ProductDescription/ProductDescription';
+export * from './productDescription/ProductDescription';
