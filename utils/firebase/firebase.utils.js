@@ -15,7 +15,9 @@ import {
     setDoc,
     deleteDoc,
     updateDoc,
-    addDoc
+    addDoc,
+    query,
+    getDocs
 } from 'firebase/firestore';
 
 const firebaseConfig = {
@@ -71,7 +73,7 @@ export const getProductById = async (id, pathName) => {
     const response = await getDoc(doc(db, pathName, id.toString()))
     
     if (response.exists()) {
-        console.log(response.data())
+        // console.log(response.data())
         return response.data()
     }
     else {
@@ -86,9 +88,9 @@ export const createUsersProuctDataFromAuth = async (id, obj) => {
         ).catch((error) => console.log(error))
 } //для создания нового товара передаем id и обьект товара
 
-export const updateProductById = async (id, ...obj) => {
+export const updateProductById = async (id, pathName, ...obj ) => {
 
-    return updateDoc(doc(db, 'products', id.toString()), ...obj)
+    return updateDoc(doc(db, pathName, id.toString()), ...obj)
 } // обновляем информацию в документе, передаем id и обьект с нужными полями для изменения 
 
 export const deleteProductById = async (id) => {
@@ -154,3 +156,31 @@ export const signOutUser = async () => await signOut(auth);
 export const onAuthStateChangedListner = (callback) => onAuthStateChanged(auth, callback);
 
 
+export const getSubCollection = async (id) => {
+//     const q = query(collection(db, 'users'))
+//     const snapShot = await getDocs(q);
+//     const data = snapShot.docs.map((doc) => ({
+//         ...doc.data(), id: doc.id
+//     }))
+
+   
+// } 
+// data.map((element) => {
+
+        const workQ = query(collection(db, `users/${id}/fav`))
+     getDocs(workQ)
+     .then((snapShot) => {
+        if (snapShot.exists()) {
+            console.log('snapShot', snapShot.data())
+            return shapShot.data()
+        }
+        else {
+            console.log('does not exist')
+        }
+     }
+     
+     )
+
+}
+    
+    // })
