@@ -1,0 +1,9 @@
+.formInput {
+	display: grid;
+	grid-template-rows: auto auto;
+	margin: 20px 0;
+}
+
+.formInputLabel {
+	margin-bottom: 5px;
+}
