@@ -88,6 +88,7 @@ export const Header = ({className, ...props}: HeaderProps): JSX.Element => {
                         <Link href={'/favorites'}><IconFav/></Link>
                     </div>
                     <div className={styles.cart}>
+                        {/*//TODO Сделать вывод количества товара в корзине в иконку*/}
                         <IconCart/>
                         <div className={styles.cardData}>
                             <span className={styles.cartAmount}>0 р.</span>
