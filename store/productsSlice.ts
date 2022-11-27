@@ -2,9 +2,9 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { fetchAllProducts } from './productsAsyncActions';
 import { IProduct } from "../interface/entities/interface";
 
-export type ProductsSlice = { 
+export type ProductsSlice = {
     status: 'idle' | 'loading' | 'finished' | 'error',
-    products: IProduct[], 
+    products: IProduct[],
     search: IProduct[],
 }
 
@@ -19,6 +19,12 @@ export const productsSlice = createSlice({
     name: "products",
     initialState,
     reducers: {
+        addProducts: (state, action: PayloadAction<IProduct[]>) => {
+            state.products = action.payload
+        },
+        clearProducts: (state) => {
+            state.products = []
+        },
         searchAct: (state, action: PayloadAction<IProduct[]>) => {
             state.search = action.payload
         },
@@ -29,17 +35,17 @@ export const productsSlice = createSlice({
     extraReducers: (builder) => {
         builder.addCase(
             fetchAllProducts.pending, (state) => {
-            state.status = "loading";
-        })
-        .addCase(fetchAllProducts.fulfilled, (state, action) => {
-            state.status = "finished";
-            state.products = action.payload;
-        })
-        .addCase(fetchAllProducts.rejected, (state) => {
-            state.status = "error";
-        })
-    } 
+                state.status = "loading";
+            })
+            .addCase(fetchAllProducts.fulfilled, (state, action) => {
+                state.status = "finished";
+                state.products = action.payload;
+            })
+            .addCase(fetchAllProducts.rejected, (state) => {
+                state.status = "error";
+            })
+    }
 });
 
-export const {searchAct, clearSerch} = productsSlice.actions
+export const { searchAct, clearSerch, addProducts, clearProducts } = productsSlice.actions
 export default productsSlice.reducer;
