@@ -1,7 +1,7 @@
 import { getDocs, getDoc, doc } from 'firebase/firestore';
 import { useEffect } from 'react';
 import { isTemplateMiddle } from 'typescript';
-import { ProductCart } from '../components';
+import { ProductCard } from '../components';
 import { useAppSelector } from '../hooks/redux-hooks';
 import {withLayout} from '../layouts/Layout';
 import { createUsersProuctDataFromAuth, getProductById, db, newGetDoc } from '../utils/firebase/firebase.utils';
@@ -34,7 +34,7 @@ function Favorites(): JSX.Element {
                 {
                     favProducts.map((item) => {
                 return <li key={item.id+item.price}>
-                    <ProductCart item={item} />
+                    <ProductCard item={item} />
                 </li>
                 
             }) 
