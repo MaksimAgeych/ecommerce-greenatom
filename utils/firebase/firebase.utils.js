@@ -12,7 +12,10 @@ import {
     getFirestore,
     doc, //document
     getDoc, //get data from doc
-    setDoc
+    setDoc,
+    deleteDoc,
+    updateDoc,
+    addDoc
 } from 'firebase/firestore';
 
 const firebaseConfig = {
@@ -61,26 +64,34 @@ export const createUserDocFromAuth = async (userAuth) => {
     return userDocRef
 }
 //------------------------Создаем колекцию с избранным
-export const createUsersProuctDataFromAuth = async (id, favSelector) => {
-    return setDoc(doc(db, 'products', id.toString()), {
-        // cart: cartSelector,
-        product: favSelector,
-    })
-        .then((Response) => console.log(Response)
-        ).catch((error) => console.log(error))
 
+//-------------------Функции CRUD
 
-}
-//-------------------Функции геттеры
 export const getProductById = async (id) => {
     const response = await getDoc(doc(db, 'products', id.toString()))
     const data = await response
     return data
-}
+} //функция для получения нужного документа (товар, пользователь), в нее передаем id или uid
+
+export const createUsersProuctDataFromAuth = async (id, obj) => {
+    return setDoc(doc(db, 'products', id.toString()), obj)
+        .then((Response) => console.log(Response)
+        ).catch((error) => console.log(error))
+} //для создания нового товара передаем id и обьект товара
+
+export const updateProductById = async (id, ...obj) => {
+
+    return updateDoc(doc(db, 'products', id.toString()), ...obj)
+} // обновляем информацию в документе, передаем id и обьект с нужными полями для изменения 
+
+export const deleteProductById = async (id) => {
+    return deleteDoc(doc(db, 'products', id.toString()))
+} // для удаления передаем просто id
+
 
 export const getCollectionByName = async (collectionName) => {
     const response = await collection(db, collectionName)
-      const data = await  response.withConverter()
+    const data = await response.withConverter()
     return response
 }
 //---------------------------------------------------

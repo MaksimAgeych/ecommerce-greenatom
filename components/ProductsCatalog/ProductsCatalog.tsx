@@ -6,6 +6,7 @@ import { ProductCart } from '../ProductCard/ProductCart';
 import { IProduct } from '../../interface/entities/interface';
 import { useFetchCollection } from '../../hooks/firestore-hooks';
 import { addProducts, clearProducts } from '../../store/productsSlice';
+import { updateProductById } from '../../utils/firebase/firebase.utils';
 
 export const ProductsCatalog = (): JSX.Element => {
    
@@ -21,14 +22,12 @@ export const ProductsCatalog = (): JSX.Element => {
  
       if (fetchProd) {
        const  arr = fetchProd.map((item) => {
-        const {product} = item;
-        return product
-        
+        return item
       }) 
       console.log(arr)
       dispatch(addProducts(arr))
-        // dispatch(fetchAllProducts(''));
-        setProductsList(products)
+
+      setProductsList(products)
       }
    
     }, [fetchProd]);
