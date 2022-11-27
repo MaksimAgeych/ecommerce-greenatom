@@ -6,8 +6,6 @@ import IconLike from "./icons/like.svg";
 import Link from "next/link";
 import { IProduct } from '../../interface/entities/interface';
 
-
-
 export const ProductDescription = ({id, name, size, about, price, rating, description, img}: IProduct): JSX.Element => {
     
     const stars = [];
