@@ -1,7 +1,7 @@
 .imageDiv{
     width: 487px;
     height: 487px;
-    box-shadow: 0px 4px 20px 0px #0000001A;
+    box-shadow: 0 4px 20px 0 #0000001A;
     background-color: white;
     float: left;
 
@@ -14,7 +14,7 @@
     width: 756px;
     height: 687px;
     background-color: white;
-    box-shadow: 0px 4px 20px 0px #0000001A;
+    box-shadow: 0 4px 20px 0 #0000001A;
     margin-left: 560px;
 }
 .descripTitle{
@@ -40,7 +40,7 @@
 .text{
 font-weight: 400;
 line-height: 24px;
-letter-spacing: 0em;
+letter-spacing: 0;
 text-align: left;
 padding: 20px;
 }
@@ -60,7 +60,7 @@ padding: 20px;
     font-size: 18px;
     font-weight: 500;
     line-height: 22px;
-    letter-spacing: 0em;
+    letter-spacing: 0;
     text-align: left;
     color: #ABABAB;
     padding-left: 100px;
