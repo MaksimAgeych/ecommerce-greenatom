@@ -67,10 +67,17 @@ export const createUserDocFromAuth = async (userAuth) => {
 
 //-------------------Функции CRUD
 
-export const getProductById = async (id, str) => {
-    const response = await getDoc(doc(db, str, id.toString()))
-    const data = await response
-    return data
+export const getProductById = async (id, pathName) => {
+    const response = await getDoc(doc(db, pathName, id.toString()))
+    
+    if (response.exists()) {
+        console.log(response.data())
+        return response.data()
+    }
+    else {
+        console.log('Doc does not exist')
+    }
+    // return response
 } //функция для получения нужного документа (товар, пользователь), в нее передаем id или uid
 
 export const createUsersProuctDataFromAuth = async (id, obj) => {
@@ -91,8 +98,7 @@ export const deleteProductById = async (id) => {
 
 export const getCollectionByName = async (collectionName) => {
     const response = await collection(db, collectionName)
-    const data = await response.withConverter()
-    return response
+        return response
 }
 //---------------------------------------------------
 
