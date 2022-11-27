@@ -11,11 +11,13 @@ import { persistStore, persistReducer,
     PURGE,
     REGISTER,} from 'redux-persist'
 import storage from 'redux-persist/lib/storage'
+import busketSlice from "./busketSlice";
 
 const rootReducer = combineReducers({
     favoriets: favorietsSlice,
     user: authSlice,
-    products: productsSlice
+    products: productsSlice,
+    busket: busketSlice,
 })
 
 const persistConfig = {

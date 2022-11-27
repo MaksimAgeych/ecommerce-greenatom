@@ -41,17 +41,7 @@ const SignUpForm = () => {
             .then(({user}: any) => {
                     const {uid, accessToken, email} = user;
 
-                    // const auth = getAuth();
-            //         //Добавление имени
-                    
-            //         updateProfile(auth.currentUser, {
-            //             displayName: displayName
-            //         }).then(() => {
-            //             console.log('Имя обновлено')
-            //         }).catch((error) => {
-            //             console.error('Имя не обновлено: ' + error)
-            //         });
-
+                    createUserFromAuthWithPassword(user)
                     dispatch(setUser({email: email, id: uid, token: accessToken, name: displayName}))
                     complitedUserAuth(user);
 
