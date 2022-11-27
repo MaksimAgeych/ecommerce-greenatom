@@ -1,0 +1,6 @@
+.buttonsForm {
+	display: grid;
+	grid-template-columns: auto auto;
+	justify-content: end;
+	gap: 40px;
+}

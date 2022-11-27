@@ -6,7 +6,8 @@ import {useAuth} from "../../hooks/userAuth";
 import {Button} from "../Button/Button";
 import {useRouter} from "next/router";
 
-
+import styles from './Authentication.module.css';
+import {Htag} from "../Htag/Htag";
 
 const Authentication = () => {
 
@@ -15,7 +16,7 @@ const Authentication = () => {
     isAuth ? router.push('/') : '';
 
     // const dispatch = useAppDispatch();
-    
+
     // const handleGoogleSignIn = async () => {
     //     signInWithGooglePopup()
     //         .then(({user}) => {
@@ -24,23 +25,23 @@ const Authentication = () => {
     //             const {uid, refreshToken, email, displayName} = user;
     //             dispatch(setUser({email: email, id: uid, token: refreshToken, name: displayName}))
     //         })
-    
+
     // }
 
     console.log(useAuth().name)
-    return (<div className="auth-container">
-
-            <div>
-                <SignInForm/>
+    return (
+        <>
+            <Htag tag={'h1'}>Авторизация</Htag>
+            <div className={styles.container}>
+                <div className={styles.block}>
+                    <SignInForm/>
+                </div>
+                <div className={styles.block}>
+                    <SignUpForm/>
+                </div>
+                {/*<Button appearance={'primary'} onClick={() => signOutUser()}>Выйти</Button>*/}
             </div>
-            <div>
-                <SignUpForm/>
-            </div>
-          
-            
-            <Button appearance={'primary'} onClick={() => signOutUser()}>Выйти</Button>
-
-        </div>
+        </>
     )
 };
 

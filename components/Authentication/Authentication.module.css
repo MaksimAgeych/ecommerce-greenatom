@@ -1,0 +1,13 @@
+.container {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 40px;
+	margin-top: 40px;
+	align-items: start
+}
+
+.block {
+	background: #FEFEFE;
+	box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+	padding: 20px;
+}
