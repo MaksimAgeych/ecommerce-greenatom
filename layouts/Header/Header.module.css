@@ -61,8 +61,10 @@
 
 .midHeader {
 	display: grid;
-	grid-template-columns: 190px 350px 100px auto 30px auto;
+	/*grid-template-columns: 190px 350px 100px auto 30px auto;*/
+	grid-template-columns: minmax(190px, 1fr) 1fr minmax(100px, 1fr) auto 30px 1fr;
 	gap: 30px;
+	align-items: center
 }
 
 .locate {
@@ -75,6 +77,7 @@
 
 .contact {
 	font-size: 18px;
+	white-space: nowrap;
 }
 
 .favorites {
@@ -99,6 +102,7 @@
 .cart {
 	display: grid;
 	grid-template-columns: 40px auto;
+	align-items: center
 }
 
 .cardData {
@@ -113,17 +117,20 @@
 	color: var(--primary)
 }
 
-.menu li {
-	list-style-type: none;
-	display: inline-block;
-	font-size: 18px;
-	font-weight: 300;
-}
 
 .menu ul {
 	display: grid;
 	grid-template-columns: repeat(5, auto);
 }
+
+.menu li {
+	list-style-type: none;
+	display: inline-block;
+	font-size: 18px;
+	font-weight: 300;
+	text-align: center;
+}
+
 
 .menu a:hover {
 	color: var(--primary);
@@ -133,3 +140,21 @@
 }
 
 
+@media screen and (max-width: 990px){
+	.midHeader {
+		display: grid;
+		grid-template-columns: minmax(190px, 1fr) auto minmax(100px, 1fr) auto 30px 40px;
+		gap: 20px;
+		align-items: center
+	}
+
+	.cart {
+		display: grid;
+		grid-template-columns: 40px;
+		align-items: center
+	}
+
+	.cardData {
+		display: none;
+	}
+}

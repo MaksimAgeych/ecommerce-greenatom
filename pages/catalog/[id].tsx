@@ -3,6 +3,7 @@ import {IProduct} from "../../interface/entities/interface";
 import {Htag, P} from "../../components";
 import {withLayout} from "../../layouts/Layout";
 import { ProductDescription } from '../../components';
+import Head from "next/head";
 //SSG
 export const getStaticPaths = async () => {
     const response = await fetch('http://localhost:4000/products');
@@ -22,7 +23,6 @@ export const getStaticProps = async (context: { params: { id: any; }; }) => {
     const {id} = context.params;
     const response = await fetch(`http://localhost:4000/products/${id}`);
     const data = await response.json();
-    console.log(data)
     return {
         props: {product: data}
     }
@@ -51,6 +51,9 @@ function ProductPage({product}: { product: IProduct }): JSX.Element {
     console.log(product.name)
     return (
         <>
+            <Head>
+                <title>{name} - Магазин ножей</title>
+            </Head>
             {/* <Htag tag={'h1'}>{name}</Htag> */}
             <ProductDescription {...product}/>
         </>
