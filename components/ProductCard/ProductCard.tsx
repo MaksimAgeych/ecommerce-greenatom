@@ -1,18 +1,20 @@
-import React, { FC } from "react";
+import React, {FC} from "react";
 import styles from "./ProductCard.module.css";
 import IconStar from "./icons/Star.svg";
 import IconCompare from "./icons/scales.svg";
 import IconLike from "./icons/like.svg";
+import IconCart from "./icons/cart.svg";
 import {IProduct} from '../../interface/entities/interface';
 import Link from "next/link";
-import { useAppDispatch } from "../../hooks/redux-hooks";
-import { addFav } from "../../store/favorietsSlice";
+import {useAppDispatch} from "../../hooks/redux-hooks";
+import {addFav} from "../../store/favorietsSlice";
 
 interface IProps {
     item: IProduct
 }
-export const ProductCard:FC<IProps> = ({item}): JSX.Element => {//на продукт пока заглушка any
-   const {id, name, size, about, price, rating, description, img} = item
+
+export const ProductCard: FC<IProps> = ({item}): JSX.Element => {//на продукт пока заглушка any
+    const {id, name, size, about, price, rating, description, img} = item
     const dispatch = useAppDispatch()
 
     const stars = [];
@@ -44,12 +46,12 @@ export const ProductCard:FC<IProps> = ({item}): JSX.Element => {//на прод�
                     <div className={styles.price}>{price} р.</div>
                     <div className={styles.activity}>
                         <Link href={'/'}><IconCompare/></Link>
-                        <Link href={'/'}>
-                            <button className={styles.btn} onClick={() => dispatch(addFav(item))}>
-                                 <IconLike/>
-                            </button>
-                           
-                            </Link>
+                        <button className={styles.btn} onClick={() => dispatch(addFav(item))}>
+                            <IconLike/>
+                        </button>
+                        <button className={styles.btn}>
+                            <IconCart/>
+                        </button>
                     </div>
                 </div>
             </div>
