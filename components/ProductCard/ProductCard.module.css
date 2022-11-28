@@ -1,0 +1,92 @@
+.cart {
+	box-shadow: 0 4px 20px 0 #0000001A;
+	padding: 20px;
+	display: grid;
+	grid-template-areas:
+			"images"
+			"name"
+			'spec'
+			'feedback'
+			'hr'
+			'footer';
+	background: var(--white);
+}
+
+.images {
+	grid-area: images;
+}
+
+.images img {
+	width: 100%;
+}
+
+.name {
+	grid-area: name;
+	font-size: 20px;
+	line-height: 34px;
+	font-weight: 600;
+}
+
+.spec {
+	grid-area: spec;
+	font-size: 16px;
+	line-height: 34px;
+	font-weight: 600;
+	color: #ABABAB;
+	display: grid;
+	grid-template-columns: auto;
+	justify-content: space-between;
+}
+
+.spec p {
+	line-height: 1.2;
+	padding-bottom: 10px;
+}
+
+.feedback {
+	grid-area: feedback;
+	display: grid;
+	grid-template-columns: auto auto;
+	justify-content: space-between
+}
+
+.hr {
+	grid-area: hr;
+	padding: 20px 0;
+}
+
+.footer {
+	grid-area: footer;
+	display: grid;
+	grid-template-columns: auto auto;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.activity {
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr;
+	align-items: center;
+}
+
+.activity svg {
+	margin-left: 20px;
+	width: 25px;
+}
+
+.btn {
+	background: transparent;
+	
+	border: none;
+}
+
+.like{
+	background: transparent;
+	fill: #E8AA31;
+	border: none;
+}
+
+
+.price {
+	white-space: nowrap;
+}
