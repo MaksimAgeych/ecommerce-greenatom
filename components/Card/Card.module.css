@@ -1,3 +1,13 @@
+.Buttonstyle{
+    background-color: rgb(221, 214, 16);
+  color: rgb(0, 0, 0);
+  font-size: 20px;
+  padding: 10px 60px;
+  border-radius: 5px;
+  margin: -5px 0px;
+  cursor: pointer;
+  text-align: center;
+}
 .cartFooter {
     display: grid;
     grid-template-columns: 2fr repeat(3, 3fr) 1fr;
@@ -45,8 +55,6 @@
 
 }
 .wrapper{
-
-
     border-bottom:0.8px solid rgb(203, 199, 199);
     border-top: 0.8px solid rgb(152, 146, 146); 
     border-left: 0px;
@@ -71,7 +79,7 @@
     color:#000000;
 }
 .container {
-    width: 1140px;
+    width: 100%;
     padding: 0 15px;
     margin-left: auto;
     margin-right: auto;

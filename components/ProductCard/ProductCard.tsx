@@ -16,7 +16,6 @@ interface IProps {
 
 export const ProductCard: FC<IProps> = ({item}): JSX.Element => {
     const {id, name, size, about, price, rating, description, img} = item
-    const dispatch = useAppDispatch()
 
     let isFavor=styles.btn;
     const favProducts = useAppSelector(state => state.favoriets.favoriets)
@@ -46,7 +45,7 @@ export const ProductCard: FC<IProps> = ({item}): JSX.Element => {
                 </div>
                 <div className={styles.feedback}>
                     <div className={styles.rating}>
-                        {stars}
+                        {stars.length == 0 ? "Нет рейтинга" : stars}
                     </div>
                     <div className={styles.reviews}>1 Отзыв</div>
                 </div>

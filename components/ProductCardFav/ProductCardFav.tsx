@@ -9,6 +9,7 @@ import Link from "next/link";
 import {useAppDispatch,useAppSelector} from "../../hooks/redux-hooks";
 import {addFav, deleteFav} from "../../store/favorietsSlice";
 
+
 interface IProps {
     item: IProduct,  
     isFavor: boolean,
@@ -16,6 +17,7 @@ interface IProps {
 }
 
 export const ProductCardFav: FC<IProps> = ({item, isFavor,handleDeleteFav}): JSX.Element => {//на продукт пока заглушка any
+
     const {id, name, size, about, price, rating, description, img} = item
     const dispatch = useAppDispatch()
 
