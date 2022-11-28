@@ -50,3 +50,8 @@
 	grid-area: price;
 	white-space: nowrap;
 }
+.like{
+	background: transparent;
+	fill: #E8AA31;
+	border: none;
+}
