@@ -40,10 +40,19 @@ function Favorites(): JSX.Element {
     //TODO: Сделать редирект на авторизацию, если не залогинен
    
     return (
-        <div>
-            <Htag tag={'h1'}>Избранное</Htag>
 
-            {userID
+        
+        <div>
+           
+
+           <Htag tag={'h1'}>Избранное</Htag>
+            {
+                loading && <span>Loading</span>
+                        }
+                        {
+                            error &&  alert(error)
+                        }
+            {docs
                 ? (favProducts.length!=0 ?  
                     favProducts.map((item) => {return <ProductCardFav item={item} key={item.id} isFavor={true} handleDeleteFav={handleDeleteFav}/>})
                     : <div style={{margin: '20px 0'}}>Нет избранных товаров</div>)

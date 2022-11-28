@@ -71,7 +71,7 @@ export const createUserDocFromAuth = async (userAuth) => {
 
 export const getProductById = async (id, pathName) => {
     const response = await getDoc(doc(db, pathName, id.toString()))
-    
+
     if (response.exists()) {
         // console.log(response.data())
         return response.data()
@@ -82,13 +82,14 @@ export const getProductById = async (id, pathName) => {
     // return response
 } //функция для получения нужного документа (товар, пользователь), в нее передаем id или uid
 
-export const createUsersProuctDataFromAuth = async (id, obj) => {
-    return setDoc(doc(db, 'products', id.toString()), obj)
-        .then((Response) => console.log(Response)
-        ).catch((error) => console.log(error))
-} //для создания нового товара передаем id и обьект товара
+export const createUsersProuctDataFromAuth = async (uid, dir, obj, prodID) => {
+    return await setDoc(doc(db, 'users', uid, dir, prodID), obj)
+    // .then((Response) => console.log(Response))
+    // .catch((error) => console.log(error))
+}
+//для создания нового товара передаем id и обьект товара
 
-export const updateProductById = async (id, pathName, ...obj ) => {
+export const updateProductById = async (id, pathName, ...obj) => {
 
     return updateDoc(doc(db, pathName, id.toString()), ...obj)
 } // обновляем информацию в документе, передаем id и обьект с нужными полями для изменения 
@@ -100,7 +101,7 @@ export const deleteProductById = async (id) => {
 
 export const getCollectionByName = async (collectionName) => {
     const response = await collection(db, collectionName)
-        return response
+    return response
 }
 //---------------------------------------------------
 
@@ -157,30 +158,30 @@ export const onAuthStateChangedListner = (callback) => onAuthStateChanged(auth, 
 
 
 export const getSubCollection = async (id) => {
-//     const q = query(collection(db, 'users'))
-//     const snapShot = await getDocs(q);
-//     const data = snapShot.docs.map((doc) => ({
-//         ...doc.data(), id: doc.id
-//     }))
+    //     const q = query(collection(db, 'users'))
+    //     const snapShot = await getDocs(q);
+    //     const data = snapShot.docs.map((doc) => ({
+    //         ...doc.data(), id: doc.id
+    //     }))
 
-   
-// } 
-// data.map((element) => {
 
-        const workQ = query(collection(db, `users/${id}/fav`))
-     getDocs(workQ)
-     .then((snapShot) => {
-        if (snapShot.exists()) {
-            console.log('snapShot', snapShot.data())
-            return shapShot.data()
+    // } 
+    // data.map((element) => {
+
+    const workQ = query(collection(db, `users/${id}/fav`))
+    getDocs(workQ)
+        .then((snapShot) => {
+            if (snapShot.exists()) {
+                console.log('snapShot', snapShot.data())
+                return shapShot.data()
+            }
+            else {
+                console.log('does not exist')
+            }
         }
-        else {
-            console.log('does not exist')
-        }
-     }
-     
-     )
+
+        )
 
 }
-    
+
     // })
