@@ -15,7 +15,6 @@ interface IProps {
 
 export const ProductCard: FC<IProps> = ({item}): JSX.Element => {//на продукт пока заглушка any
     const {id, name, size, about, price, rating, description, img} = item
-    const dispatch = useAppDispatch()
 
     const stars = [];
     for (let i = 0; i < rating; i++) {
@@ -35,7 +34,7 @@ export const ProductCard: FC<IProps> = ({item}): JSX.Element => {//на прод
                 </div>
                 <div className={styles.feedback}>
                     <div className={styles.rating}>
-                        {stars}
+                        {stars.length == 0 ? "Нет рейтинга" : stars}
                     </div>
                     <div className={styles.reviews}>1 Отзыв</div>
                 </div>

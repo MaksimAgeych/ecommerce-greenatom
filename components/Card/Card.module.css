@@ -45,8 +45,6 @@
 
 }
 .wrapper{
-
-
     border-bottom:0.8px solid rgb(203, 199, 199);
     border-top: 0.8px solid rgb(152, 146, 146); 
     border-left: 0px;
@@ -71,7 +69,7 @@
     color:#000000;
 }
 .container {
-    width: 1140px;
+    width: 100%;
     padding: 0 15px;
     margin-left: auto;
     margin-right: auto;

@@ -9,11 +9,11 @@ import Link from "next/link";
 import {useAppDispatch} from "../../hooks/redux-hooks";
 import {addFav} from "../../store/favorietsSlice";
 
-interface IProps {
+interface ProductCardFavProps {
     item: IProduct
 }
 
-export const ProductCardFav: FC<IProps> = ({item}): JSX.Element => {//на продукт пока заглушка any
+export const ProductCardFav: FC<ProductCardFavProps> = ({item}): JSX.Element => {//на продукт пока заглушка any
     const {id, name, size, about, price, rating, description, img} = item
     const dispatch = useAppDispatch()
 
