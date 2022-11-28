@@ -1,0 +1,20 @@
+
+.productCardItem {
+    width: 100%;
+    border-top: 1px solid grey;
+    border-bottom: 1px solid grey;
+    padding: 5px;
+    display: grid;
+    grid-template-columns: 2fr repeat(3, 3fr) 1fr;
+    column-gap: 30px;
+}
+
+.productCardCount span {
+    margin: 0 5px
+}
+
+.productBtn {
+    border: none; 
+    outline: none;
+    width: 25px;
+}
