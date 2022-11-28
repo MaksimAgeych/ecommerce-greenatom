@@ -1,4 +1,4 @@
-import React, {FC} from "react";
+import React, {FC, useEffect, useState} from "react";
 import styles from "./ProductCardFav.module.css";
 import IconStar from "./icons/Star.svg";
 import IconCompare from "./icons/scales.svg";
@@ -6,16 +6,20 @@ import IconLike from "./icons/like.svg";
 import IconCart from "./icons/cart.svg";
 import {IProduct} from '../../interface/entities/interface';
 import Link from "next/link";
-import {useAppDispatch} from "../../hooks/redux-hooks";
-import {addFav} from "../../store/favorietsSlice";
+import {useAppDispatch,useAppSelector} from "../../hooks/redux-hooks";
+import {addFav, deleteFav} from "../../store/favorietsSlice";
 
 interface IProps {
-    item: IProduct
+    item: IProduct,  
+    isFavor: boolean,
+    handleDeleteFav: (item: IProduct) => void
 }
 
-export const ProductCardFav: FC<IProps> = ({item}): JSX.Element => {//на продукт пока заглушка any
+export const ProductCardFav: FC<IProps> = ({item, isFavor,handleDeleteFav}): JSX.Element => {//на продукт пока заглушка any
     const {id, name, size, about, price, rating, description, img} = item
     const dispatch = useAppDispatch()
+
+    
 
     const stars = [];
     for (let i = 0; i < rating; i++) {
@@ -40,8 +44,8 @@ export const ProductCardFav: FC<IProps> = ({item}): JSX.Element => {//на пр�
                 <button className={styles.btn}>
                     <IconCart/>
                 </button>
-                <button className={styles.btn} onClick={() => dispatch(addFav(item))}>
-                    <IconLike/>
+                <button className={styles.btn} onClick={()=>handleDeleteFav(item)}>
+                    <IconLike className={isFavor && styles.like}/>
                 </button>
             </div>
         </div>

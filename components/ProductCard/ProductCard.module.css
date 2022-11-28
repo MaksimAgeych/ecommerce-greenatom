@@ -76,8 +76,16 @@
 
 .btn {
 	background: transparent;
+	
 	border: none;
 }
+
+.like{
+	background: transparent;
+	fill: #E8AA31;
+	border: none;
+}
+
 
 .price {
 	white-space: nowrap;
