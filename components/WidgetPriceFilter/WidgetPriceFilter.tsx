@@ -1,9 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {WidgetPriceFilterProps} from "./WidgetPriceFilter.props";
-import {Input} from "../Input/Input";
 import {useAppDispatch, useAppSelector} from "../../hooks/redux-hooks";
-import {clearSerch, searchAct} from "../../store/productsSlice";
-import styles from './WidgetPriceFilter.module.css'
+import styles from './WidgetPriceFilter.module.css';
 import cn from "classnames";
 export const WidgetPriceFilter = ({className, ...props}: WidgetPriceFilterProps): JSX.Element => {
 
@@ -21,8 +19,14 @@ export const WidgetPriceFilter = ({className, ...props}: WidgetPriceFilterProps)
     }, [defaultProducts])
 
 
-    const [minPrice, setMinPrice] = useState<number>(minRange);
-    const [maxPrice, setMaxPrice] = useState<number>(maxRange);
+    const [minPrice, setMinPrice] = useState<number>(0);
+    const [maxPrice, setMaxPrice] = useState<number>(0);
+
+
+    useEffect(()=> {
+        setMinPrice(minRange);
+        setMaxPrice(maxRange);
+    },[])
 
     useEffect(() => {
         maxPrice < minPrice ? setMaxPrice(Number(minPrice) + 5) : null;
