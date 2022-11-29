@@ -8,25 +8,20 @@ import {IProduct} from '../../interface/entities/interface';
 import Link from "next/link";
 import {useAppDispatch,useAppSelector} from "../../hooks/redux-hooks";
 import {addFav} from "../../store/favorietsSlice";
+import { addToBusket } from "../../store/busketSlice";
 
 
 interface IProps {
-    item: IProduct
+    item: IProduct,
+    handleAddToBusket: (product: IProduct) => void,
+    handleAddToFav: (product: IProduct) => void,
+    handleDeleteToFav: (product: IProduct) => void,
+    isFav: boolean
 }
 
-export const ProductCard: FC<IProps> = ({item}): JSX.Element => {
+export const ProductCard: FC<IProps> = ({item, isFav, handleAddToBusket, handleAddToFav, handleDeleteToFav}): JSX.Element => {
     const {id, name, size, about, price, rating, description, img} = item
-    const dispatch = useAppDispatch()
-
-    let isFavor=styles.btn;
-    const favProducts = useAppSelector(state => state.favoriets.favoriets)
-    const getFavID = favProducts.map((item) => item.id)
-    for(let i=0;i<getFavID.length;i++){
-        if(getFavID[i]==id){
-            isFavor=styles.like;
-        }
-        else {}
-    }
+    
 
     const stars = [];
     for (let i = 0; i < rating; i++) {
@@ -56,12 +51,11 @@ export const ProductCard: FC<IProps> = ({item}): JSX.Element => {
                 <div className={styles.footer}>
                     <div className={styles.price}>{price} р.</div>
                     <div className={styles.activity}>
-                        <IconCompare/>
-                        <button className={styles.btn} onClick={() => dispatch(addFav(item))}>
-                            
-                            <IconLike className={isFavor} />
+                        <Link href={'/'}><IconCompare/></Link>
+                        <button className={styles.btn} onClick={() => isFav ? handleDeleteToFav(item) : handleAddToFav(item)}>
+                            <IconLike className={isFav ? styles.like : null} />
                         </button>
-                        <button className={styles.btn}>
+                        <button className={styles.btn} onClick={() => handleAddToBusket(item)}>
                             <IconCart/>
                         </button>
                     </div>
