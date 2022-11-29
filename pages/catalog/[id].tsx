@@ -10,17 +10,16 @@ import {useCollectionData} from "react-firebase-hooks/firestore";
 import {useAppSelector} from "../../hooks/redux-hooks";
 
 
-//SSG
 export const converter = {
     toFirestore: (data: IProduct) => data,
     fromFirestore: (snap: QueryDocumentSnapshot) =>
-      snap.data() as IProduct
-  }
+        snap.data() as IProduct
+}
 
+//SSG
 export const getStaticPaths = async () => {
     const snapshot = await getDocs(collection(db, 'products').withConverter(converter));
     const paths = snapshot.docs.map(doc => {
-        doc
         return {
             params: {id: doc.id.toString()}
         }

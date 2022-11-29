@@ -8,53 +8,56 @@ import {withLayout} from '../layouts/Layout';
 import {addFav, deleteFav} from '../store/favoritesSlice';
 import {db} from '../utils/firebase/firebase.utils';
 import {converter} from './catalog/[id]';
+import {useRouter} from "next/router";
 
-function Favorites(): JSX.Element {
 
-    const favProducts = useAppSelector(state => state.favorites.favorites)
-    const userID = useAppSelector(state => state.user.id)
-
-    const getFavID = favProducts.map((item) => item.id)
-    const dispatch = useAppDispatch()
+const LoadData = (userID: string) => {
 
     const q = query(collection(db, 'users', userID, 'fav').withConverter(converter))
     const [docs, loading, error, snapshot] = useCollectionData(q);
 
+    return [docs, loading, error, snapshot];
+}
+
+function Favorites(): JSX.Element {
+
+    const favProducts = useAppSelector(state => state.favorites.favorites)
+    let userID = useAppSelector(state => state.user.id);
+
+    const getFavID = favProducts.map((item) => item.id)
+    const dispatch = useAppDispatch();
+
     const handleDeleteFav = (item: IProduct) => {
         dispatch(deleteFav(item))
     }
+    const router = useRouter();
 
-    useEffect(() => {
-        docs?.forEach((item) => dispatch(addFav(item)))
+    if (userID) {
+        const [docs, loading, error, snapshot] = LoadData(userID);
+        return (
+            <>
+                <Htag tag={'h1'}>Избранное</Htag>
+                {loading && <span>Loading</span>}
+                {error && alert(error)}
+                {docs
+                    ? (favProducts.length != 0 ?
+                        favProducts.map((item) => {
+                            return <ProductCardFav item={item} key={item.id} isFavor={true}
+                                                   handleDeleteFav={handleDeleteFav}/>
+                        })
+                        : <div style={{margin: '20px 0'}}>Нет избранных товаров</div>)
+                    : <div style={{margin: '20px 0'}}>Авторизуйтесь, чтобы получит доступ к вашему списку
+                        избранного</div>
+                }
+            </>
+        )
 
-    }, [docs])
-    // useEffect(() => {
-    //     if (userID) async () => {
-    //         const res = await getProductById(userID, 'users')
-    //         // console.log(res)
-    //     }
-    //     console.log(userID)
-    // }, [userID])
-
-    //TODO: Сделать редирект на авторизацию, если не залогинен
-
-    return (
-        <div>
-            <Htag tag={'h1'}>Избранное</Htag>
-            {loading && <span>Loading</span>}
-            {error && alert(error)}
-            {docs
-                ? (favProducts.length != 0 ?
-                    favProducts.map((item) => {
-                        return <ProductCardFav item={item} key={item.id} isFavor={true}
-                                               handleDeleteFav={handleDeleteFav}/>
-                    })
-                    : <div style={{margin: '20px 0'}}>Нет избранных товаров</div>)
-                : <div style={{margin: '20px 0'}}>Авторизуйтесь, чтобы получит доступ к вашему списку избранного</div>
-            }
-
-        </div>
-    )
+    } else {
+        router.push('/auth');
+        return (
+            <div>Редирект на авторизацию</div>
+        )
+    }
 }
 
 export default withLayout(Favorites);
