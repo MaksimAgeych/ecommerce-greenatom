@@ -6,7 +6,7 @@ import { stat } from 'fs';
 
 
 export const Card = (): JSX.Element => { 
-    const {busket} = useAppSelector(state => state.busket);
+    const {basket} = useAppSelector(state => state.basket);
 
     return (
         <section className={styles.sectionCart}>
@@ -27,7 +27,7 @@ export const Card = (): JSX.Element => {
                             <div className={styles.cartHeaderCost}>сумма</div>           
                         </div>
                             <div className={styles.product}>
-                                {busket.map(item => {
+                                {basket.map(item => {
                                     return <ProductCardItem key={item.id} {...item} />
                                 })}
                             </div>
