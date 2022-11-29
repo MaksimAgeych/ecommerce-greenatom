@@ -1,7 +1,6 @@
 import { Action, combineReducers, configureStore, ThunkAction } from "@reduxjs/toolkit";
-import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
 import authSlice from "./authSlice";
-import favorietsSlice from "./favorietsSlice";
+import favoritesSlice from "./favoritesSlice";
 import productsSlice from "./productsSlice";
 import { persistStore, persistReducer,
     FLUSH,
@@ -11,13 +10,13 @@ import { persistStore, persistReducer,
     PURGE,
     REGISTER,} from 'redux-persist'
 import storage from 'redux-persist/lib/storage'
-import busketSlice from "./busketSlice";
+import basketSlice from "./basketSlice";
 
 const rootReducer = combineReducers({
-    favoriets: favorietsSlice,
+    favorites: favoritesSlice,
     user: authSlice,
     products: productsSlice,
-    busket: busketSlice,
+    basket: basketSlice,
 })
 
 const persistConfig = {

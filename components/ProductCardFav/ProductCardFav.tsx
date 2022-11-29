@@ -7,7 +7,7 @@ import IconCart from "./icons/cart.svg";
 import {IProduct} from '../../interface/entities/interface';
 import Link from "next/link";
 import {useAppDispatch,useAppSelector} from "../../hooks/redux-hooks";
-import {addFav, deleteFav} from "../../store/favorietsSlice";
+import {addFav, deleteFav} from "../../store/favoritesSlice";
 
 
 interface IProps {
