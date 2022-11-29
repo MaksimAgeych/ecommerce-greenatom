@@ -15,6 +15,8 @@ import {useCollectionData} from 'react-firebase-hooks/firestore';
 import {collection, query} from 'firebase/firestore';
 import {converter} from '../../pages/catalog/[id]';
 
+
+
 export const ProductsCatalog = (): JSX.Element => {
     const {products, status, search} = useAppSelector((state) => state.products);
     const favProducts = useAppSelector(getFavorites);
@@ -23,24 +25,19 @@ export const ProductsCatalog = (): JSX.Element => {
     const dispatch = useAppDispatch();
     const [productsList, setProductsList] = useState<IProduct[] | null>(null)
     const q = query(collection(db, 'products',).withConverter(converter))
-
+    const [viewProducts, setViewProducts] = useState<IProduct[] | undefined>([]);
     const [fetchProd, loading, error] = useCollectionData(q)
 
-    // useEffect(() => {
-    //   dispatch(clearProducts())} ,[])
+    const searchProducts = useAppSelector(state => state.products.search);
+    useEffect(() => {
+        setViewProducts(fetchProd);
+    }, [fetchProd])
 
     useEffect(() => {
-
-        if (fetchProd) {
-            const arr = fetchProd.map((item) => {
-                return item
-            })
-
-            // dispatch(addProducts(arr))
-            setProductsList(products)
+        if (searchProducts.length > 0) {
+            setViewProducts(searchProducts);
         }
-
-    }, [fetchProd]);
+    }, [searchProducts]);
 
     useEffect(() => {
         search.length > 0 ? setProductsList(search) : setProductsList(products)
@@ -67,8 +64,8 @@ export const ProductsCatalog = (): JSX.Element => {
     return (
         <nav className={styles.menu} role={"navigation"}>
             {
-                fetchProd ?
-                    fetchProd.map((product) =>
+                viewProducts ?
+                    viewProducts.map((product) =>
                         <ProductCard key={product.id}
                                      item={product}
                                      handleAddToBasket={handleAddToBasket}
