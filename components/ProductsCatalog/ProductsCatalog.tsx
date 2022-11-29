@@ -6,9 +6,11 @@ import { ProductCard } from '../ProductCard/ProductCard';
 import { IProduct } from '../../interface/entities/interface';
 import { useFetchCollection } from '../../hooks/firestore-hooks';
 import { addProducts, clearProducts } from '../../store/productsSlice';
-import { createUsersProuctDataFromAuth, updateProductById } from '../../utils/firebase/firebase.utils';
+import { createUsersProuctDataFromAuth, db, deleteProductById, updateProductById } from '../../utils/firebase/firebase.utils';
 import { addFav, deleteFav } from '../../store/favorietsSlice';
 import { addToBusket } from '../../store/busketSlice';
+import { useCollectionData } from 'react-firebase-hooks/firestore';
+import { collection, query } from 'firebase/firestore';
 
 export const ProductsCatalog = (): JSX.Element => {
   const {products, status, search} = useAppSelector((state) => state.products);
@@ -17,10 +19,12 @@ export const ProductsCatalog = (): JSX.Element => {
 
   const dispatch = useAppDispatch();
   const [productsList, setProductsList] = useState<IProduct[] | null>(null)
-  const fetchProd = useFetchCollection('products')
+  const q = query(collection(db, 'products',))
 
-  useEffect(() => {
-    dispatch(clearProducts())} ,[])
+  const [fetchProd, loading, error] = useCollectionData(q)
+
+  // useEffect(() => {
+  //   dispatch(clearProducts())} ,[])
   
   useEffect(() => {
 
@@ -29,7 +33,7 @@ export const ProductsCatalog = (): JSX.Element => {
         return item
       }) 
 
-      dispatch(addProducts(arr))
+      // dispatch(addProducts(arr))
       setProductsList(products)
     }
   
@@ -42,33 +46,38 @@ export const ProductsCatalog = (): JSX.Element => {
 
   const handleAddToFav = (product: IProduct) => {
     dispatch(addFav(product))
-    if (userID) createUsersProuctDataFromAuth('EvChAa0TdgRUX5KfXtBTFAaQfp23', '/fav', product, product.id.toString())
-
+    if (userID) createUsersProuctDataFromAuth(userID, 'fav', product, product.id.toString())
+//createUsersProuctDataFromAuth заносит товар (документ) в конкретную коллекцию
+//для этого ей нужно указать путь ввиде аргументов функции
   }
 
   const handleAddToBusket = (product: IProduct) => {
     dispatch(addToBusket(product))
+    if (userID) createUsersProuctDataFromAuth(userID, 'busket', product, product.id.toString())
   }
 
   const handleDeleteToFav = (product: IProduct) => {
     dispatch(deleteFav(product))
+    if (userID) deleteProductById(userID, 'fav', product.id.toString())
   }
 
 
 
   return (
       <nav className={styles.menu} role={"navigation"}>
-          {status === "loading" && <div>Загрузка</div>}
-          {status === "error" && <div>Ошибка</div>}
+
+          {loading && <div>Загрузка</div>}
+        
+          {error && <div>Ошибка</div>}
           {
-            productsList ?  
-            productsList.map((product) => 
+            fetchProd ?  
+            fetchProd.map((product) => 
                 <ProductCard key={product.id} 
                 item={product} 
                 handleAddToBusket={handleAddToBusket}
                 handleAddToFav={handleAddToFav}
                 handleDeleteToFav={handleDeleteToFav}
-                isFav={favProducts.filter(item => item.id === product.id).length == 1}/>)
+                isFav={fetchProd.filter(item => item.id === product.id).length == 1}/>)
             : <span>Loading</span>
           }
       </nav>

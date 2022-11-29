@@ -29,7 +29,12 @@ export const ProductDescription = ({id, name, size, about, price, rating, descri
             <div className={styles.right}>
             <div className={styles.activity}>
                     <Link href={'/'}><IconCompare/></Link>
-                    <Link href={'/'}><IconLike/></Link>
+                    <Link href={'/'}>
+                        {/* <button onClick={handletAddFav}>
+
+                        </button> */}
+                        <IconLike/>
+                        </Link>
                 </div>
                 <div className={styles.stars}>
                     {stars}

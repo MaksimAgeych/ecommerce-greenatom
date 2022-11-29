@@ -94,8 +94,8 @@ export const updateProductById = async (id, pathName, ...obj) => {
     return updateDoc(doc(db, pathName, id.toString()), ...obj)
 } // обновляем информацию в документе, передаем id и обьект с нужными полями для изменения 
 
-export const deleteProductById = async (id) => {
-    return deleteDoc(doc(db, 'products', id.toString()))
+export const deleteProductById = async (uid, dir, prodID) => {
+    return deleteDoc(doc(db, 'users', uid, dir, prodID))
 } // для удаления передаем просто id
 
 
