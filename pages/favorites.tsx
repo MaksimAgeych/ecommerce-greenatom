@@ -19,9 +19,8 @@ function Favorites(): JSX.Element {
     const getFavID = favProducts.map((item) => item.id)
     const dispatch = useAppDispatch()
     
-    const q = query(collection(db, 'users/EvChAa0TdgRUX5KfXtBTFAaQfp23/fav'))
+    const q = query(collection(db, 'users', userID, 'fav'))
     const [docs, loading, error, snapshot] = useCollectionData(q);
-    if (docs) console.log(docs)
     
     
    
