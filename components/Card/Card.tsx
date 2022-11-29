@@ -3,10 +3,18 @@ import styles from  './Card.module.css';
 import { ProductCardItem } from './../ProductCardItem/ProductCardItem';
 import { useAppSelector } from '../../hooks/redux-hooks';
 import { stat } from 'fs';
+import { getBasket } from '../../store/basketSlice';
+import { collection, query } from 'firebase/firestore';
+import { db } from '../../utils/firebase/firebase.utils';
+
 
 
 export const Card = (): JSX.Element => { 
-    const {busket} = useAppSelector(state => state.busket);
+
+    // const userID = useAppSelector(state => state.user.id)
+    // const q = query(collection(db, 'users',  ))
+
+    const basket = useAppSelector(getBasket);
 
     return (
         <section className={styles.sectionCart}>
@@ -27,7 +35,7 @@ export const Card = (): JSX.Element => {
                             <div className={styles.cartHeaderCost}>сумма</div>           
                         </div>
                             <div className={styles.product}>
-                                {busket.map(item => {
+                                {basket.map(item => {
                                     return <ProductCardItem key={item.id} {...item} />
                                 })}
                             </div>
