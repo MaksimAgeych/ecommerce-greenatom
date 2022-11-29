@@ -11,6 +11,7 @@ import { addFav, deleteFav } from '../../store/favorietsSlice';
 import { addToBusket } from '../../store/busketSlice';
 import { useCollectionData } from 'react-firebase-hooks/firestore';
 import { collection, query } from 'firebase/firestore';
+import { converter } from '../../pages/catalog/[id]';
 
 export const ProductsCatalog = (): JSX.Element => {
   const {products, status, search} = useAppSelector((state) => state.products);
@@ -19,7 +20,7 @@ export const ProductsCatalog = (): JSX.Element => {
 
   const dispatch = useAppDispatch();
   const [productsList, setProductsList] = useState<IProduct[] | null>(null)
-  const q = query(collection(db, 'products',))
+  const q = query(collection(db, 'products',).withConverter(converter))
 
   const [fetchProd, loading, error] = useCollectionData(q)
 
