@@ -4,16 +4,23 @@ import {Htag, P} from "../../components";
 import {withLayout} from "../../layouts/Layout";
 import {ProductDescription} from '../../components';
 import Head from "next/head";
-import {collection, doc, getDoc, getDocs, query} from "firebase/firestore";
+import {collection, doc, getDoc, getDocs, Query, query, QueryDocumentSnapshot} from "firebase/firestore";
 import {db, getCollectionByName} from "../../utils/firebase/firebase.utils";
 import {useCollectionData} from "react-firebase-hooks/firestore";
 import {useAppSelector} from "../../hooks/redux-hooks";
 
 
 //SSG
+const converter = {
+    toFirestore: (data: IProduct) => data,
+    fromFirestore: (snap: QueryDocumentSnapshot) =>
+      snap.data() as IProduct
+  }
+
 export const getStaticPaths = async () => {
-    const snapshot = await getDocs(collection(db, 'products'));
+    const snapshot = await getDocs(collection(db, 'products').withConverter(converter));
     const paths = snapshot.docs.map(doc => {
+        doc
         return {
             params: {id: doc.id.toString()}
         }
@@ -24,10 +31,10 @@ export const getStaticPaths = async () => {
     }
 }
 
-export const getStaticProps = async (context: { params: { id: any; }; }) => {
+export const getStaticProps = async (context: { params: { id: string; }; }) => {
     const id = context.params.id;
     const docRef = doc(db, "products", id);
-    const docSnap = await getDoc(docRef);
+    const docSnap = await getDoc(docRef.withConverter(converter));
     return {
         props: { product: docSnap.data()}
     }
@@ -52,10 +59,12 @@ export const getStaticProps = async (context: { params: { id: any; }; }) => {
 
 
 function ProductPage({product}: { product: IProduct }): JSX.Element {
-    // @ts-ignore
-    console.log(product)
-    const q = query(collection(db, 'products',))
 
+
+   
+    console.log(product)
+    const q = query(collection(db, 'products',).withConverter(converter))
+ 
     const [fetchProd, loading, error] = useCollectionData(q)
 
     let {id, name, description, about, rating, size, price, img} = product;
