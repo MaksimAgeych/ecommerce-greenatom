@@ -6,13 +6,14 @@ import { ProductCard } from '../ProductCard/ProductCard';
 import { IProduct } from '../../interface/entities/interface';
 import { useFetchCollection } from '../../hooks/firestore-hooks';
 import { addProducts, clearProducts } from '../../store/productsSlice';
-import { updateProductById } from '../../utils/firebase/firebase.utils';
+import { createUsersProuctDataFromAuth, updateProductById } from '../../utils/firebase/firebase.utils';
 import { addFav, deleteFav } from '../../store/favorietsSlice';
 import { addToBusket } from '../../store/busketSlice';
 
 export const ProductsCatalog = (): JSX.Element => {
   const {products, status, search} = useAppSelector((state) => state.products);
   const favProducts = useAppSelector(state => state.favoriets.favoriets)
+  const userID = useAppSelector(state => state.user.id)
 
   const dispatch = useAppDispatch();
   const [productsList, setProductsList] = useState<IProduct[] | null>(null)
@@ -41,6 +42,8 @@ export const ProductsCatalog = (): JSX.Element => {
 
   const handleAddToFav = (product: IProduct) => {
     dispatch(addFav(product))
+    if (userID) createUsersProuctDataFromAuth('EvChAa0TdgRUX5KfXtBTFAaQfp23', '/fav', product, product.id.toString())
+
   }
 
   const handleAddToBusket = (product: IProduct) => {

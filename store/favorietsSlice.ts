@@ -26,11 +26,14 @@ export const favorietsSlice = createSlice({
         (item) => item.id !== action.payload.id
       );
     },
+    clearFav: (state) => {
+      state.favoriets = [];
+    }
 
   },
 });
 
 export const getFavoriets = (state: RootState) => state.favoriets
 
-export const { addFav, deleteFav } = favorietsSlice.actions; // 
+export const { addFav, deleteFav, clearFav } = favorietsSlice.actions; // 
 export default favorietsSlice.reducer;
