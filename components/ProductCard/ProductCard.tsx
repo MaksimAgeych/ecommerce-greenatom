@@ -6,9 +6,6 @@ import IconLike from "./icons/like.svg";
 import IconCart from "./icons/cart.svg";
 import {IProduct} from '../../interface/entities/interface';
 import Link from "next/link";
-import {useAppDispatch, useAppSelector} from "../../hooks/redux-hooks";
-import {addFav} from "../../store/favoritesSlice";
-import {addToBasket} from "../../store/basketSlice";
 
 
 interface IProps {
@@ -34,42 +31,44 @@ export const ProductCard: FC<IProps> = ({
     }
 
     return (
-        <Link className={styles.cart} href={`/catalog/${id}`}>
-            <div>
-                <div className={styles.images}>
+
+        <div className={styles.cart}>
+            <div className={styles.images}>
+                <Link href={`/catalog/${id}`}>
                     <img src={img} className={styles.image}/>
+                </Link>
+            </div>
+            <span className={styles.name}><Link href={`/catalog/${id}`}>{name}</Link></span>
+            <div className={styles.spec}>
+                <p>{size}</p>
+                <p>{about}</p>
+            </div>
+
+            <div className={styles.feedback}>
+                <div className={styles.rating}>
+                    {stars.length == 0 ? "Нет рейтинга" : stars}
                 </div>
-                <span className={styles.name}>{name}</span>
-                <div className={styles.spec}>
-                    <p>{size}</p>
-                    <p>{about}</p>
-                </div>
-                <div className={styles.feedback}>
-                    <div className={styles.rating}>
-                        {stars.length == 0 ? "Нет рейтинга" : stars}
-                    </div>
-                    <div className={styles.reviews}>1 Отзыв</div>
-                </div>
-                <div className={styles.hr}>
-                    <hr className={styles.line}/>
-                </div>
-                <div className={styles.footer}>
-                    <div className={styles.price}>{price} р.</div>
-                    <div className={styles.activity}>
-                        <button className={styles.btn}><IconCompare/></button>
-                        <button className={styles.btn}
-                                onClick={(event) => isFav ? (event.preventDefault(), handleAddToFav(item)) : handleAddToFav(item)}>
-                            <IconLike className={isFav ? styles.like : null}/>
-                        </button>
-                        <button className={styles.btn} onClick={(event) => {
-                            event.preventDefault();
-                            handleAddToBasket(item);
-                        }}>
-                            <IconCart/>
-                        </button>
-                    </div>
+                <div className={styles.reviews}>1 Отзыв</div>
+            </div>
+            <div className={styles.hr}>
+                <hr className={styles.line}/>
+            </div>
+            <div className={styles.footer}>
+                <div className={styles.price}>{price} р.</div>
+                <div className={styles.activity}>
+                    <button className={styles.btn}><IconCompare/></button>
+                    <button className={styles.btn}
+                            onClick={(event) => isFav ? (event.preventDefault(), handleDeleteToFav(item)) : handleAddToFav(item)}>
+                        <IconLike className={isFav ? styles.like : null}/>
+                    </button>
+                    <button className={styles.btn} onClick={(event) => {
+                        event.preventDefault();
+                        handleAddToBasket(item);
+                    }}>
+                        <IconCart/>
+                    </button>
                 </div>
             </div>
-        </Link>
+        </div>
     );
 }
