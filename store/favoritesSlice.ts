@@ -3,7 +3,9 @@ import {IProduct} from "../interface/entities/interface";
 import {RootState} from "./rootReducer";
 
 
-type TFavState = { favorites: IProduct[], }
+type TFavState = {
+    favorites: IProduct[]
+}
 
 
 const initialState: TFavState = {
@@ -15,10 +17,15 @@ export const favoritesSlice = createSlice({
     initialState,
     reducers: {
         addFav: (state, action: PayloadAction<IProduct>) => {
+            let isUnique;
+            state.favorites.length !== 0
+                ? (
+                    isUnique = state.favorites.some((item) => item.id === action.payload.id),
+                        !isUnique ? state.favorites = [...state.favorites, action.payload] : null
+                )
+                : state.favorites = [action.payload];
 
-            const isUnique = state.favorites.some((item) => item.id === action.payload.id)
-
-            if (!isUnique) state.favorites = [...state.favorites, action.payload]
+            // if (isUnique) state.favorites = [...state.favorites, action.payload]
 
         },
         deleteFav: (state, action: PayloadAction<IProduct>) => {
