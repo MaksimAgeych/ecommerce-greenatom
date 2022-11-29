@@ -7,8 +7,9 @@ import {Htag, ProductCard, ProductCardFav} from '../components';
 import {useAppDispatch, useAppSelector} from '../hooks/redux-hooks';
 import { IProduct } from '../interface/entities/interface';
 import {withLayout} from '../layouts/Layout';
-import { deleteFav } from '../store/favorietsSlice';
+import { addFav, deleteFav } from '../store/favorietsSlice';
 import {createUsersProuctDataFromAuth, getProductById, db} from '../utils/firebase/firebase.utils';
+import { converter } from './catalog/[id]';
 
 function Favorites(): JSX.Element {
 
@@ -19,15 +20,18 @@ function Favorites(): JSX.Element {
     const getFavID = favProducts.map((item) => item.id)
     const dispatch = useAppDispatch()
     
-    const q = query(collection(db, 'users', userID, 'fav'))
+   
+     const q = query(collection(db, 'users', userID, 'fav').withConverter(converter))
     const [docs, loading, error, snapshot] = useCollectionData(q);
     
-    
-   
-
     const handleDeleteFav = (item :IProduct)=>{
         dispatch(deleteFav(item))
     }
+
+    useEffect(() => {
+        docs?.forEach((item) =>dispatch(addFav(item)) )
+        
+    },[docs])
     // useEffect(() => {
     //     if (userID) async () => {
     //         const res = await getProductById(userID, 'users')

@@ -11,7 +11,7 @@ import {useAppSelector} from "../../hooks/redux-hooks";
 
 
 //SSG
-const converter = {
+export const converter = {
     toFirestore: (data: IProduct) => data,
     fromFirestore: (snap: QueryDocumentSnapshot) =>
       snap.data() as IProduct
