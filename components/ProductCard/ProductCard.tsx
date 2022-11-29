@@ -16,6 +16,7 @@ interface IProps {
 
 export const ProductCard: FC<IProps> = ({item}): JSX.Element => {
     const {id, name, size, about, price, rating, description, img} = item
+    const dispatch = useAppDispatch()
 
     let isFavor=styles.btn;
     const favProducts = useAppSelector(state => state.favoriets.favoriets)
@@ -55,7 +56,7 @@ export const ProductCard: FC<IProps> = ({item}): JSX.Element => {
                 <div className={styles.footer}>
                     <div className={styles.price}>{price} р.</div>
                     <div className={styles.activity}>
-                        <Link href={'/'}><IconCompare/></Link>
+                        <IconCompare/>
                         <button className={styles.btn} onClick={() => dispatch(addFav(item))}>
                             
                             <IconLike className={isFavor} />

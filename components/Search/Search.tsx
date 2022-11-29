@@ -1,18 +1,17 @@
-
 import React, {useState, KeyboardEvent, Dispatch, SetStateAction, FC} from 'react';
 import {SearchProps} from "./Search.props";
 import styles from './Search.module.css';
-import { Input } from '../Input/Input';
-import { Button } from '../Button/Button';
+import {Input} from '../Input/Input';
+import {Button} from '../Button/Button';
 import GlassIcon from './glass.svg';
 import {useRouter} from "next/router";
-import { useAppDispatch, useAppSelector } from '../../hooks/redux-hooks';
-import { IProduct } from '../../interface/entities/interface';
-import { clearSerch, searchAct } from '../../store/productsSlice';
+import {useAppDispatch, useAppSelector} from '../../hooks/redux-hooks';
+import {IProduct} from '../../interface/entities/interface';
+import {clearSerch, searchAct} from '../../store/productsSlice';
 
 export type TSearch = Dispatch<SetStateAction<IProduct[]>>
 
-export const Search = ({className,setSearchResult ,...props}: SearchProps):JSX.Element => {
+export const Search = ({className, setSearchResult, ...props}: SearchProps): JSX.Element => {
     const defaultProducts = useAppSelector(state => state.products.products);
     const products = useAppSelector(state => state.products.search);
     const dispatch = useAppDispatch()
@@ -22,31 +21,22 @@ export const Search = ({className,setSearchResult ,...props}: SearchProps):JSX.E
 
     const goToSearch = (e: string) => {
         if (!e) {
-      return dispatch(clearSerch())
-    }
-    else {
-        
-             const searchResult = defaultProducts.filter((item) => {
+            return dispatch(clearSerch())
+        } else {
 
-          const isFind =  item.name.toLowerCase().includes(e.toLowerCase());
-          if (isFind) {
-           
-            return item
-          }
-        })
-      
-       return dispatch(searchAct(searchResult))
-    }
+            const searchResult = defaultProducts.filter((item) => {
+
+                const isFind = item.name.toLowerCase().includes(e.toLowerCase());
+                if (isFind) {
+
+                    return item
+                }
+            })
+
+            return dispatch(searchAct(searchResult))
         }
-        // void router.push({
-        //     pathname: `/search`,
-        //     query: {
-        //         q: search,
-        //     },
-        // });
-       
-        
-    
+    }
+
 
 // export default Search;
     // const handleKeyDown = (e: KeyboardEvent<HTMLImageElement>) => {
@@ -62,7 +52,7 @@ export const Search = ({className,setSearchResult ,...props}: SearchProps):JSX.E
                 value={search}
                 onChange={(e) => {
                     goToSearch(e.target.value)
-                    setSearch(e.target.value)            
+                    setSearch(e.target.value)
                 }}
                 className={styles.input}
             ></Input>
