@@ -6,22 +6,27 @@ import IconLike from "./icons/like.svg";
 import IconCart from "./icons/cart.svg";
 import {IProduct} from '../../interface/entities/interface';
 import Link from "next/link";
-import {useAppDispatch,useAppSelector} from "../../hooks/redux-hooks";
-import {addFav} from "../../store/favorietsSlice";
-import { addToBusket } from "../../store/busketSlice";
+import {useAppDispatch, useAppSelector} from "../../hooks/redux-hooks";
+import {addFav} from "../../store/favoritesSlice";
+import {addToBasket} from "../../store/basketSlice";
 
 
 interface IProps {
     item: IProduct,
-    handleAddToBusket: (product: IProduct) => void,
+    handleAddToBasket: (product: IProduct) => void,
     handleAddToFav: (product: IProduct) => void,
     handleDeleteToFav: (product: IProduct) => void,
     isFav: boolean
 }
 
-export const ProductCard: FC<IProps> = ({item, isFav, handleAddToBusket, handleAddToFav, handleDeleteToFav}): JSX.Element => {
+export const ProductCard: FC<IProps> = ({
+                                            item,
+                                            isFav,
+                                            handleAddToBasket,
+                                            handleAddToFav,
+                                            handleDeleteToFav
+                                        }): JSX.Element => {
     const {id, name, size, about, price, rating, description, img} = item
-    
 
     const stars = [];
     for (let i = 0; i < rating; i++) {
@@ -29,8 +34,8 @@ export const ProductCard: FC<IProps> = ({item, isFav, handleAddToBusket, handleA
     }
 
     return (
-        <Link href={`/catalog/${id}`}>
-            <div className={styles.cart}>
+        <Link className={styles.cart} href={`/catalog/${id}`}>
+            <div>
                 <div className={styles.images}>
                     <img src={img} className={styles.image}/>
                 </div>
@@ -51,11 +56,15 @@ export const ProductCard: FC<IProps> = ({item, isFav, handleAddToBusket, handleA
                 <div className={styles.footer}>
                     <div className={styles.price}>{price} р.</div>
                     <div className={styles.activity}>
-                        <Link href={'/'}><IconCompare/></Link>
-                        <button className={styles.btn} onClick={() => isFav ? handleDeleteToFav(item) : handleAddToFav(item)}>
-                            <IconLike className={isFav ? styles.like : null} />
+                        <button className={styles.btn}><IconCompare/></button>
+                        <button className={styles.btn}
+                                onClick={(event) => isFav ? (event.preventDefault(), handleAddToFav(item)) : handleAddToFav(item)}>
+                            <IconLike className={isFav ? styles.like : null}/>
                         </button>
-                        <button className={styles.btn} onClick={() => handleAddToBusket(item)}>
+                        <button className={styles.btn} onClick={(event) => {
+                            event.preventDefault();
+                            handleAddToBasket(item);
+                        }}>
                             <IconCart/>
                         </button>
                     </div>
