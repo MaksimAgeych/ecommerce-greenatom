@@ -15,10 +15,8 @@ import {useCollectionData} from 'react-firebase-hooks/firestore';
 import {collection, query} from 'firebase/firestore';
 import {converter} from '../../pages/catalog/[id]';
 
-
-
 export const ProductsCatalog = (): JSX.Element => {
-    const {products, status, search} = useAppSelector((state) => state.products);
+    const {products, status, search, filtered} = useAppSelector((state) => state.products);
     const favProducts = useAppSelector(getFavorites);
 
     const userID = useAppSelector(state => state.user.id)
@@ -27,6 +25,23 @@ export const ProductsCatalog = (): JSX.Element => {
     const q = query(collection(db, 'products',).withConverter(converter))
     const [viewProducts, setViewProducts] = useState<IProduct[] | undefined>([]);
     const [fetchProd, loading, error] = useCollectionData(q)
+
+    const filteredProduct = useAppSelector(state => state.products.filtered);
+    useEffect(() => {
+        setViewProducts(fetchProd);
+    }, [fetchProd])
+
+    useEffect(() => {
+        //console.log(filteredProduct)
+        if (filteredProduct.length > 0) {
+            setViewProducts(filteredProduct);
+        }
+    }, [filteredProduct]);
+
+    useEffect(() => {
+        //console.log(filtered)
+        filtered.length > 0 ? setProductsList(filtered) : setProductsList(products)
+    }, [filtered, products])
 
     const searchProducts = useAppSelector(state => state.products.search);
     useEffect(() => {
