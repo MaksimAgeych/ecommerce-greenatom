@@ -1,5 +1,6 @@
 import {DetailedHTMLProps, HTMLAttributes} from "react";
 
 export interface WidgetSearchShopProps extends DetailedHTMLProps<HTMLAttributes<HTMLFormElement>, HTMLFormElement>{
-    handleFilterSearch: any
+    handleFilterSearch: any,
+    initSearch?: string | string[]
 }
