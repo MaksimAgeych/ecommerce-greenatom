@@ -6,6 +6,7 @@ export type ProductsSlice = {
     status: 'idle' | 'loading' | 'finished' | 'error',
     products: IProduct[],
     search: IProduct[],
+    filtered: IProduct[],
 }
 
 
@@ -13,6 +14,7 @@ const initialState: ProductsSlice = {
     status: 'idle',
     products: [],
     search: [],
+    filtered: [],
 };
 
 export const productsSlice = createSlice({
@@ -25,12 +27,18 @@ export const productsSlice = createSlice({
         clearProducts: (state) => {
             state.products = []
         },
+        filteredProduct: (state, action: PayloadAction<IProduct[]>) => {
+            state.filtered = action.payload
+        },
+        clearFilter: (state) => {
+            state.filtered = [];
+        },
         searchAct: (state, action: PayloadAction<IProduct[]>) => {
             state.search = action.payload
         },
         clearSerch: (state) => {
             state.search = [];
-        }
+        },
     },
     extraReducers: (builder) => {
         builder.addCase(
@@ -47,5 +55,5 @@ export const productsSlice = createSlice({
     }
 });
 
-export const { searchAct, clearSerch, addProducts, clearProducts } = productsSlice.actions
+export const {filteredProduct, clearFilter, searchAct, clearSerch, addProducts, clearProducts } = productsSlice.actions
 export default productsSlice.reducer;
