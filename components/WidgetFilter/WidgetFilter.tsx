@@ -8,6 +8,7 @@ import WidgetPriceFilter from "../WidgetPriceFilter/WidgetPriceFilter";
 import {WidgetFilterProps} from "./WidgetFilter.props";
 import {IProduct} from "../../interface/entities/interface";
 import {filteredProduct} from "../../store/productsSlice";
+import {useRouter} from "next/router";
 
 const filtering = (search: string | undefined, minPrice: number | undefined, maxPrice: number | undefined, defaultProducts: IProduct[]) => {
     let searchResult;
@@ -39,9 +40,9 @@ const WidgetFilter = ({className, ...props}: WidgetFilterProps): JSX.Element => 
 
     const dispatch = useAppDispatch()
     const defaultProducts = useAppSelector(state => state.products.products);
-
+    const router = useRouter();
     //Фильтры
-    const [search, setSearch] = useState('');
+    const [search, setSearch] = useState(String(router.query.search));
     const [minPrice, setMinPrice] = useState<number>();
     const [maxPrice, setMaxPrice] = useState<number>();
 
@@ -66,6 +67,7 @@ const WidgetFilter = ({className, ...props}: WidgetFilterProps): JSX.Element => 
             <div className={styles.sidebar}>
                 <SidebarWidget name={"Поиск"}>
                     <WidgetSearchShop
+                        initSearch={router.query.search}
                         handleFilterSearch={handleFilterSearch}/>
                 </SidebarWidget>
                 <SidebarWidget name={"Цена"}>

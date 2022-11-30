@@ -2,9 +2,9 @@ import React, {useState} from 'react';
 import {WidgetSearchShopProps} from "./WidgetSearchShop.props";
 import {Input} from "../Input/Input";
 
-export const WidgetSearchShop = ({handleFilterSearch}: WidgetSearchShopProps): JSX.Element => {
+export const WidgetSearchShop = ({handleFilterSearch, initSearch = ''}: WidgetSearchShopProps): JSX.Element => {
 
-    const [search, setSearch] = useState('');
+    const [search, setSearch] = useState(initSearch);
 
     return (
         <Input value={search} onChange={(event) => {
