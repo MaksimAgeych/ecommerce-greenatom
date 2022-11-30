@@ -1,0 +1,64 @@
+.mainDiv{
+    display: grid;
+    grid-template-areas: "title title title"
+                         "line line line"
+                         "hist hist hist"
+                         "text text . "
+                         "image image image"
+                         "task task task"
+                         "textTask textTask . ";
+}
+.lineHr{
+    grid-area: line;
+
+    background: #E8AA31;
+    border: 0.5px solid #E8AA31;
+    margin-left: 20px;
+    margin: 10px;
+}
+.image{
+    grid-area: image;
+    margin: 20px;
+    
+}
+.titleP{
+    grid-area: title;
+    font-weight: 400;
+    line-height: 24px;
+    font-size: 40px;
+    margin: 20px;
+    
+}
+.textDiv{
+    grid-area: text;
+
+    display: inline-block;
+    font-weight: 400;
+    line-height: 24px;
+    text-align: left;
+    padding: 20px;
+    box-shadow: 0 4px 20px 0 #0000001A;
+   margin-left: 20px;
+}
+.historyP{
+    font-size: 25px;
+    margin: 20px;
+
+    grid-area: hist;
+}
+.taskP{
+    font-size: 25px;
+    margin: 20px;
+
+    grid-area: task;
+}
+.taskDiv{
+    display: inline-block;
+    font-weight: 400;
+    line-height: 24px;
+    text-align: left;
+    padding: 20px;
+    box-shadow: 0 4px 20px 0 #0000001A;
+   margin-left: 20px;
+    grid-area: textTask;
+}

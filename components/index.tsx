@@ -13,3 +13,4 @@ export * from './ProductCardFav/ProductCardFav';
 export * from './ProductDescription/ProductDescription';
 export * from './WidgetSearchShop/WidgetSearchShop';
 export * from './WidgetPriceFilter/WidgetPriceFilter';
+export * from './aboutUs/AboutUs'

@@ -1,0 +1,16 @@
+.notes{
+    padding: 5px 10px;
+    margin: 10px 0;
+    background: yellow;
+    color: gray;
+    border-radius: 6px;
+}
+.noteField{
+    position: fixed;
+    right: 20px;
+    top: 0;
+    bottom: 0;
+    width: 15%;
+    background: rgba(0, 0, 0, .3);
+    z-index: 99999;
+}
