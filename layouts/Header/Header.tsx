@@ -19,7 +19,7 @@ import { useFetchCollection } from '../../hooks/firestore-hooks';
 export const Header = ({className, ...props}: HeaderProps): JSX.Element => {
 
     const [user, setUser] = useState(null);
-    const [serchResult, setSearchResult] = useState<IProduct[] | []>([]);
+    const [searchResult, setSearchResult] = useState<IProduct[] | []>([]);
     const dispatch = useAppDispatch()
     const fetchUser = useFetchCollection('users')
 
@@ -37,7 +37,6 @@ export const Header = ({className, ...props}: HeaderProps): JSX.Element => {
 
     useEffect(() => {
    const isExists = fetchUser?.find(user => user.email === userAuth.email)
-   console.log(isExists)
    if (isExists) dispatch(setUserName(isExists.displayName))
 }
 ,[user])
