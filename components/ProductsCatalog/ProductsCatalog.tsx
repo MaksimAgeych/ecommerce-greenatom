@@ -22,7 +22,7 @@ export const ProductsCatalog = (): JSX.Element => {
     const qFav = query(collection(db, 'fav',).withConverter(converter))
     const [favProducts, loadingFav, errorFav] = useCollectionData(qFav)
 
-    const userID = useAppSelector(state => state.user.id)
+    // const userID = useAppSelector(state => state.user.id)
     const dispatch = useAppDispatch();
     const [productsList, setProductsList] = useState<IProduct[] | null>(null)
     const q = query(collection(db, 'products',).withConverter(converter))

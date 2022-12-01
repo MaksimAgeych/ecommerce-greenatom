@@ -26,11 +26,13 @@ export const basketSlice = createSlice({
                 (item) => item.id !== action.payload.id
             );
         },
-
+        clearBasket: (state) => {
+            state.basket = [];
+        }
     },
 });
 
 export const getBasket = (state: RootState) => state.basket.basket;
 
-export const { addToBasket, deleteFromBasket } = basketSlice.actions; //
+export const { addToBasket, deleteFromBasket, clearBasket } = basketSlice.actions; //
 export default basketSlice.reducer;

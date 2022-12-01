@@ -1,4 +1,4 @@
-import {createUserDocFromAuth, signInWithGooglePopup, signOutUser,} from '../../utils/firebase/firebase.utils.js';
+import {auth, createUserDocFromAuth, signInWithGooglePopup, signOutUser,} from '../../utils/firebase/firebase.utils.js';
 import SignInForm from '../SignInForm/SignInForm';
 import SignUpForm from '../SignUpForm/SignUpForm'
 
@@ -8,12 +8,13 @@ import {useRouter} from "next/router";
 
 import styles from './Authentication.module.css';
 import {Htag} from "../Htag/Htag";
+import { useAuthState } from 'react-firebase-hooks/auth';
 
 const Authentication = () => {
-
+    const [userAuth] = useAuthState(auth)
     let {isAuth} = useAuth();
     let router = useRouter();
-    isAuth ? router.push('/') : '';
+    userAuth ? router.push('/') : '';
 
     console.log(useAuth().name)
     return (
