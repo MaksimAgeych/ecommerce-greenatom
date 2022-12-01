@@ -3,23 +3,19 @@ import {withLayout} from "../../layouts/Layout";
 import {useAppSelector} from "../../hooks/redux-hooks";
 import styles from "./Cart.module.css";
 import {ProductCardItem} from "../../components/ProductCardItem/ProductCardItem";
-import styles from  './Card.module.css';
-import { ProductCardItem } from './../ProductCardItem/ProductCardItem';
-import { useAppSelector } from '../../hooks/redux-hooks';
 import { stat } from 'fs';
 import { getBasket } from '../../store/basketSlice';
 import { collection, query } from 'firebase/firestore';
 import { db } from '../../utils/firebase/firebase.utils';
+import { useCollectionData } from 'react-firebase-hooks/firestore';
+import { converter } from '../catalog/[id]';
+import router from 'next/router';
 
 
 
 export const Card = (): JSX.Element => { 
 
-    // const userID = useAppSelector(state => state.user.id)
-    // const q = query(collection(db, 'users',  ))
-
-    const basket = useAppSelector(getBasket);
-
+    
     return (
         <section className={styles.sectionCart}>
             <div className={styles.sectionCartHeader}>
@@ -54,4 +50,4 @@ export const Card = (): JSX.Element => {
 
 }
 
-export default withLayout(Index);
+export default withLayout(Card);
