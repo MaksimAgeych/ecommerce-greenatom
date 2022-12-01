@@ -37,8 +37,8 @@ function Favorites(): JSX.Element {
     }
     const router = useRouter();
 
-    if (user.uid) {
-        const [docs, loading, error, snapshot] = LoadData(userID);
+    if (user?.uid) {
+        const [docs, loading, error, snapshot] = LoadData(user.uid);
         return (
             <>
                 <Htag tag={'h1'}>Избранное</Htag>
