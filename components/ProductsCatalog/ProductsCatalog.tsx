@@ -19,7 +19,7 @@ export const ProductsCatalog = (): JSX.Element => {
     const {products, status, search, filtered} = useAppSelector((state) => state.products);
     const favProducts = useAppSelector(getFavorites);
 
-    const userID = useAppSelector(state => state.user.id)
+    // const userID = useAppSelector(state => state.user.id)
     const dispatch = useAppDispatch();
     const [productsList, setProductsList] = useState<IProduct[] | null>(null)
     const q = query(collection(db, 'products',).withConverter(converter))
