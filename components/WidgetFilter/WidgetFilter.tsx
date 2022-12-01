@@ -9,21 +9,36 @@ import {WidgetFilterProps} from "./WidgetFilter.props";
 import {IProduct} from "../../interface/entities/interface";
 import {filteredProduct} from "../../store/productsSlice";
 import {useRouter} from "next/router";
+import WidgetSizeFilter from "../WidgetSizeFilter/WidgetSizeFilter";
 
-const filtering = (search: string | undefined, minPrice: number | undefined, maxPrice: number | undefined, defaultProducts: IProduct[]) => {
-    let searchResult;
-    let priceResult;
-    if(search) {
-        searchResult = defaultProducts.filter((item) => {
+const filtering = (sizes: string[] | undefined, search: string | undefined, minPrice: number | undefined, maxPrice: number | undefined, defaultProducts: IProduct[]) => {
+    let sizeResult: IProduct[], searchResult: IProduct[], priceResult: IProduct[];
+
+    if (sizes && sizes.length > 0) {
+        sizeResult = defaultProducts.filter(product => {
+            let isFind: IProduct | undefined;
+            sizes.map((size) => {
+                if (size === product.size) {
+                    isFind = product;
+                }
+            })
+            if(isFind) return isFind
+        })
+    } else {
+        sizeResult = defaultProducts;
+    }
+
+    if (search) {
+        searchResult = sizeResult.filter((item) => {
             const isFindSearch = item.name.toLowerCase().includes(search.toLowerCase());
             if (isFindSearch) {
                 return item
             }
         })
     } else {
-        searchResult = defaultProducts;
+        searchResult = sizeResult;
     }
-    if(minPrice && maxPrice) {
+    if (minPrice && maxPrice) {
         priceResult = searchResult.filter((item) => {
             if (item.price > minPrice && item.price < maxPrice) {
                 return item
@@ -40,11 +55,16 @@ const WidgetFilter = ({className, ...props}: WidgetFilterProps): JSX.Element => 
 
     const dispatch = useAppDispatch()
     const defaultProducts = useAppSelector(state => state.products.products);
+
+    //Получение поискового запроса из get параметра
     const router = useRouter();
+    const initSearch = router.query.search ? String(router.query.search) : '';
+
     //Фильтры
-    const [search, setSearch] = useState(String(router.query.search));
+    const [search, setSearch] = useState(initSearch);
     const [minPrice, setMinPrice] = useState<number>();
     const [maxPrice, setMaxPrice] = useState<number>();
+    const [size, setSize] = useState<string[]>();
 
     //Получение данных из фильтров
     const handleFilterSearch = (search: React.SetStateAction<string>) => {
@@ -56,11 +76,15 @@ const WidgetFilter = ({className, ...props}: WidgetFilterProps): JSX.Element => 
     const handleFilterMaxPrice = (maxPrice: React.SetStateAction<number>) => {
         setMaxPrice(Number(maxPrice));
     }
+    const handleFilterSize = (size: React.SetStateAction<any>) => {
+        setSize(size);
+    }
+
 
     //Загрузка отфильтрованного товара на страницу
-    useEffect(()=> {
-        dispatch(filteredProduct(filtering(search, minPrice, maxPrice, defaultProducts)))
-    }, [defaultProducts, maxPrice, minPrice, search])
+    useEffect(() => {
+        dispatch(filteredProduct(filtering(size, search, minPrice, maxPrice, defaultProducts)))
+    }, [defaultProducts, dispatch, maxPrice, minPrice, search, size])
 
     return (
         <div {...props} className={cn(className)}>
@@ -76,7 +100,9 @@ const WidgetFilter = ({className, ...props}: WidgetFilterProps): JSX.Element => 
                         handleFilterMinPrice={handleFilterMinPrice}
                     />
                 </SidebarWidget>
-                <SidebarWidget name={"Категории"}>Контент</SidebarWidget>
+                <SidebarWidget name={"Размеры"}>
+                    <WidgetSizeFilter handleFilterSize={handleFilterSize} product={defaultProducts}/>
+                </SidebarWidget>
                 <SidebarWidget name={"Длина ножа"}>Контент</SidebarWidget>
             </div>
         </div>
