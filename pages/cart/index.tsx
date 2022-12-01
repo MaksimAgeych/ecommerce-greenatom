@@ -20,12 +20,22 @@ import { FirebaseError } from 'firebase/app';
 export const Card = (): JSX.Element => { 
 
         const [user, loading, error] = useAuthState(auth)
+
+
         const [basket, setBasket] = useState<IProduct[]>([])
+
 
     const router = useRouter();
 
     function LoadData(user: any) {
      
+
+ //            const [basket, loading, error, ...props] = useCollectionData(query(collection(db, 'users', user?.uid, 'basket' ).withConverter(converter)))
+        
+        // return [basket, loading, error]   
+   // }
+   //const [basketData, loadingData, errorData,] = LoadData(user)
+
         
         const [basket, loading, error, ...props] = useCollectionData(query(collection(db, 'users', user?.uid, 'basket' ).withConverter(converter)))
         
@@ -60,8 +70,6 @@ console.log(basketData)
           }
 
           {basketData === undefined || basketData.length === 0 && <span>Cart is Empty</span> }
-
-
   { basketData && user && basketData.length !== 0 && 
     <section className={styles.sectionCart}>
            <div className={styles.sectionCartHeader}>
