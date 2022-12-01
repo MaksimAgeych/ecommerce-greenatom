@@ -9,7 +9,7 @@ import { collection, query } from 'firebase/firestore';
 import { auth, db } from '../../utils/firebase/firebase.utils';
 import { useCollectionData, useCollectionDataOnce } from 'react-firebase-hooks/firestore';
 import { converter } from '../catalog/[id]';
-import router from 'next/router';
+import router, { useRouter } from 'next/router';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { User } from 'firebase/auth';
 import { IProduct } from '../../interface/entities/interface';
@@ -18,17 +18,21 @@ import { FirebaseError } from 'firebase/app';
 
 
 export const Card = (): JSX.Element => { 
-    const [basket, setBasket] = useState<any>([])
 
-    const [user, loading, error] = useAuthState(auth)
+        const [user, loading, error] = useAuthState(auth)
+        const [basket, setBasket] = useState<any>([])
 
-    function useLoadData(user: any) {
-         const [basket, loading, error, ...props] = useCollectionData(query(collection(db, 'users', user?.uid, 'basket' ).withConverter(converter)))
+    const router = useRouter();
+
+    function LoadData(user: any) {
+     
+             const [basket, loading, error, ...props] = useCollectionData(query(collection(db, 'users', user?.uid, 'basket' ).withConverter(converter)))
         
-         return [basket, loading, error]
+         return [basket, loading, error]   
     }
-   const [basketData, loadingData, errorData] = useLoadData(user)
+   const [basketData, loadingData, errorData,] = LoadData(user)
    const dispatch = useAppDispatch()
+
 
     useEffect((
     ) => {
@@ -43,16 +47,23 @@ export const Card = (): JSX.Element => {
 
         },[user, loadingData, basketData])
 
+     if (user) {
 
+
+
+
+console.log(basketData)
     return (
         <>
-    {loading && loadingData &&
+    {loading && loadingData && 
     <span>
         loading data  </span> 
           }
 
+          {basketData === undefined || basketData.length === 0 && <span>Cart is Empty</span> }
 
-  { user && 
+
+  { basketData && user && basketData.length !== 0 && 
     <section className={styles.sectionCart}>
            <div className={styles.sectionCartHeader}>
                  <div className={styles.container}>
@@ -90,11 +101,16 @@ export const Card = (): JSX.Element => {
         }
         </>
         
-       
-       
-  
     );
 
+
+} else {
+    router.push('/auth');
+    return (
+        <div>Редирект на авторизацию</div>
+    )
 }
+}
+
 
 export default withLayout(Card);

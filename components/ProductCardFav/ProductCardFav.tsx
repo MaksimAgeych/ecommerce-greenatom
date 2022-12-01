@@ -9,7 +9,6 @@ import Link from "next/link";
 import {useAppDispatch,useAppSelector} from "../../hooks/redux-hooks";
 import {addFav, deleteFav} from "../../store/favoritesSlice";
 
-
 interface IProps {
     item: IProduct,  
     isFavor: boolean,

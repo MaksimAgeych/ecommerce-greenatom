@@ -4,13 +4,10 @@ import styles from './ProductsCatalog.module.css';
 import {useAppDispatch} from '../../hooks/redux-hooks';
 import {ProductCard} from '../ProductCard/ProductCard';
 import {IProduct} from '../../interface/entities/interface';
-import {useFetchCollection} from '../../hooks/firestore-hooks';
-import {addProducts, clearProducts} from '../../store/productsSlice';
 import {
     createUsersProuctDataFromAuth,
     db,
     deleteProductById,
-    updateProductById
 } from '../../utils/firebase/firebase.utils';
 import {addFav, deleteFav, getFavorites} from '../../store/favoritesSlice';
 import {addToBasket} from '../../store/basketSlice';
@@ -24,38 +21,34 @@ export const ProductsCatalog = (): JSX.Element => {
     const [favProducts, loadingFav, errorFav] = useCollectionData(qFav)
 
     const userID = useAppSelector(state => state.user.id)
-    console.log(favProducts)
     const dispatch = useAppDispatch();
     const [productsList, setProductsList] = useState<IProduct[] | null>(null)
     const q = query(collection(db, 'products',).withConverter(converter))
-
+    const [viewProducts, setViewProducts] = useState<IProduct[] | undefined>([]);
     const [fetchProd, loading, error] = useCollectionData(q)
 
-    // useEffect(() => {
-    //   dispatch(clearProducts())} ,[])
+    const filteredProduct = useAppSelector(state => state.products.filtered);
+    useEffect(() => {
+        setViewProducts(fetchProd);
+    }, [fetchProd])
 
     useEffect(() => {
-
-        if (fetchProd) {
-            const arr = fetchProd.map((item) => {
-                return item
-            })
-
-            // dispatch(addProducts(arr))
-            setProductsList(products)
+        //console.log(filteredProduct)
+        if (filteredProduct && filteredProduct.length > 0) {
+            setViewProducts(filteredProduct);
         }
+    }, [filteredProduct]);
 
-    }, [fetchProd]);
+    // useEffect(() => {
+    //     filtered.length > 0 ? setProductsList(filtered) : setProductsList(products)
+    // }, [filtered, products])
 
-    useEffect(() => {
-        search.length > 0 ? setProductsList(search) : setProductsList(products)
-    }, [search, products])
 
     const handleAddToFav = (product: IProduct) => {
         dispatch(addFav(product))
         if (userID) createUsersProuctDataFromAuth(userID, 'fav', product, product.id.toString())
-    //createUsersProductDataFromAuth заносит товар (документ) в конкретную коллекцию
-    //для этого ей нужно указать путь в виде аргументов функции
+        //createUsersProductDataFromAuth заносит товар (документ) в конкретную коллекцию
+        //для этого ей нужно указать путь в виде аргументов функции
     }
 
     const handleAddToBasket = (product: IProduct) => {
@@ -76,8 +69,8 @@ export const ProductsCatalog = (): JSX.Element => {
 
             {error || errorFav && <div>Ошибка</div>}
             {
-                fetchProd ?
-                    fetchProd.map((product) =>
+                viewProducts ?
+                    viewProducts.map((product) =>
                         <ProductCard key={product.id}
                                      item={product}
                                      handleAddToBasket={handleAddToBasket}
