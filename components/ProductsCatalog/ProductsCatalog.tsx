@@ -52,7 +52,7 @@ export const ProductsCatalog = (): JSX.Element => {
 
     const handleAddToBasket = (product: IProduct) => {
         dispatch(addToBasket(product))
-        if (userID) createUsersProuctDataFromAuth(userID, 'basket', product, product.id.toString())
+        if (userID) createUsersProuctDataFromAuth(userID, 'basket', {...product, quantity: 1}, product.id.toString())
     }
 
     const handleDeleteToFav = (product: IProduct) => {
