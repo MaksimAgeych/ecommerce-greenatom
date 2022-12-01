@@ -6,9 +6,10 @@ import {useAppDispatch, useAppSelector} from '../hooks/redux-hooks';
 import {IProduct} from '../interface/entities/interface';
 import {withLayout} from '../layouts/Layout';
 import {addFav, deleteFav} from '../store/favoritesSlice';
-import {db} from '../utils/firebase/firebase.utils';
+import {auth, db, deleteProductById} from '../utils/firebase/firebase.utils';
 import {converter} from './catalog/[id]';
 import {useRouter} from "next/router";
+import { useAuthState } from 'react-firebase-hooks/auth';
 
 
 const LoadData = (userID: string) => {
@@ -22,18 +23,22 @@ const LoadData = (userID: string) => {
 function Favorites(): JSX.Element {
 
     const favProducts = useAppSelector(state => state.favorites.favorites)
-    let userID = useAppSelector(state => state.user.id);
+
+    const [user] = useAuthState(auth)
 
     const getFavID = favProducts.map((item) => item.id)
     const dispatch = useAppDispatch();
 
     const handleDeleteFav = (item: IProduct) => {
-        dispatch(deleteFav(item))
+       deleteProductById(user?.uid, 'fav', item.id) //ошибка поиска пути документа
+      dispatch(deleteFav(item))
+       
+       
     }
     const router = useRouter();
 
-    if (userID) {
-        const [docs, loading, error, snapshot] = LoadData(userID);
+    if (user?.uid) {
+        const [docs, loading, error, snapshot] = LoadData(user.uid);
         return (
             <>
                 <Htag tag={'h1'}>Избранное</Htag>

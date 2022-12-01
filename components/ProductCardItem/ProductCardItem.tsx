@@ -5,13 +5,14 @@ import IconCompare from "./icons/scales.svg";
 import IconLike from "./icons/like.svg";
 import Link from "next/link";
 import { IProduct } from '../../interface/entities/interface';
-import { db, deleteProductById, updateProductById } from "../../utils/firebase/firebase.utils";
+import { auth, db, deleteProductById, updateProductById } from "../../utils/firebase/firebase.utils";
 import { useAppSelector } from "../../hooks/redux-hooks";
 import { useCollectionData, useDocumentData, useDocumentDataOnce } from "react-firebase-hooks/firestore";
 import { collection, doc, query } from "firebase/firestore";
 import { converter } from "../../pages/catalog/[id]";
 import { getBasket } from "../../store/basketSlice";
 import router from "next/router";
+import { useAuthState } from "react-firebase-hooks/auth";
 
 export const ProductCardItem = ({id, name, size, about, price, rating, description, img, quantity} : IProduct): JSX.Element => {
    
@@ -24,7 +25,9 @@ export const ProductCardItem = ({id, name, size, about, price, rating, descripti
         return [product, loading, error, snapshot];
     }
 
-    const userID = useAppSelector(state =>  state.user.id)
+    const [user, userLoading, error] = useAuthState(auth)
+    // const userID = useAppSelector(state =>  state.user.id)
+    const userID = user?.uid
     const basket = useAppSelector(getBasket);
     const [product, ...props] = useLoadData(userID)
 

@@ -14,6 +14,8 @@ import {useAppDispatch, useAppSelector} from "../../hooks/redux-hooks";
 import { IProduct } from '../../interface/entities/interface';
 import { removeUser, setUser, setUserName } from '../../store/authSlice';
 import { useFetchCollection } from '../../hooks/firestore-hooks';
+import { clearBasket } from '../../store/basketSlice';
+import { clearFav } from '../../store/favoritesSlice';
 
 
 export const Header = ({className, ...props}: HeaderProps): JSX.Element => {
@@ -63,6 +65,8 @@ export const Header = ({className, ...props}: HeaderProps): JSX.Element => {
                                                                                       onClick={() => {
                                                                                         signOutUser()
                                                                                         dispatch(removeUser())
+                                                                                        dispatch(clearBasket())
+                                                                                        dispatch(clearFav())
                                                                                         }}>Выйти</Link>
                                 </div>
                                 : <div><Link href={'/auth'}><span>Войти</span></Link></div>
@@ -84,14 +88,15 @@ export const Header = ({className, ...props}: HeaderProps): JSX.Element => {
                         <Link className={styles.callBack} href={'/'}>Заказать звонок</Link>
                     </div>
                     <div className={styles.favorites}>
-                        <Link href={'/favorites'}><IconFav/></Link>
+                        <Link href={user ? '/favorites' : '/auth'}><IconFav/></Link>
                     </div>
                     <div className={styles.cart}>
                         {/*//TODO Сделать вывод количества товара в корзине в иконку*/}
                         <IconCart/>
                         <div className={styles.cardData}>
                             <span className={styles.cartAmount}>0 р.</span>
-                            <Link className={styles.checkout} href={'/cart'}>Оформить заказ</Link>
+                        
+                         <Link className={styles.checkout} href={user ? '/cart' : '/auth'}>Оформить заказ</Link>
                         </div>
                     </div>
                 </div>

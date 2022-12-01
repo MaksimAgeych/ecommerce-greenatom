@@ -59,15 +59,11 @@ export const getStaticProps = async (context: { params: { id: string; }; }) => {
 
 function ProductPage({product}: { product: IProduct }): JSX.Element {
 
-
-   
-    console.log(product)
     const q = query(collection(db, 'products',).withConverter(converter))
  
     const [fetchProd, loading, error] = useCollectionData(q)
 
     let {id, name, description, about, rating, size, price, img} = product;
-    console.log(product.name)
     return (
         <>
             <Head>

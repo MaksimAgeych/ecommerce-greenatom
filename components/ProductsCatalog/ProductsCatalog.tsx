@@ -16,10 +16,13 @@ import {collection, query} from 'firebase/firestore';
 import {converter} from '../../pages/catalog/[id]';
 
 export const ProductsCatalog = (): JSX.Element => {
-    const {products, status, search, filtered} = useAppSelector((state) => state.products);
-    const favProducts = useAppSelector(getFavorites);
+    
 
-    const userID = useAppSelector(state => state.user.id)
+    const {products, status, search} = useAppSelector((state) => state.products);
+    const qFav = query(collection(db, 'fav',).withConverter(converter))
+    const [favProducts, loadingFav, errorFav] = useCollectionData(qFav)
+
+    // const userID = useAppSelector(state => state.user.id)
     const dispatch = useAppDispatch();
     const [productsList, setProductsList] = useState<IProduct[] | null>(null)
     const q = query(collection(db, 'products',).withConverter(converter))
@@ -38,9 +41,9 @@ export const ProductsCatalog = (): JSX.Element => {
         }
     }, [filteredProduct]);
 
-    useEffect(() => {
-        filtered.length > 0 ? setProductsList(filtered) : setProductsList(products)
-    }, [filtered, products])
+    // useEffect(() => {
+    //     filtered.length > 0 ? setProductsList(filtered) : setProductsList(products)
+    // }, [filtered, products])
 
 
     const handleAddToFav = (product: IProduct) => {
@@ -63,6 +66,10 @@ export const ProductsCatalog = (): JSX.Element => {
 
     return (
         <nav className={styles.menu} role={"navigation"}>
+
+            {loading && loadingFav && <div>Загрузка</div>}
+
+            {error || errorFav && <div>Ошибка</div>}
             {
                 viewProducts ?
                     viewProducts.map((product) =>
@@ -71,8 +78,8 @@ export const ProductsCatalog = (): JSX.Element => {
                                      handleAddToBasket={handleAddToBasket}
                                      handleAddToFav={handleAddToFav}
                                      handleDeleteToFav={handleDeleteToFav}
-                                     isFav={favProducts.filter(item => item.id === product.id).length == 1}/>)
-                    : null
+                                     isFav={favProducts && favProducts.filter(item => item?.id === product.id).length == 1}/>)
+                    : <span>Loading</span>
             }
         </nav>
     );
