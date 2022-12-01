@@ -20,7 +20,8 @@ import {converter} from '../../pages/catalog/[id]';
 
 export const ProductsCatalog = (): JSX.Element => {
     const {products, status, search} = useAppSelector((state) => state.products);
-    const favProducts = useAppSelector(getFavorites);
+    const qFav = query(collection(db, 'fav',).withConverter(converter))
+    const [favProducts, loadingFav, errorFav] = useCollectionData(qFav)
 
     const userID = useAppSelector(state => state.user.id)
     console.log(favProducts)
@@ -71,9 +72,9 @@ export const ProductsCatalog = (): JSX.Element => {
     return (
         <nav className={styles.menu} role={"navigation"}>
 
-            {loading && <div>Загрузка</div>}
+            {loading && loadingFav && <div>Загрузка</div>}
 
-            {error && <div>Ошибка</div>}
+            {error || errorFav && <div>Ошибка</div>}
             {
                 fetchProd ?
                     fetchProd.map((product) =>
@@ -82,7 +83,7 @@ export const ProductsCatalog = (): JSX.Element => {
                                      handleAddToBasket={handleAddToBasket}
                                      handleAddToFav={handleAddToFav}
                                      handleDeleteToFav={handleDeleteToFav}
-                                     isFav={fetchProd.filter(item => item.id === product.id).length == 1}/>)
+                                     isFav={favProducts && favProducts.filter(item => item?.id === product.id).length == 1}/>)
                     : <span>Loading</span>
             }
         </nav>
