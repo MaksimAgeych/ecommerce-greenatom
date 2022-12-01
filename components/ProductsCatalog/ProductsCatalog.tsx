@@ -35,7 +35,6 @@ export const ProductsCatalog = (): JSX.Element => {
     }, [fetchProd])
 
     useEffect(() => {
-        console.log(filteredProduct)
         if (filteredProduct && filteredProduct.length > 0) {
             setViewProducts(filteredProduct);
         }
