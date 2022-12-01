@@ -96,7 +96,7 @@ export const updateProductById = async (id, pathName, ...obj) => {
 //pathName 
 
 export const deleteProductById = async (uid, dir, prodID) => {
-    return deleteDoc(doc(db, 'users', uid, dir, prodID))
+    return await deleteDoc(doc(db, 'users', uid, dir, prodID))
 } // для удаления передаем просто id
 
 
