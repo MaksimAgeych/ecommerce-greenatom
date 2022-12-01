@@ -33,30 +33,15 @@ export const ProductsCatalog = (): JSX.Element => {
 
     useEffect(() => {
         //console.log(filteredProduct)
-        if (filteredProduct.length > 0) {
+        if (filteredProduct && filteredProduct.length > 0) {
             setViewProducts(filteredProduct);
         }
     }, [filteredProduct]);
 
     useEffect(() => {
-        //console.log(filtered)
         filtered.length > 0 ? setProductsList(filtered) : setProductsList(products)
     }, [filtered, products])
 
-    const searchProducts = useAppSelector(state => state.products.search);
-    useEffect(() => {
-        setViewProducts(fetchProd);
-    }, [fetchProd])
-
-    useEffect(() => {
-        if (searchProducts.length > 0) {
-            setViewProducts(searchProducts);
-        }
-    }, [searchProducts]);
-
-    useEffect(() => {
-        search.length > 0 ? setProductsList(search) : setProductsList(products)
-    }, [search, products])
 
     const handleAddToFav = (product: IProduct) => {
         dispatch(addFav(product))

@@ -12,7 +12,7 @@ export const WidgetPriceFilter = ({
 
     const defaultProducts = useAppSelector(state => state.products.products);
 
-    const [minRange, setMinRange] = useState<number>(defaultProducts[0].price);
+    const [minRange, setMinRange] = useState<number>(999999);
     const [maxRange, setMaxRange] = useState<number>(0);
 
     const [minPrice, setMinPrice] = useState<number>(minRange);
