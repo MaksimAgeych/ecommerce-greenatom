@@ -16,6 +16,8 @@ import {collection, query} from 'firebase/firestore';
 import {converter} from '../../pages/catalog/[id]';
 
 export const ProductsCatalog = (): JSX.Element => {
+    
+
     const {products, status, search} = useAppSelector((state) => state.products);
     const qFav = query(collection(db, 'fav',).withConverter(converter))
     const [favProducts, loadingFav, errorFav] = useCollectionData(qFav)
