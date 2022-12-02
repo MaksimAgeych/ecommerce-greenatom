@@ -46,7 +46,7 @@ export const ProductCardItem = ({
         if ((product as IProduct).quantity === 1 && count === -1) {
             await deleteProductById(userID, 'basket', id.toString())
         } else {
-            const responce = await updateProductById(id, `users/${userID}/basket`, {quantity: product?.quantity + count});
+            const response = await updateProductById(id, `users/${userID}/basket`, {quantity: (product as IProduct)?.quantity + count});
         }
 
     }
