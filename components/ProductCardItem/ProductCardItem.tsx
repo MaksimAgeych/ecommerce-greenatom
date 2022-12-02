@@ -13,6 +13,7 @@ import {converter} from "../../pages/catalog/[id]";
 import {getBasket} from "../../store/basketSlice";
 import router from "next/router";
 import {useAuthState} from "react-firebase-hooks/auth";
+import { User } from "firebase/auth";
 
 export const ProductCardItem = ({
                                     id,
@@ -34,14 +35,15 @@ export const ProductCardItem = ({
 
     const [user, userLoading, error] = useAuthState(auth)
     // const userID = useAppSelector(state =>  state.user.id)
-    const userID = user?.uid
+    const userID = (user as User)?.uid
     const basket = useAppSelector(getBasket);
+
     const [product, ...props] = useLoadData(userID)
 
 
     async function changeQuantityOnClick(count: number) {
 
-        if (product?.quantity === 1 && count === -1) {
+        if ((product as IProduct).quantity === 1 && count === -1) {
             await deleteProductById(userID, 'basket', id.toString())
         } else {
             const responce = await updateProductById(id, `users/${userID}/basket`, {quantity: product?.quantity + count});
@@ -59,7 +61,7 @@ export const ProductCardItem = ({
             <div>{price} руб.</div>
             <div className={styles.productCardCount}>
                 <button className={styles.productBtn} onClick={() => changeQuantityOnClick(-1)}>{'<'}</button>
-                <span>{product?.quantity}</span>
+                <span>{(product as IProduct)?.quantity}</span>
                 <button className={styles.productBtn} onClick={() => changeQuantityOnClick(1)}>{'>'}</button>
             </div>
             <div>{price} руб.</div>
