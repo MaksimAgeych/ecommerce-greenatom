@@ -32,7 +32,7 @@ export const ProductCardItem:FC<IProps> = ( {product}): JSX.Element => {
 
             const productList = useAppSelector(state => state.basket.basket)
            
-                               
+    const [user] = useAuthState(auth)  
 
 
     async function changeQuantityOnClick(count: number) {
@@ -51,6 +51,12 @@ export const ProductCardItem:FC<IProps> = ( {product}): JSX.Element => {
     }
 
 
+    function handleBasketDelete(item: IProduct): void {
+        dispatch(deleteFromBasket(item))
+
+         if (user) deleteProductById(user.uid, 'basket', item.id.toString() )
+    }
+   
     return (
         <>
         {
@@ -66,6 +72,7 @@ export const ProductCardItem:FC<IProps> = ( {product}): JSX.Element => {
                 <button className={styles.productBtn} onClick={() => changeQuantityOnClick(1)}>{'>'}</button>
             </div>
             <div>{price} руб.</div>
+            <button onClick={() => handleBasketDelete(product)}>x</button>
         </div>}
         </>
 

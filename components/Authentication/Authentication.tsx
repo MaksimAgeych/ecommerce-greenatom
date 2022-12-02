@@ -33,17 +33,17 @@ const Authentication = () => {
     const fav = useAppSelector(getFavorites)
 
     const [currentUserID, setCurrentUserID] = useState<string>('falseUser') 
-    const [usersFavData, loading, error] = useCollectionDataOnce(query(collection(db, 'users', user?.uid || 'falseUser', 'fav')))
+    const [usersFavData] = useCollectionDataOnce(query(collection(db, 'users', user?.uid || 'falseUser', 'fav')))
     const [usersBasketData] = useCollectionDataOnce(query(collection(db, 'users', user?.uid || 'falseUser' , 'basket')))
     const dispatch = useAppDispatch()
 
 
         //==========Merge user's 
 
-    console.log("f", usersFavData);
-    console.log("b", usersBasketData);
-    console.log("ff", fav);
-    console.log("bb", basket);
+    // console.log("f", usersFavData);
+    // console.log("b", usersBasketData);
+    // console.log("ff", fav);
+    // console.log("bb", basket);
 
     useCallback(() => {
         if (!!user && user.uid !== 'falseUser') {
@@ -51,25 +51,47 @@ const Authentication = () => {
             fav.forEach((item) => (setDoc(favQUeryPath(item.id.toString()), item)));
     
             
-            let mergedFav = [...usersFavData, ...fav]
-            console.log("mf", mergedFav)
-            dispatch(addManyFav(mergedFav as IProduct[]))
+            // let mergedFav = [...usersFavData, ...fav]
+            // console.log("mf", mergedFav)
+            // dispatch(addManyFav(mergedFav as IProduct[]))
         }
-    }, [fav, basket])
+    }, [fav, usersFavData])
+
+
 
     useCallback(() => {
         if(!!user && user.uid !== 'falseUser') {
            const basketQUeryPath = (id: string) =>  doc(db, 'users', user.uid.toString(), 'basket', id) 
            basket.forEach((item) => (setDoc(basketQUeryPath(item.id.toString()), item)));
             
-            let mergedBasket = [...usersBasketData, ...basket]
-            console.log("mb", mergedBasket)
-            dispatch(addManyBasket(mergedBasket as IProduct[]))
         }
     
-    }, [basket, fav])
-    
+    }, [usersBasketData, basket])
+
+  
+useEffect(() => {
+   if (usersBasketData) {
+       let mergedBasket = [...usersBasketData, ...basket]
+       let set = new Set()
+       set.add(mergedBasket)
+       let arr = Array.from(set)
+    console.log("mb", mergedBasket)
+    dispatch(addManyBasket(arr as IProduct[]))  
+     }
+     
+}, [usersBasketData])
+
+useEffect(() => {
+    if (usersFavData) {
+          
+
         
+     
+    dispatch(addManyFav(arr as IProduct[]))
+    }
+   
+}, [usersFavData])
+
 
     
     return (
