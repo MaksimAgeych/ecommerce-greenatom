@@ -31,12 +31,19 @@ export const getStaticPaths = async () => {
 }
 
 export const getStaticProps = async (context: { params: { id: string; }; }) => {
-    const id = context.params.id;
-    const docRef = doc(db, "products", id);
-    const docSnap = await getDoc(docRef.withConverter(converter));
-    return {
-        props: { product: docSnap.data()}
+    try{
+        const id = context.params.id;
+        const docRef = doc(db, "products", id);
+        const docSnap = await getDoc(docRef.withConverter(converter));
+        return {
+            props: { product: docSnap.data()}
+        }
+    } catch {
+        return {
+            props: { product: null}
+        }
     }
+
 }
 
 //SSR - не удалять
