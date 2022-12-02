@@ -33,8 +33,6 @@ function Favorites(): JSX.Element {
     const handleDeleteFav = (item: IProduct) => {
         deleteProductById(user?.uid, 'fav', item.id) //ошибка поиска пути документа
         dispatch(deleteFav(item))
-
-
     }
     const router = useRouter();
 
@@ -55,7 +53,7 @@ function Favorites(): JSX.Element {
                 colors={['#e15b64', '#f47e60', '#f8b26a', '#abbd81', '#849b87']}
             />}
             {error && alert(error)}
-            {docs || (favProducts.length != 0 ?
+            {(favProducts.length != 0 ?
                 favProducts.map((item) => {
                     return <ProductCardFav item={item} key={item.id} isFavor={true}
                                            handleDeleteFav={handleDeleteFav}/>
