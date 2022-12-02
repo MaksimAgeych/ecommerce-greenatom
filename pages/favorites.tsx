@@ -38,6 +38,7 @@ function Favorites(): JSX.Element {
     }
     const router = useRouter();
 
+
         const [docs, loading, error, snapshot] = LoadData(user.uid);
         return (
             <>

@@ -15,4 +15,5 @@ export * from './WidgetSearchShop/WidgetSearchShop';
 export * from './WidgetPriceFilter/WidgetPriceFilter';
 export * from './aboutUs/AboutUs'
 export * from './WidgetFilter/WidgetFilter';
+export * from './WidgetSizeFilter/WidgetSizeFilter';
 

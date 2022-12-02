@@ -40,7 +40,7 @@ export const ProductCardItem = ({id, name, size, about, price, rating, descripti
                     const responce =  await updateProductById(id,`users/${userID}/basket`, {quantity: product?.quantity + count} );
         }
         
-    }
+    }я
 
 
     return (
