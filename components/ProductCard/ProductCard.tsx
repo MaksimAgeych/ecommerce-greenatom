@@ -13,7 +13,7 @@ interface IProps {
     handleAddToBasket: (product: IProduct) => void,
     handleAddToFav: (product: IProduct) => void,
     handleDeleteToFav: (product: IProduct) => void,
-    isFav: boolean
+    isFav: boolean | undefined
 }
 
 export const ProductCard: FC<IProps> = ({
