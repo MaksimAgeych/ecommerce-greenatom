@@ -14,6 +14,7 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 import { User } from 'firebase/auth';
 import { IProduct } from '../../interface/entities/interface';
 import { FirebaseError } from 'firebase/app';
+import { ColorRing } from 'react-loader-spinner';
 
 
 
@@ -65,8 +66,15 @@ console.log(basketData)
     return (
         <>
     {loading && loadingData && 
-    <span>
-        loading data  </span> 
+   <ColorRing
+   visible={true}
+   height="80"
+   width="80"
+   ariaLabel="blocks-loading"
+   wrapperStyle={{}}
+   wrapperClass="blocks-wrapper"
+   colors={['#e15b64', '#f47e60', '#f8b26a', '#abbd81', '#849b87']}
+ />
           }
 
           {basketData === undefined || basketData.length === 0 && <span>Cart is Empty</span> }
