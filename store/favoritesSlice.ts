@@ -35,6 +35,9 @@ export const favoritesSlice = createSlice({
         },
         clearFav: (state) => {
             state.favorites = [];
+        },
+        addManyFav: (state, action: PayloadAction<IProduct[]>) => {
+            state.favorites = action.payload
         }
 
     },
@@ -42,5 +45,5 @@ export const favoritesSlice = createSlice({
 
 export const getFavorites = (state: RootState) => state.favorites.favorites;
 
-export const {addFav, deleteFav, clearFav} = favoritesSlice.actions; //
+export const {addFav, deleteFav, clearFav, addManyFav} = favoritesSlice.actions; //
 export default favoritesSlice.reducer;
