@@ -42,11 +42,14 @@ export const basketSlice = createSlice({
                 item.quantity += 1
             }}
             )
+        },
+        addManyBasket: (state, action: PayloadAction<IProduct[]>) => {
+            state.basket = action.payload
         }
     },
 });
 
 export const getBasket = (state: RootState) => state.basket.basket;
 
-export const { addToBasket, deleteFromBasket, clearBasket, increaseQuantity, decreaseQuantity } = basketSlice.actions; //
+export const { addToBasket, deleteFromBasket, clearBasket, increaseQuantity, decreaseQuantity, addManyBasket  } = basketSlice.actions; //
 export default basketSlice.reducer;

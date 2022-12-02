@@ -47,7 +47,10 @@ function ProductPage({product}: { product: IProduct }): JSX.Element {
     return (
         <>
             <Head>
-                <title>{name} - Магазин ножей</title>
+                <title>
+                    {/* {name} -  */}
+                
+                Магазин ножей</title>
             </Head>
           
             <ProductDescription {...product}/>
