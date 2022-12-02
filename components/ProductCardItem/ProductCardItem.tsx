@@ -31,16 +31,14 @@ export const ProductCardItem = ({id, name, size, about, price, rating, descripti
     const basket = useAppSelector(getBasket);
     const [product, ...props] = useLoadData(userID)
 
-
-  async function changeQuantityOnClick(count: number) {
-        
-        if (product?.quantity === 1 && count === -1) {
+    async function changeQuantityOnClick(count: number) {   
+        if ((product as IProduct)?.quantity === 1 && count === -1) {
             await deleteProductById(userID, 'basket', id.toString())
         } else {
                     const responce =  await updateProductById(id,`users/${userID}/basket`, {quantity: product?.quantity + count} );
         }
         
-    }я
+    }
 
 
     return (
@@ -52,7 +50,7 @@ export const ProductCardItem = ({id, name, size, about, price, rating, descripti
             <div>{price} руб.</div>
             <div className={styles.productCardCount}>
                 <button className={styles.productBtn} onClick={() => changeQuantityOnClick(-1)}>{'<'}</button>
-                <span>{product?.quantity}</span>
+                <span>{(product as IProduct)?.quantity}</span>
                 <button className={styles.productBtn} onClick={() =>changeQuantityOnClick(1)}>{'>'}</button>
             </div>
             <div>{price} руб.</div>
