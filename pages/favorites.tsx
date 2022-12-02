@@ -14,6 +14,7 @@ import {ColorRing} from 'react-loader-spinner';
 
 
 function Favorites(): JSX.Element {
+    const [user] = useAuthState(auth)
 
     const favProducts = useAppSelector(state => state.favorites.favorites)
 
@@ -23,6 +24,7 @@ function Favorites(): JSX.Element {
     const handleDeleteFav = (item: IProduct) => {
    
         dispatch(deleteFav(item))
+        if (user) deleteProductById(user.uid, 'fav', item.id.toString() )
     }
   
 
