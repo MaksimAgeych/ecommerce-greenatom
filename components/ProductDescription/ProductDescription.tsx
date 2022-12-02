@@ -65,7 +65,7 @@ export const ProductDescription = ({id, name, size, about, price, rating, descri
                         className={styles.btn}
                         onClick={(event) => isFav ? (event.preventDefault(), handleDeleteToFav(item)) : handleAddToFav(item)}
                     >
-                        <IconLike className={isFav ? styles.like : null}/>
+                        <IconLike className={isFav ? styles.like : styles.likesvg}/>
                     </button>
                     <button className={styles.btn} onClick={(event) => {
                         event.preventDefault();

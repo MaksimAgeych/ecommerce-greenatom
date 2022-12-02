@@ -10,9 +10,17 @@
     grid-template-columns: 1fr 1fr;
     gap: 10px;
 }
-
 .btn {
 	background: transparent;
+	border: none;
+}
+.btn:hover {
+	box-shadow: 0 4px 20px 0 #0000001A;
+    cursor: pointer;
+}
+.like{
+	background: transparent;
+	fill: #E8AA31;
 	border: none;
 }
 .image {
@@ -61,7 +69,8 @@ padding: 20px;
 .activity svg {
 	margin-left: 20px;
     float: right;
-    height: 25px
+    height: 25px;
+    margin: 10px;
 }
 .right{
     margin: 15px 20px;
