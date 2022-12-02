@@ -17,9 +17,10 @@
 }
 
 .footerFirstFloor {
-	display: grid;
-	grid-template-columns: 3fr 3fr 3fr 3fr;
+	display: flex;
+	/* grid-template-columns: 3fr 3fr 3fr 3fr; */
 	margin: 102px 0 30px 0;
+	justify-content: space-around;
 }
 
 .section {
