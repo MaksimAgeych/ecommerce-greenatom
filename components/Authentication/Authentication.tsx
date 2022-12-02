@@ -9,7 +9,7 @@ import {useRouter} from "next/router";
 import styles from './Authentication.module.css';
 import {Htag} from "../Htag/Htag";
 import { useAuthState } from 'react-firebase-hooks/auth';
-import {useEffect, useState} from "react";
+import {useCallback, useEffect, useState} from "react";
 import {useAppDispatch, useAppSelector} from "../../hooks/redux-hooks";
 import {addManyBasket, getBasket} from "../../store/basketSlice";
 import {addFav, addManyFav, getFavorites} from "../../store/favoritesSlice";
@@ -40,23 +40,29 @@ const Authentication = () => {
 
         //==========Merge user's 
 
-    console.log(usersFavData);
+    console.log("f", usersFavData);
 
-if (!!user && user.uid !== 'falseUser') {
-    const favQUeryPath = (id: string) =>  doc(db, 'users', user.uid.toString(), 'fav', id)
-    const basketQUeryPath = (id: string) =>  doc(db, 'users', user.uid.toString(), 'basket', id)
-
-
-    if (usersBasketData && currentUserID !== 'falseUser') {
-        let mergedBasket = new Set([...usersBasketData, ...basket])
-        dispatch(addManyBasket(Array.from(mergedBasket as Set<IProduct>)))
-    }
-
-    if (usersFavData && currentUserID !== 'falseUser') {
-        let mergedFav = new Set([...usersFavData, ...basket])
-        dispatch(addManyFav(Array.from(mergedFav as Set<IProduct>)))
-    }
-}
+    useCallback(() => {
+        if (!!user) {
+            const favQUeryPath = (id: string) =>  doc(db, 'users', user.uid.toString(), 'fav', id)
+            const basketQUeryPath = (id: string) =>  doc(db, 'users', user.uid.toString(), 'basket', id)
+    
+            basket.forEach((item) => (setDoc(basketQUeryPath(item.id.toString()), item)));
+            fav.forEach((item) => (setDoc(favQUeryPath(item.id.toString()), item)));
+    
+            if (usersBasketData) {
+                let mergedBasket = new Set([...usersBasketData, ...basket])
+                
+                dispatch(addManyBasket(Array.from(mergedBasket as Set<IProduct>)))
+            }
+    
+            if (usersFavData) {
+                let mergedFav = new Set([...usersFavData, ...basket])
+                dispatch(addManyFav(Array.from(mergedFav as Set<IProduct>)))
+            }
+        }
+    }, [basket, fav])
+    
         
 
     
