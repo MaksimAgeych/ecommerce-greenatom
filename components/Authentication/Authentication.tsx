@@ -21,49 +21,41 @@ import { IProduct } from '../../interface/entities/interface.js';
 const Authentication = () => {
     
 
-     const converter = {
+    const converter = {
         toFirestore: (data: IProduct) => data,
         fromFirestore: (snap: QueryDocumentSnapshot) =>
             snap.data() as IProduct
     }
+    
   
-        const [user, loadUser, errorUser] = useAuthState(auth)
-        const basket = useAppSelector(getBasket)
-        const fav = useAppSelector(getFavorites)
+    const [user, loadUser, errorUser] = useAuthState(auth)
+    const basket = useAppSelector(getBasket)
+    const fav = useAppSelector(getFavorites)
 
-        // const [currentUserID, setCurrentUserID] = useState<string>('falseUser') 
-        // const [usersFavData, loading, error] = useCollectionDataOnce(query(collection(db, 'users', user?.uid || 'falseUser', 'fav').withConverter(converter)))
-        // const [usersBasketData] = useCollectionDataOnce(collection(db, 'users', user?.uid || 'falseUser' , 'basket').withConverter(converter))
-        const dispatch = useAppDispatch()
+    const [currentUserID, setCurrentUserID] = useState<string>('falseUser') 
+    const [usersFavData, loading, error] = useCollectionDataOnce(query(collection(db, 'users', user?.uid || 'falseUser', 'fav')))
+    const [usersBasketData] = useCollectionDataOnce(query(collection(db, 'users', user?.uid || 'falseUser' , 'basket')))
+    const dispatch = useAppDispatch()
 
 
         //==========Merge user's 
 
-     console.log(user)
+    console.log(usersFavData);
 
 if (!!user && user.uid !== 'falseUser') {
-    // const favQUeryPath = (id: string) =>  doc(db, 'users', user.uid.toString(), 'fav', id)
-    // const basketQUeryPath = (id: string) =>  doc(db, 'users', user.uid.toString(), 'basket', id)
+    const favQUeryPath = (id: string) =>  doc(db, 'users', user.uid.toString(), 'fav', id)
+    const basketQUeryPath = (id: string) =>  doc(db, 'users', user.uid.toString(), 'basket', id)
 
-  
 
-    (async () => {
-          const q = query(collection(db, 'users', user?.uid, 'fav').withConverter(converter)) 
-//   .then((response) => response.forEach((doc) => console.log(doc.data())))
-  
-  const querySnapshot = await getDocs(q);
-querySnapshot.forEach((doc) => {
-  // doc.data() is never undefined for query doc snapshots
-  console.log(doc.id, " => ", doc.data());
-});
-    })()
+    if (usersBasketData && currentUserID !== 'falseUser') {
+        let mergedBasket = new Set([...usersBasketData, ...basket])
+        dispatch(addManyBasket(Array.from(mergedBasket as Set<IProduct>)))
+    }
 
-    // // // setCurrentUserID(user.uid.toString());
-    // // if (usersBasketData && currentUserID !== 'falseUser') {
-    //     let mergedBasket = new Set([...usersBasketData, ...basket])
-    //     dispatch(addManyBasket(Array.from(mergedBasket)))
-    // // }
-
+    if (usersFavData && currentUserID !== 'falseUser') {
+        let mergedFav = new Set([...usersFavData, ...basket])
+        dispatch(addManyFav(Array.from(mergedFav as Set<IProduct>)))
+    }
 }
         
 
