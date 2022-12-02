@@ -41,26 +41,32 @@ const Authentication = () => {
         //==========Merge user's 
 
     console.log("f", usersFavData);
+    console.log("b", usersBasketData);
+    console.log("ff", fav);
+    console.log("bb", basket);
 
     useCallback(() => {
-        if (!!user) {
+        if (!!user && user.uid !== 'falseUser') {
             const favQUeryPath = (id: string) =>  doc(db, 'users', user.uid.toString(), 'fav', id)
-            const basketQUeryPath = (id: string) =>  doc(db, 'users', user.uid.toString(), 'basket', id)
-    
-            basket.forEach((item) => (setDoc(basketQUeryPath(item.id.toString()), item)));
             fav.forEach((item) => (setDoc(favQUeryPath(item.id.toString()), item)));
     
-            if (usersBasketData) {
-                let mergedBasket = new Set([...usersBasketData, ...basket])
-                
-                dispatch(addManyBasket(Array.from(mergedBasket as Set<IProduct>)))
-            }
-    
-            if (usersFavData) {
-                let mergedFav = new Set([...usersFavData, ...basket])
-                dispatch(addManyFav(Array.from(mergedFav as Set<IProduct>)))
-            }
+            
+            let mergedFav = [...usersFavData, ...fav]
+            console.log("mf", mergedFav)
+            dispatch(addManyFav(mergedFav as IProduct[]))
         }
+    }, [fav, basket])
+
+    useCallback(() => {
+        if(!!user && user.uid !== 'falseUser') {
+           const basketQUeryPath = (id: string) =>  doc(db, 'users', user.uid.toString(), 'basket', id) 
+           basket.forEach((item) => (setDoc(basketQUeryPath(item.id.toString()), item)));
+            
+            let mergedBasket = [...usersBasketData, ...basket]
+            console.log("mb", mergedBasket)
+            dispatch(addManyBasket(mergedBasket as IProduct[]))
+        }
+    
     }, [basket, fav])
     
         

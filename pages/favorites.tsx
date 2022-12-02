@@ -17,6 +17,7 @@ function Favorites(): JSX.Element {
 
     const favProducts = useAppSelector(state => state.favorites.favorites)
 
+
     const dispatch = useAppDispatch();
 
     const handleDeleteFav = (item: IProduct) => {
