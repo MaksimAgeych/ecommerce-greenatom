@@ -5,6 +5,8 @@ const initialState = {
     token: null,
     id: null,
     name: null,
+    basket: [],
+    fav: [],
 }
 
 export const authSlice = createSlice(

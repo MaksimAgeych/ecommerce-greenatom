@@ -39,37 +39,17 @@ export const getStaticProps = async (context: { params: { id: string; }; }) => {
     }
 }
 
-//SSR - не удалять
-// export const getServerSideProps = async (context: { params: { id: number; }; }) => {
-//     console.log(context)
-//     if (!context.params) {
-//         return {
-//             noFound: true,
-//         }
-//     }
-//     const {id} = context.params;
-//     const response = await fetch(`http://localhost:4000/products/${id}`);
-//     const data = await response.json();
-//     console.log(data)
-//     return {
-//         props: {product: data}
-//     }
-// }
 
 
 function ProductPage({product}: { product: IProduct }): JSX.Element {
 
-    const q = query(collection(db, 'products',).withConverter(converter))
- 
-    const [fetchProd, loading, error] = useCollectionData(q)
 
-    let {id, name, description, about, rating, size, price, img} = product;
     return (
         <>
             <Head>
                 <title>{name} - Магазин ножей</title>
             </Head>
-            {/* <Htag tag={'h1'}>{name}</Htag> */}
+          
             <ProductDescription {...product}/>
         </>
     );

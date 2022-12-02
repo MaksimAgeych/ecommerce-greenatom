@@ -1,4 +1,4 @@
-import {auth, createUserDocFromAuth, signInWithGooglePopup, signOutUser,} from '../../utils/firebase/firebase.utils.js';
+import {auth, createUserDocFromAuth, db, signInWithGooglePopup, signOutUser,} from '../../utils/firebase/firebase.utils.js';
 import SignInForm from '../SignInForm/SignInForm';
 import SignUpForm from '../SignUpForm/SignUpForm'
 
@@ -13,22 +13,31 @@ import {useEffect} from "react";
 import {useAppDispatch, useAppSelector} from "../../hooks/redux-hooks";
 import {getBasket} from "../../store/basketSlice";
 import {addFav, getFavorites} from "../../store/favoritesSlice";
+import { collection, doc, query, setDoc } from 'firebase/firestore';
+// import { converter } from '../../pages/catalog/[id].jsx';
+
 
 const Authentication = () => {
-    const dispatch = useAppDispatch();
+  
+        const [user, loadUser, errorUser] = useAuthState(auth)
+        const basket = useAppSelector(getBasket)
+        const fav = useAppSelector(getFavorites)
 
-    const [userAuth] = useAuthState(auth)
-    let {isAuth} = useAuth();
-    let router = useRouter();
-    // let basket = useAppSelector(getBasket);
-    // let favorites = useAppSelector(getFavorites);
-    // userAuth ? router.push('/') : '';
-    //
-    // useEffect(() => {
-    //     dispatch(addFav(favorites))
-    // }, [userAuth, basket, favorites])
+        useEffect(() => {
 
-    console.log(useAuth().name)
+  if (user) {
+    const favQUeryPath = (id: string) =>  doc(db, 'users', user.uid.toString(), 'fav', id)
+    const basketQUeryPath = (id: string) =>  doc(db, 'users', user.uid.toString(), 'basket', id)
+    basket.forEach((item) => {
+        setDoc(basketQUeryPath(item.id.toString()), item)
+    })
+        }
+
+        }, [user])
+
+      
+
+    
     return (
         <>
             <Htag tag={'h1'}>Авторизация</Htag>

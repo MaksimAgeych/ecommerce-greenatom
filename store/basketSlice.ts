@@ -28,11 +28,25 @@ export const basketSlice = createSlice({
         },
         clearBasket: (state) => {
             state.basket = [];
+        },
+        increaseQuantity: (state, action: PayloadAction<IProduct>) => {
+            state.basket.forEach((item) =>{ 
+            if (item.id === action.payload.id) {
+                item.quantity += 1
+            }}
+            )
+        },
+        decreaseQuantity: (state, action: PayloadAction<IProduct>) => {
+            state.basket.forEach((item) =>{ 
+            if (item.id === action.payload.id) {
+                item.quantity += 1
+            }}
+            )
         }
     },
 });
 
 export const getBasket = (state: RootState) => state.basket.basket;
 
-export const { addToBasket, deleteFromBasket, clearBasket } = basketSlice.actions; //
+export const { addToBasket, deleteFromBasket, clearBasket, increaseQuantity, decreaseQuantity } = basketSlice.actions; //
 export default basketSlice.reducer;

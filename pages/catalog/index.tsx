@@ -10,6 +10,8 @@ function Index(): JSX.Element {
     const [user, loading, error] = useAuthState(auth);
     const router = useRouter()
 
+    
+
     return (
         <>
         
