@@ -9,12 +9,24 @@ import {useRouter} from "next/router";
 import styles from './Authentication.module.css';
 import {Htag} from "../Htag/Htag";
 import { useAuthState } from 'react-firebase-hooks/auth';
+import {useEffect} from "react";
+import {useAppDispatch, useAppSelector} from "../../hooks/redux-hooks";
+import {getBasket} from "../../store/basketSlice";
+import {addFav, getFavorites} from "../../store/favoritesSlice";
 
 const Authentication = () => {
+    const dispatch = useAppDispatch();
+
     const [userAuth] = useAuthState(auth)
     let {isAuth} = useAuth();
     let router = useRouter();
-    userAuth ? router.push('/') : '';
+    // let basket = useAppSelector(getBasket);
+    // let favorites = useAppSelector(getFavorites);
+    // userAuth ? router.push('/') : '';
+    //
+    // useEffect(() => {
+    //     dispatch(addFav(favorites))
+    // }, [userAuth, basket, favorites])
 
     console.log(useAuth().name)
     return (

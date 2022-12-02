@@ -5,6 +5,7 @@ import {useAppDispatch} from '../../hooks/redux-hooks';
 import {ProductCard} from '../ProductCard/ProductCard';
 import {IProduct} from '../../interface/entities/interface';
 import {
+    auth,
     createUsersProuctDataFromAuth,
     db,
     deleteProductById,
@@ -14,14 +15,17 @@ import {addToBasket} from '../../store/basketSlice';
 import {useCollectionData} from 'react-firebase-hooks/firestore';
 import {collection, query} from 'firebase/firestore';
 import {converter} from '../../pages/catalog/[id]';
-import { ColorRing } from 'react-loader-spinner';
+import {ColorRing} from 'react-loader-spinner';
+import {useAuthState} from "react-firebase-hooks/auth";
 
 export const ProductsCatalog = (): JSX.Element => {
-    
+
 
     const {products, status, search} = useAppSelector((state) => state.products);
+    const favProducts = useAppSelector(state => state.favorites.favorites); //Получение избранного из state
+
     const qFav = query(collection(db, 'fav',).withConverter(converter))
-    const [favProducts, loadingFav, errorFav] = useCollectionData(qFav)
+    const [loadingFav, errorFav] = useCollectionData(qFav)
 
     // const userID = useAppSelector(state => state.user.id)
     const dispatch = useAppDispatch();
@@ -29,6 +33,9 @@ export const ProductsCatalog = (): JSX.Element => {
     const q = query(collection(db, 'products',).withConverter(converter))
     const [viewProducts, setViewProducts] = useState<IProduct[] | undefined>([]);
     const [fetchProd, loading, error] = useCollectionData(q)
+
+    const [user] = useAuthState(auth);
+    let userID = user?.uid;
 
     const filteredProduct = useAppSelector(state => state.products.filtered);
     useEffect(() => {
@@ -65,19 +72,19 @@ export const ProductsCatalog = (): JSX.Element => {
 
 
     return (
-        <nav className={styles.menu} role={"navigation"}>
+        <div className={styles.menu} role={"navigation"}>
 
             {loading && loadingFav && <ColorRing
-  visible={true}
-  height="80"
-  width="80"
-  ariaLabel="blocks-loading"
-  wrapperStyle={{}}
-  wrapperClass="blocks-wrapper"
-  colors={['#e15b64', '#f47e60', '#f8b26a', '#abbd81', '#849b87']}
-/>}
+                visible={true}
+                height="80"
+                width="80"
+                ariaLabel="blocks-loading"
+                wrapperStyle={{}}
+                wrapperClass="blocks-wrapper"
+                colors={['#e15b64', '#f47e60', '#f8b26a', '#abbd81', '#849b87']}
+            />}
 
-            {error || errorFav && <div>Ошибка</div>}
+            {/*{error || errorFav && <div>Ошибка</div>}*/}
             {
                 viewProducts ?
                     viewProducts.map((product) =>
@@ -89,6 +96,6 @@ export const ProductsCatalog = (): JSX.Element => {
                                      isFav={favProducts && favProducts.filter(item => item?.id === product.id).length == 1}/>)
                     : <span>Loading</span>
             }
-        </nav>
+        </div>
     );
 };

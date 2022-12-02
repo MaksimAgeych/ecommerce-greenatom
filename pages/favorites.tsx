@@ -9,8 +9,8 @@ import {addFav, deleteFav} from '../store/favoritesSlice';
 import {auth, db, deleteProductById} from '../utils/firebase/firebase.utils';
 import {converter} from './catalog/[id]';
 import {useRouter} from "next/router";
-import { useAuthState } from 'react-firebase-hooks/auth';
-import { ColorRing } from 'react-loader-spinner';
+import {useAuthState} from 'react-firebase-hooks/auth';
+import {ColorRing} from 'react-loader-spinner';
 
 
 const LoadData = (userID: string) => {
@@ -31,38 +31,41 @@ function Favorites(): JSX.Element {
     const dispatch = useAppDispatch();
 
     const handleDeleteFav = (item: IProduct) => {
-       deleteProductById(user?.uid, 'fav', item.id) //ошибка поиска пути документа
-      dispatch(deleteFav(item))
-       
-       
+        deleteProductById(user?.uid, 'fav', item.id) //ошибка поиска пути документа
+        dispatch(deleteFav(item))
+
+
     }
     const router = useRouter();
 
+    let userID = user?.uid;
+    let docs, loading, error, snapshot;
+    if(userID) [docs, loading, error, snapshot] = LoadData(userID);
 
-        const [docs, loading, error, snapshot] = LoadData(user.uid);
-        return (
-            <>
-                <Htag tag={'h1'}>Избранное</Htag>
-                {loading && <ColorRing
-  visible={true}
-  height="80"
-  width="80"
-  ariaLabel="blocks-loading"
-  wrapperStyle={{}}
-  wrapperClass="blocks-wrapper"
-  colors={['#e15b64', '#f47e60', '#f8b26a', '#abbd81', '#849b87']}
-/>}
-                {error && alert(error)}
-                {docs && (favProducts.length != 0 ?
-                        favProducts.map((item) => {
-                            return <ProductCardFav item={item} key={item.id} isFavor={true}
-                                                   handleDeleteFav={handleDeleteFav}/>
-                        })
-                        : <div style={{margin: '20px 0'}}>Нет избранных товаров</div>)
-              
-                }
-            </>
-        )
+    return (
+        <>
+            <Htag tag={'h1'}>Избранное</Htag>
+            {loading && <ColorRing
+                visible={true}
+                height="80"
+                width="80"
+                ariaLabel="blocks-loading"
+                wrapperStyle={{}}
+                wrapperClass="blocks-wrapper"
+                colors={['#e15b64', '#f47e60', '#f8b26a', '#abbd81', '#849b87']}
+            />}
+            {error && alert(error)}
+            {docs && (favProducts.length != 0 ?
+                favProducts.map((item) => {
+                    return <ProductCardFav item={item} key={item.id} isFavor={true}
+                                           handleDeleteFav={handleDeleteFav}/>
+                })
+                : <div style={{margin: '20px 0'}}>Нет избранных товаров</div>)
+
+            }
+            {!userID ? 'Авторизуйтесь' : ''}
+        </>
+    )
 }
 
 export default withLayout(Favorites);
