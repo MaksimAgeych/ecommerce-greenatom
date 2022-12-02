@@ -9,18 +9,25 @@ import IconLocate from './locate.svg';
 import IconFav from './fav.svg';
 import IconCart from './cart.svg';
 import IconAuth from './auth.svg';
-import {getProductById, onAuthStateChangedListner, signOutUser} from '../../utils/firebase/firebase.utils';
+import {db, getProductById, onAuthStateChangedListner, signOutUser} from '../../utils/firebase/firebase.utils';
 import {useAppDispatch, useAppSelector} from "../../hooks/redux-hooks";
 import { IProduct } from '../../interface/entities/interface';
 import { removeUser, setUser, setUserName } from '../../store/authSlice';
 import { useFetchCollection } from '../../hooks/firestore-hooks';
 import { clearBasket } from '../../store/basketSlice';
 import { clearFav } from '../../store/favoritesSlice';
+import { useCollectionData } from 'react-firebase-hooks/firestore';
+import { auth } from '../../utils/firebase/firebase.utils';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import { collection, query } from 'firebase/firestore';
+import { User } from 'firebase/auth';
 
 
 export const Header = ({className, ...props}: HeaderProps): JSX.Element => {
+    const [user] = useAuthState(auth)
+    const userID = (user as User)?.uid;
+    // const [basket] = useCollectionData(query(collection(db, 'users', userID, 'basket')))
 
-    const [user, setUser] = useState(null);
     const [searchResult, setSearchResult] = useState<IProduct[] | []>([]);
     const dispatch = useAppDispatch()
     const fetchUser = useFetchCollection('users')
