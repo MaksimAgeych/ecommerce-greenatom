@@ -10,6 +10,7 @@ import {collection, query} from "firebase/firestore";
 import {auth, db} from "../utils/firebase/firebase.utils";
 import {useCollectionData} from "react-firebase-hooks/firestore";
 import {useAuthState} from "react-firebase-hooks/auth";
+import { ColorRing } from 'react-loader-spinner';
 
 export const Layout = ({children}: LayoutProps): JSX.Element => {
     const q = query(collection(db, 'products',))
@@ -19,7 +20,15 @@ export const Layout = ({children}: LayoutProps): JSX.Element => {
     if (loadingProd || loadingUser) {
         return (
             <>
-            Загрузка
+           <ColorRing
+  visible={true}
+  height="80"
+  width="80"
+  ariaLabel="blocks-loading"
+  wrapperStyle={{}}
+  wrapperClass="blocks-wrapper"
+  colors={['#e15b64', '#f47e60', '#f8b26a', '#abbd81', '#849b87']}
+/>
             </>
         )
     } else {
@@ -42,11 +51,11 @@ export const withLayout = <T extends Record<string, unknown> & IAppContext>(Comp
     return function withLayoutComponent(props: T): JSX.Element {
         return (
             <Provider store={store}>
-                <AppContextProvider>
+                {/* <AppContextProvider> */}
                     <Layout>
                         <Component {...props}/>
                     </Layout>
-                </AppContextProvider>
+                {/* </AppContextProvider> */}
             </Provider>
         );
 

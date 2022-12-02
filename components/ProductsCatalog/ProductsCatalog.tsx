@@ -14,6 +14,7 @@ import {addToBasket} from '../../store/basketSlice';
 import {useCollectionData} from 'react-firebase-hooks/firestore';
 import {collection, query} from 'firebase/firestore';
 import {converter} from '../../pages/catalog/[id]';
+import { ColorRing } from 'react-loader-spinner';
 
 export const ProductsCatalog = (): JSX.Element => {
     
@@ -67,7 +68,15 @@ export const ProductsCatalog = (): JSX.Element => {
     return (
         <nav className={styles.menu} role={"navigation"}>
 
-            {loading && loadingFav && <div>Загрузка</div>}
+            {loading && loadingFav && <ColorRing
+  visible={true}
+  height="80"
+  width="80"
+  ariaLabel="blocks-loading"
+  wrapperStyle={{}}
+  wrapperClass="blocks-wrapper"
+  colors={['#e15b64', '#f47e60', '#f8b26a', '#abbd81', '#849b87']}
+/>}
 
             {error || errorFav && <div>Ошибка</div>}
             {
