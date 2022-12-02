@@ -55,7 +55,7 @@ function Favorites(): JSX.Element {
                 colors={['#e15b64', '#f47e60', '#f8b26a', '#abbd81', '#849b87']}
             />}
             {error && alert(error)}
-            {docs && (favProducts.length != 0 ?
+            {docs || (favProducts.length != 0 ?
                 favProducts.map((item) => {
                     return <ProductCardFav item={item} key={item.id} isFavor={true}
                                            handleDeleteFav={handleDeleteFav}/>
@@ -63,7 +63,6 @@ function Favorites(): JSX.Element {
                 : <div style={{margin: '20px 0'}}>Нет избранных товаров</div>)
 
             }
-            {!userID ? 'Авторизуйтесь' : ''}
         </>
     )
 }
