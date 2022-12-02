@@ -49,41 +49,35 @@ export const ProductDescription = ({id, name, size, about, price, rating, descri
     
     return (
     <div className={styles.catDes}>
-        
         <div className={styles.imageDiv}>
             <img src={img} className={styles.image}></img>
         </div>
         <div className={styles.destiptionDiv}>
             <div className={styles.descripName}>
-                {name}
-                
+                <span>{name}</span>
                 <span className={styles.mater}>Материал: {about}</span>
             </div>
             <hr className={styles.line}/>
             <div className={styles.right}>
             <div className={styles.activity}>
-                    <Link href={'/'}><IconCompare/></Link>
-                    <Link href={'/'}>
-                    
-                        <button className={styles.btn}
-                            onClick={(event) => isFav ? (event.preventDefault(), handleDeleteToFav(item)) : handleAddToFav(item)}>
+                    <button className={styles.btn}><IconCompare/></button>
+                    <button 
+                        className={styles.btn}
+                        onClick={(event) => isFav ? (event.preventDefault(), handleDeleteToFav(item)) : handleAddToFav(item)}
+                    >
                         <IconLike className={isFav ? styles.like : null}/>
                     </button>
-
-                        </Link>
-                        <Link href={'/'}>
-             <button className={styles.btn} onClick={(event) => {
+                    <button className={styles.btn} onClick={(event) => {
                         event.preventDefault();
                         handleAddToBasket(item);
                     }}>
                         <IconCart/>
                     </button>
-                        </Link>
-                     
+                    <div className={styles.stars}>
+                        {stars}
+                    </div>
                 </div>
-                <div className={styles.stars}>
-                    {stars}
-                </div>
+                
             </div>
             <span className={styles.descripTitle}>Описание</span>
             <hr className={styles.line}/>

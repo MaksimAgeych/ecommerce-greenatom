@@ -1,46 +1,47 @@
 .imageDiv{
-    width: 487px;
-    height: 487px;
+    width: 100%;
+    height: 100%;
     box-shadow: 0 4px 20px 0 #0000001A;
-    background-color: white;
     float: left;
+}
 
+.catDes {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
 }
 
 .btn {
 	background: transparent;
 	border: none;
 }
-.image{
-    width: 487px;
-    height: 487px;
+.image {
+    width: 100%;
 }
-.destiptionDiv{
-    width: 756px;
-    height: 687px;
+.destiptionDiv {
     background-color: white;
     box-shadow: 0 4px 20px 0 #0000001A;
-    margin-left: 560px;
 }
 .descripTitle{
+    display: block;
     font-size: 24px;
     font-weight: 700;
     line-height: 29px;
-    padding: 20px;
+    padding: 0 20px 10px;
 }
 .descripName{
-    display: inline-block;
+    /* display: grid;
+    grid-template-columns: 1fr 1fr; */
     font-size: 24px;
     font-weight: 700;
     line-height: 29px;
-    padding: 20px;
+    padding: 20px 20px 10px 20px;
 }
 .line{
     background: #E8AA31;
     border: 0.5px solid #E8AA31;
     margin-left: 20px;
     margin-right: 20px;
-
 }
 .text{
 font-weight: 400;
@@ -52,21 +53,26 @@ padding: 20px;
 
 .stars{
     float: right;
-    margin-right: 20px;
+}
+.activity {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 8fr;
 }
 .activity svg {
 	margin-left: 20px;
     float: right;
+    height: 25px
 }
 .right{
-    margin: 20px;
+    margin: 15px 20px;
 }
 .mater{
+    display: block;
+    margin-top: 5px;
     font-size: 18px;
     font-weight: 500;
     line-height: 22px;
     letter-spacing: 0;
     text-align: left;
     color: #ABABAB;
-    padding-left: 100px;
 }
