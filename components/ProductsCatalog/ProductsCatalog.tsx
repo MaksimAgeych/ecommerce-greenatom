@@ -53,7 +53,7 @@ export const ProductsCatalog = (): JSX.Element => {
     // }, [filtered, products])
 
 
-    const handleAddToFav = (product: IProduct) => {
+        const handleAddToFav = (product: IProduct) => {
         dispatch(addFav(product))
         if (userID) createUsersProuctDataFromAuth(userID, 'fav', product, product.id.toString())
         //createUsersProductDataFromAuth заносит товар (документ) в конкретную коллекцию

@@ -6,6 +6,11 @@
     float: left;
 
 }
+
+.btn {
+	background: transparent;
+	border: none;
+}
 .image{
     width: 487px;
     height: 487px;
