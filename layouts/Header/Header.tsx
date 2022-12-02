@@ -95,7 +95,7 @@ export const Header = ({className, ...props}: HeaderProps): JSX.Element => {
                         <Link className={styles.callBack} href={'/'}>Заказать звонок</Link>
                     </div>
                     <div className={styles.favorites}>
-                        <Link href={user ? '/favorites' : '/auth'}><IconFav/></Link>
+                        <Link href='/favorites'><IconFav/></Link>
                     </div>
                     <div className={styles.cart}>
                         {/*//TODO Сделать вывод количества товара в корзине в иконку*/}
@@ -103,7 +103,7 @@ export const Header = ({className, ...props}: HeaderProps): JSX.Element => {
                         <div className={styles.cardData}>
                             <span className={styles.cartAmount}>0 р.</span>
                         
-                         <Link className={styles.checkout} href={user ? '/cart' : '/auth'}>Оформить заказ</Link>
+                         <Link className={styles.checkout} href={'/cart'}>Оформить заказ</Link>
                         </div>
                     </div>
                 </div>
