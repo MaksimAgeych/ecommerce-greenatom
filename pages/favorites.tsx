@@ -6,15 +6,17 @@ import {useAppDispatch, useAppSelector} from '../hooks/redux-hooks';
 import {IProduct} from '../interface/entities/interface';
 import {withLayout} from '../layouts/Layout';
 import {addFav, deleteFav} from '../store/favoritesSlice';
-import {auth, db, deleteProductById} from '../utils/firebase/firebase.utils';
+import {auth, db, deleteProductById, createUsersProuctDataFromAuth} from '../utils/firebase/firebase.utils';
 import {converter} from './catalog/[id]';
 import {useRouter} from "next/router";
 import {useAuthState} from 'react-firebase-hooks/auth';
 import {ColorRing} from 'react-loader-spinner';
+import { addToBasket } from '../store/basketSlice';
 
 
 function Favorites(): JSX.Element {
     const [user] = useAuthState(auth)
+    let userID = user?.uid;
 
     const favProducts = useAppSelector(state => state.favorites.favorites)
 
@@ -27,7 +29,10 @@ function Favorites(): JSX.Element {
         if (user) deleteProductById(user.uid, 'fav', item.id.toString() )
     }
   
-
+    const handleAddToBasket = (product: IProduct) => {
+        dispatch(addToBasket(product))
+        if (userID) createUsersProuctDataFromAuth(userID, 'basket', {...product, quantity: 1}, product.id.toString())
+    }
 
 
     return (
@@ -46,7 +51,8 @@ function Favorites(): JSX.Element {
             {(favProducts.length != 0 ?
                 favProducts.map((item) => {
                     return <ProductCardFav item={item} key={item.id} isFavor={true}
-                                           handleDeleteFav={handleDeleteFav}/>
+                                           handleDeleteFav={handleDeleteFav}
+                                           handleAddToBasket={handleAddToBasket}/>
                 })
                 : <div style={{margin: '20px 0'}}>Нет избранных товаров</div>)
 

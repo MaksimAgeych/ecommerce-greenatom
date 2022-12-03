@@ -13,9 +13,10 @@ interface IProps {
     item: IProduct,  
     isFavor: boolean,
     handleDeleteFav: (item: IProduct) => void
+    handleAddToBasket: (item: IProduct) => void
 }
 
-export const ProductCardFav: FC<IProps> = ({item, isFavor,handleDeleteFav}): JSX.Element => {//на продукт пока заглушка any
+export const ProductCardFav: FC<IProps> = ({item, isFavor,handleDeleteFav, handleAddToBasket}): JSX.Element => {//на продукт пока заглушка any
 
     const {id, name, size, about, price, rating, description, img} = item
     const dispatch = useAppDispatch()
@@ -41,8 +42,10 @@ export const ProductCardFav: FC<IProps> = ({item, isFavor,handleDeleteFav}): JSX
             </div>
             <div className={styles.price}>{price} р.</div>
             <div className={styles.activity}>
-                <Link href={'/'}><IconCompare/></Link>
-                <button className={styles.btn}>
+                <button className={styles.btn}><Link className={styles.link} href={'/'}><IconCompare/></Link></button>
+                <button className={styles.btn} onClick={(event) => {
+                        event.preventDefault();
+                        handleAddToBasket(item)}}>
                     <IconCart/>
                 </button>
                 <button className={styles.btn} onClick={()=>handleDeleteFav(item)}>
@@ -50,6 +53,5 @@ export const ProductCardFav: FC<IProps> = ({item, isFavor,handleDeleteFav}): JSX
                 </button>
             </div>
         </div>
-
     );
 }

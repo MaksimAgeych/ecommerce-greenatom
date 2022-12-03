@@ -39,11 +39,22 @@
 
 .activity svg {
 	width: 25px;
+	margin: 5px 1px;
+}
+
+.link {
+	width: 100%;
+	height: 100%;
 }
 
 .btn {
 	background: transparent;
 	border: none;
+	cursor: pointer;
+}
+.btn:hover {
+	box-shadow: 0 4px 20px 0 #0000001A;
+    cursor: pointer;
 }
 
 .price {
