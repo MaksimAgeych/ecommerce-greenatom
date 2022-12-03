@@ -1,4 +1,5 @@
 .mainDiv{
+    
     display: grid;
     grid-template-areas: "title title title"
                          "line line line"
@@ -17,6 +18,8 @@
     margin: 10px;
 }
 .image{
+    width:1120px;
+
     grid-area: image;
     margin: 20px;
     
@@ -30,15 +33,15 @@
     
 }
 .textDiv{
+    width:1120px;
     grid-area: text;
-
     display: inline-block;
     font-weight: 400;
     line-height: 24px;
     text-align: left;
     padding: 20px;
     box-shadow: 0 4px 20px 0 #0000001A;
-   margin-left: 20px;
+    margin-left: 20px;
 }
 .historyP{
     font-size: 25px;
@@ -53,6 +56,8 @@
     grid-area: task;
 }
 .taskDiv{
+    width:1120px;
+
     display: inline-block;
     font-weight: 400;
     line-height: 24px;

@@ -54,7 +54,7 @@ export const Header = ({className, ...props}: HeaderProps): JSX.Element => {
                 <div className={styles.topHeader}>
                     <div className={styles.leftTopHeader}>
                         <ul>
-                            <li><Link href={'/'}>О нас</Link></li>
+                            <li><Link href={'/about'}>О нас</Link></li>
                             <li><Link href={'/'}>Оплата и доставка</Link></li>
                             <li><Link href={'/'}>Новости</Link></li>
                             <li><Link href={'/'}>Контакты</Link></li>
