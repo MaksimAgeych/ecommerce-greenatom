@@ -47,6 +47,9 @@ export const Header = ({className, ...props}: HeaderProps): JSX.Element => {
    if (isExists) dispatch(setUserName(isExists.displayName))
 }
 ,[user])
+let count = basket.reduce((sum: number, item: { quantity: number; price: number; }) => {
+    return sum += item.quantity
+}, 0);
 
     return (
         <header className={cn(className, styles.header)} {...props}>
@@ -103,9 +106,9 @@ export const Header = ({className, ...props}: HeaderProps): JSX.Element => {
                             <path d="M28.746 32.2656C28.746 33.5678 27.7354 34.5758 26.5466 34.5758C25.3577 34.5758 24.3472 33.5678 24.3472 32.2656C24.3472 30.9634 25.3577 29.9554 26.5466 29.9554C27.7354 29.9554 28.746 30.9634 28.746 32.2656Z" stroke="black" stroke-width="1.5"/>
                             <circle cx="30" cy="7" r="7" fill="#E8AA31"/>
                             <text x="27" y="10" fill="white" font-size="0.7em" font-family="Montserrat">
-                                {basket.reduce((sum: number, item: { quantity: number; price: number; }) => {
-                                        return sum += item.quantity
-                                }, 0)}
+                             
+                              {  count > 9 ? '9+' : count
+                                } 
                             </text>
                         </svg>
                         <div className={styles.cardData}>
