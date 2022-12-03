@@ -70,24 +70,46 @@ const Authentication = () => {
 
   
 useEffect(() => {
-   if (usersBasketData) {
-       let mergedBasket = [...usersBasketData, ...basket]
-       let set = new Set()
-       set.add(mergedBasket)
-       let arr = Array.from(set)
-    console.log("mb", mergedBasket)
-    dispatch(addManyBasket(arr as IProduct[]))  
-    }
-     
-}, [usersBasketData])
+    if (usersBasketData) {
+        const mergedArray = [...basket, ...usersBasketData]
+        let arr = mergedArray.reduce((acc, item) => acc.map[item.id] ?
+         acc :
+        ((acc.map[item.id] = true), acc.arr.push(item), acc), {
+            map: {},
+            arr: []
+          }).arr;
+          
+      console.log('mb', arr)
+        dispatch(addManyBasket(arr as IProduct[])) 
+     }
+    }   
+, [usersBasketData])
 
 useEffect(() => {
     if (usersFavData) {
         let mergedFav = [...usersFavData, ...fav]
-        let set = new Set()
-        set.add(mergedFav)
-        let arr = Array.from(set)   
-        dispatch(addManyFav(arr as IProduct[]))
+        let arrID = mergedFav.map((item) => item.id)
+
+        let set = new Set(arrID);
+
+        
+        let arr = Array.from(set) //array of ID's 
+        if (usersFavData.length >= fav.length) {
+             const result = usersFavData.map((item) => {
+            if (arr.includes(item.id)) 
+            return item
+        }) 
+        console.log('res mf', result)
+        dispatch(addManyFav(result as IProduct[]))
+        } else {
+            const result = fav.map((item) => {
+                if (arr.includes(item.id)) 
+                return item
+            }) 
+            console.log('res mf', result)
+            dispatch(addManyFav(result as IProduct[]))
+        }
+       
     }
    
 }, [usersFavData])
