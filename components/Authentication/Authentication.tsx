@@ -69,13 +69,20 @@ const Authentication = () => {
     }, [usersBasketData, basket])
 
   
-// useEffect(() => {
-//     if (usersBasketData) {
+useEffect(() => {
+    if (usersBasketData) {
+        let result = [];
+        let arrID = usersBasketData.map((item) => item.id)
+        result = [...usersBasketData]
+        basket.filter((item: IProduct) => {
+            if (!(arrID.includes(item.id)))
+            result.push(item) 
+        })
        
-//         dispatch(addManyBasket(result as IProduct[])) 
-//      }
-//     } },  
-//  [usersBasketData])
+        dispatch(addManyBasket(result as IProduct[])) 
+     }
+    } ,  
+ [usersBasketData])
 
 useEffect(() => {
     if (usersFavData) {
