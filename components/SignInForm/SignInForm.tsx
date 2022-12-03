@@ -56,8 +56,7 @@ const SignInForm = () => {
                     id: user.uid,
                     token: user.refreshToken,
                     name: user.displayName
-                }))
-         return router.push('/')       
+                }))       
 
             }).catch(console.error)
 

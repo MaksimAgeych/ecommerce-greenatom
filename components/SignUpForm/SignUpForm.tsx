@@ -45,8 +45,7 @@ const SignUpForm = () => {
 
                     createUserFromAuthWithPassword(user)
                     dispatch(setUser({email: email, id: uid, token: accessToken, name: displayName}))
-                    complitedUserAuth(user);
-                return router.push('/') 
+                    complitedUserAuth(user); 
                 }
                
             ).catch(console.error)
