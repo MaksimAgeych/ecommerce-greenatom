@@ -77,17 +77,17 @@ useEffect(() => {
        let arr = Array.from(set)
     console.log("mb", mergedBasket)
     dispatch(addManyBasket(arr as IProduct[]))  
-     }
+    }
      
 }, [usersBasketData])
 
 useEffect(() => {
     if (usersFavData) {
-          
-
-        
-     
-    dispatch(addManyFav(arr as IProduct[]))
+        let mergedFav = [...usersFavData, ...fav]
+        let set = new Set()
+        set.add(mergedFav)
+        let arr = Array.from(set)   
+        dispatch(addManyFav(arr as IProduct[]))
     }
    
 }, [usersFavData])

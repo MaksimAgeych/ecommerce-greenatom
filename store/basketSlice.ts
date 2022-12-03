@@ -39,7 +39,7 @@ export const basketSlice = createSlice({
         decreaseQuantity: (state, action: PayloadAction<IProduct>) => {
             state.basket.forEach((item) =>{ 
             if (item.id === action.payload.id) {
-                item.quantity += 1
+                item.quantity -= 1
             }}
             )
         },

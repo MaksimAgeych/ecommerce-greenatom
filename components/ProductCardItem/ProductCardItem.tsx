@@ -71,8 +71,8 @@ export const ProductCardItem:FC<IProps> = ( {product}): JSX.Element => {
                 <span>{quantity}</span>
                 <button className={styles.productBtn} onClick={() => changeQuantityOnClick(1)}>{'>'}</button>
             </div>
-            <div>{price} руб.</div>
-            <button onClick={() => handleBasketDelete(product)}>x</button>
+            <div>{price * quantity} руб.</div>
+            <button className={styles.btn} onClick={() => handleBasketDelete(product)}>x</button>
         </div>}
         </>
 

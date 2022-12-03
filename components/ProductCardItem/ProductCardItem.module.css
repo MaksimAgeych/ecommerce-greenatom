@@ -18,3 +18,10 @@
     outline: none;
     width: 25px;
 }
+
+.btn {
+	background: transparent;
+	border: none;
+    cursor: pointer;
+    color: red;
+}
