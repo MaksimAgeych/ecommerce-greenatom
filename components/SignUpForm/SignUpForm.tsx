@@ -12,6 +12,7 @@ import {getAuth, updateProfile} from "firebase/auth";
 import styles from './SignUpForm.module.css';
 import {Htag} from "../Htag/Htag";
 import {Button} from "../Button/Button";
+import { useRouter } from 'next/router';
 
 const defaultFormFields = {
     displayName: '',
@@ -22,6 +23,7 @@ const defaultFormFields = {
 
 const SignUpForm = () => {
 
+    const router = useRouter()
     const [formFields, setFormFields] = useState(defaultFormFields);
     const {displayName, email, password, confirmPassword} = formFields;
     const dispatch = useAppDispatch();
@@ -44,8 +46,9 @@ const SignUpForm = () => {
                     createUserFromAuthWithPassword(user)
                     dispatch(setUser({email: email, id: uid, token: accessToken, name: displayName}))
                     complitedUserAuth(user);
-
+                return router.push('/') 
                 }
+               
             ).catch(console.error)
 
 

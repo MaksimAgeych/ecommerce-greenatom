@@ -8,6 +8,7 @@ import {Button} from "../Button/Button";
 import {Htag} from "../Htag/Htag";
 import {inspect} from "util";
 import styles from './SignInForm.module.css'
+import { useRouter } from 'next/router';
 
 const defaultFormFields = {
     email: '',
@@ -15,6 +16,8 @@ const defaultFormFields = {
 }
 
 const SignInForm = () => {
+
+        const router = useRouter()
 
     const [formFields, setFormFields] = useState(defaultFormFields);
     const [currentUser, setCurrentUser] = useState<User | null>(null);
@@ -54,6 +57,7 @@ const SignInForm = () => {
                     token: user.refreshToken,
                     name: user.displayName
                 }))
+         return router.push('/')       
 
             }).catch(console.error)
 
