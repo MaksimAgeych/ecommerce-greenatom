@@ -71,19 +71,27 @@ const Authentication = () => {
   
 useEffect(() => {
     if (usersBasketData) {
-        const mergedArray = [...basket, ...usersBasketData]
-        let arr = mergedArray.reduce((acc, item) => acc.map[item.id] ?
-         acc :
-        ((acc.map[item.id] = true), acc.arr.push(item), acc), {
-            map: {},
-            arr: []
-          }).arr;
-          
-      console.log('mb', arr)
-        dispatch(addManyBasket(arr as IProduct[])) 
+        const mergedBasket = [...basket, ...usersBasketData]
+        let arrID = mergedBasket.map((item) => item.id)
+
+        let set = new Set(arrID);
+        let arr = Array.from(set) //array of ID's 
+        if (usersBasketData.length >= fav.length) {
+             const result = usersBasketData.map((item) => {
+            if (arr.includes(item.id)) 
+            return item
+        }) 
+        
+        dispatch(addManyBasket(result as IProduct[]))
+        } else {
+            const result = basket.map((item) => {
+                if (arr.includes(item.id)) 
+                return item
+            }) 
+        dispatch(addManyBasket(result as IProduct[])) 
      }
-    }   
-, [usersBasketData])
+    } },  
+ [usersBasketData])
 
 useEffect(() => {
     if (usersFavData) {
