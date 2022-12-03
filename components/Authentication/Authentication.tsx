@@ -45,28 +45,28 @@ const Authentication = () => {
     // console.log("ff", fav);
     // console.log("bb", basket);
 
-    useCallback(() => {
+    useEffect(() => {
         if (!!user && user.uid !== 'falseUser') {
             const favQUeryPath = (id: string) =>  doc(db, 'users', user.uid.toString(), 'fav', id)
             fav.forEach((item) => (setDoc(favQUeryPath(item.id.toString()), item)));
     
             
-            // let mergedFav = [...usersFavData, ...fav]
-            // console.log("mf", mergedFav)
+            // let mergedFav = [...usersFavData as IProduct[], ...fav]
+            console.log("i'm usecallback")
             // dispatch(addManyFav(mergedFav as IProduct[]))
         }
-    }, [fav, usersFavData])
+    }, [fav, usersFavData, user])
 
 
 
-    useCallback(() => {
+    useEffect(() => {
         if(!!user && user.uid !== 'falseUser') {
            const basketQUeryPath = (id: string) =>  doc(db, 'users', user.uid.toString(), 'basket', id) 
            basket.forEach((item) => (setDoc(basketQUeryPath(item.id.toString()), item)));
             
         }
     
-    }, [usersBasketData, basket])
+    }, [usersBasketData, basket, user])
 
   
 useEffect(() => {
