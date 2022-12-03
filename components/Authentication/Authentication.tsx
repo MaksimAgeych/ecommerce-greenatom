@@ -69,55 +69,27 @@ const Authentication = () => {
     }, [usersBasketData, basket])
 
   
-useEffect(() => {
-    if (usersBasketData) {
-        const mergedBasket = [...basket, ...usersBasketData]
-        let arrID = mergedBasket.map((item) => item.id)
-
-        let set = new Set(arrID);
-        let arr = Array.from(set) //array of ID's 
-        if (usersBasketData.length >= fav.length) {
-             const result = usersBasketData.map((item) => {
-            if (arr.includes(item.id)) 
-            return item
-        }) 
-        
-        dispatch(addManyBasket(result as IProduct[]))
-        } else {
-            const result = basket.map((item) => {
-                if (arr.includes(item.id)) 
-                return item
-            }) 
-        dispatch(addManyBasket(result as IProduct[])) 
-     }
-    } },  
- [usersBasketData])
+// useEffect(() => {
+//     if (usersBasketData) {
+       
+//         dispatch(addManyBasket(result as IProduct[])) 
+//      }
+//     } },  
+//  [usersBasketData])
 
 useEffect(() => {
     if (usersFavData) {
-        let mergedFav = [...usersFavData, ...fav]
-        let arrID = mergedFav.map((item) => item.id)
-
-        let set = new Set(arrID);
-
-        
-        let arr = Array.from(set) //array of ID's 
-        if (usersFavData.length >= fav.length) {
-             const result = usersFavData.map((item) => {
-            if (arr.includes(item.id)) 
-            return item
-        }) 
-        console.log('res mf', result)
+    
+       let result = [];
+        let arrID = usersFavData.map((item) => item.id)
+        result = [...usersFavData]
+        fav.filter((item: IProduct) => {
+            if (!(arrID.includes(item.id)))
+            result.push(item) 
+        })
+      
         dispatch(addManyFav(result as IProduct[]))
-        } else {
-            const result = fav.map((item) => {
-                if (arr.includes(item.id)) 
-                return item
-            }) 
-            console.log('res mf', result)
-            dispatch(addManyFav(result as IProduct[]))
-        }
-       
+    
     }
    
 }, [usersFavData])
