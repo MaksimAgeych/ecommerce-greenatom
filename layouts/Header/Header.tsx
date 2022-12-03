@@ -85,7 +85,7 @@ let count = basket.reduce((sum: number, item: { quantity: number; price: number;
             </div>
             <div className={cn(styles.container, styles.gray)}>
                 <div className={styles.midHeader}>
-                    <Link href={'http://localhost:3000/'}><Logo/></Link>
+                    <Link href={'/'}><Logo/></Link>
                     <Search setSearchResult={setSearchResult} />
                     <div className={styles.locate}>
                         <IconLocate/>
